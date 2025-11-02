@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Aliaga National High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', 'Arial bold italic', Times, Serif;
+            background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%), url('anhs-removebg-preview.png') center/cover no-repeat;
+            color: #13522d;
+        }
+        header {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.1);
+        }
+        .header-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-direction: row;
+            text-align: center;
+            justify-content: center;
+        }
+        .logo img {
+            height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.1);
+            margin: 0;
+        }
+        .logo > div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+            text-align: center;
+        }
+        .logo h1, .logo p {
+            margin: 0;
+            text-align: center;
+            align-items: center;
+        }
+        nav {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 18px;
+        }
+        @media (max-width: 900px) {
+            .header-container {
+                flex-direction: column;
+                padding: 12px 16px;
+                justify-content: center;
+                gap: 12px;
+            }
+            nav {
+                position: static;
+                transform: none;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: left;
+                gap: 10px;
+            }
+            .logo img { height: 64px; }
+            .header-container .logo { order: 1; }
+            .header-container nav { order: 2; }
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('anhs-removebg-preview.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26,102,51,0.7);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #e0b34d;
+            color: #1a6633;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #f0f0d9;
+        }
+        .quick-links {
+            padding: 60px 20px;
+            background: #fff;
+            text-align: center;
+        }
+        .quick-links h2 {
+            font-size: 2.5rem;
+            color: #1a6633;
+            margin-bottom: 40px;
+        }
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .link-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .link-card h3 {
+            color: #1a6633;
+            margin-bottom: 15px;
+        }
+        .link-card p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .link-card .btn {
+            background: #1a6633;
+            color: #fff;
+        }
+        .link-card .btn:hover {
+            background: #13522d;
+        }
+        footer {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            padding: 48px 0;
+            margin-top: 0;
+        }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .footer-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #e0b34d;
+            margin-bottom: 16px;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-list li {
+            margin-bottom: 8px;
+        }
+        .footer-list a {
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 2px 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-list a:hover {
+            background: #e0b34d;
+            color: #1a6633;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .footer-social a {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+        }
+        .footer-social a:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-newsletter {
+            margin-top: 16px;
+        }
+        .footer-newsletter input[type="email"] {
+            background: #f0f0d9;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #e0e8d9;
+            color: #13522d;
+        }
+        .footer-newsletter button {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-newsletter button:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-bottom {
+            border-top: 1px solid #e0e8d9;
+            margin-top: 32px;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .auth-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+        }
+        .auth-content {
+            position: relative;
+            background: #fff;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 92%;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(20,60,30,0.12);
+            z-index: 2;
+        }
+        .auth-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .auth-header h3 {
+            margin: 0;
+            color: #1a6633;
+        }
+        .auth-close {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #7a7a7a;
+        }
+        .auth-forms {
+            display: block;
+        }
+        .auth-forms form {
+            display: none;
+            gap: 12px;
+        }
+        .auth-forms form.active {
+            display: block;
+        }
+        .auth-row {
+            margin-bottom: 10px;
+        }
+        .auth-row input,
+        .auth-row select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d6e3d0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: #13522d;
+        }
+        .auth-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .btn-primary {
+            background: #1a6633;
+            color: #fff;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-secondary {
+            background: #e0b34d;
+            color: #13522d;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .auth-switch {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #13522d;
+            text-align: center;
+        }
+        .auth-switch a {
+            color: #1a6633;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+        @media (max-width: 560px) {
+            .auth-content {
+                padding: 16px;
+            }
+        }
+        .menu-button {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-block;
+            z-index: 1400;
+        }
+        .menu-toggle {
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+            transition: background 0.18s ease, transform 0.12s ease;
+        }
+        .menu-toggle:hover {
+            background: #f0f0d9;
+            transform: translateY(-1px);
+        }
+        .menu-dropdown {
+            position: absolute;
+            right: 50;
+            top: calc(100% + 10px);
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            min-width: 220px;
+            max-width: 90vw;
+            box-sizing: border-box;
+            overflow: hidden;
+            z-index: 1200;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .menu-dropdown.open {
+            display: flex;
+        }
+        .menu-item {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: calc(100% - 32px);
+            max-width: 420px;
+            padding: 16px 10px;
+            color: #13522d;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .menu-item:hover,
+        .menu-item:focus {
+            background: #f6f7f2;
+            outline: none;
+        }
+        @media (max-width: 650px) {
+            .menu-dropdown {
+                left: 8px;
+                right: 8px;
+                min-width: unset;
+                max-width: calc(100vw - 16px);
+                top: calc(100% + 8px);
+            }
+        }
+        .about-content {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08);
+            line-height: 1.8;
+            color: #13522d;
+        }
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: #1a6633;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .about-content h3 {
+            font-size: 1.8rem;
+            color: #e0b34d;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .about-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .about-content ul li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        .accessibility-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1a6633;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .accessibility-toggle:hover {
+            background: #13522d;
+        }
+        .backToTopBtn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: none;
+        }
+        .backToTopBtn:hover {
+            background: #f0f0d9;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+            background: center/cover no-repeat;
+        }
+        .carousel-item:nth-child(1) {
+            background-image: url('anhs-removebg-preview.png');
+        }
+        .carousel-item:nth-child(2) {
+            background-image: url('anhs-removebg-preview.png');
+        }
+        .carousel-item:nth-child(3) {
+            background-image: url('anhs-removebg-preview.png');
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .carousel-btn {
+            background: rgba(255,255,255,0.8);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .carousel-btn:hover {
+            background: #fff;
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .indicator.active {
+            background: #fff;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- left: keep menu toggle/button (will be positioned via CSS) -->
+            <div class="menu-button" id="heroMenu">
+                <button class="menu-toggle" id="heroMenuToggle" aria-haspopup="true" aria-expanded="false">Menu</button>
+                <div class="menu-dropdown" id="heroMenuDropdown">
+                    <a class="menu-item" href="main.html">Home</a>
+                    <a class="menu-item" href="about.html">About Us</a>
+                    <a class="menu-item" href="specialization.html">Specialization</a>
+                    <a class="menu-item" href="admission.html">Admissions</a>
+                    <a class="menu-item" href="news-events.html">News & Events</a>
+                    <a class="menu-item" href="contact.html">Contact Us</a>
+                    <a class="menu-item" id="loginRegisterBtn" href="#">Login/Register</a>
+                </div>
+            </div>
+            
+            <!-- centered logo block -->
+            <div class="logo">
+                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo">
+                <div>
+                    <h1>Aliaga National High School</h1>
+                    <p>Be an ANAHASIANS.</p>
+                </div>
+            </div>
+
+            <!-- right: (optional) place nav here if needed; keep empty to preserve centered logo -->
+            <nav id="mainNav" aria-label="Main navigation" style="visibility:hidden;"></nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-content">
+            <h2>About Aliaga National High School</h2>
+
+            <h3>Our History</h3>
+            <p>Aliaga National High School (ANHS) was established in 1946, shortly after World War II, to address the growing need for secondary education in Aliaga, Nueva Ecija. Starting with a modest number of students and faculty, ANHS has grown significantly over the decades, becoming a cornerstone of education in the region. We have consistently adapted to educational reforms and technological advancements, always striving to provide the best learning environment for our students.</p>
+
+            <h3>Our Mission</h3>
+            <p>Aliaga National High School is committed to providing quality and holistic education that nurtures the intellectual, social, emotional, and physical development of every student. We strive to create a safe, inclusive, and stimulating learning environment that fosters critical thinking, creativity, and a lifelong love for learning. We aim to empower our students to become responsible, productive, and compassionate citizens who contribute positively to society.</p>
+
+            <h3>Our Vision</h3>
+            <p>Aliaga National High School envisions a community of empowered learners who are academically excellent, morally upright, and globally competitive. We aspire to be a leading educational institution that continuously innovates and adapts to the evolving needs of society, producing graduates who are well-equipped to face future challenges and make a significant impact in their chosen fields.</p>
+
+            <h3>Our Core Values</h3>
+            <ul>
+                <li><strong>Excellence:</strong> We pursue academic and personal excellence in all endeavors.</li>
+                <li><strong>Integrity:</strong> We uphold honesty, fairness, and strong moral principles.</li>
+                <li><strong>Compassion:</strong> We foster empathy, kindness, and respect for all individuals.</li>
+                <li><strong>Innovation:</strong> We embrace creativity and continuous improvement in teaching and learning.</li>
+                <li><strong>Community:</strong> We build strong relationships and promote active participation in societal betterment.</li>
+            </ul>
+
+            <h3>Our Facilities</h3>
+            <p>ANHS boasts modern facilities designed to support a comprehensive educational experience. These include:</p>
+            <ul>
+                <li>State-of-the-art classrooms equipped with multimedia tools.</li>
+                <li>Well-equipped science laboratories for hands-on experiments.</li>
+                <li>A spacious library with a vast collection of resources.</li>
+                <li>Computer laboratories with internet access.</li>
+                <li>Sports facilities including a gymnasium and outdoor courts.</li>
+                <li>A dedicated arts studio for creative programs.</li>
+            </ul>
+
+            <h3>Our Faculty and Staff</h3>
+            <p>Our dedicated team of highly qualified and passionate educators is the backbone of ANHS. They are committed to nurturing each student's potential, providing guidance, and inspiring a love for learning. Our administrative and support staff work tirelessly to ensure the smooth operation of the school and the well-being of our students.</p>
+
+            <p>We invite you to explore our website further to learn more about our academic programs, student life, and how you can become a part of the Aliaga National High School family.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
+                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement.">
+                    </div>
+                </div>
+                <p style="font-size:0.95rem;opacity:0.9;margin-bottom:16px;">Excellence in Education</p>
+                <div style="font-size:0.95rem;">
+                    <p>1234 Education Drive</p>
+                    <p>Aliaga, Nueva Ecija</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <p>Email: @Aliaganationalhighschool.edu</p>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Quick Links</div>
+                <ul class="footer-list">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="main.html#specialization-section">Academics</a></li>
+                    <li><a href="main.html#admissions-section">Admissions</a></li>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Campus Life</a></li>
+                    <li><a href="#">Athletics</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Resources</div>
+                <ul class="footer-list">
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Parent Portal</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="main.html#news-events-section">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Stay Connected</div>
+                <div class="footer-social">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                </div>
+                <div class="footer-newsletter">
+                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
+                    <div style="display:flex;">
+                        <input type="email" placeholder="Your email">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Toggle accessibility features">♿</button>
+    <button class="backToTopBtn" id="backToTopBtn" aria-label="Back to top">↑</button>
+
+    <!-- Authentication modal added so the nav Login/Register works on this page -->
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+        <div class="auth-backdrop" id="authBackdrop"></div>
+        <div class="auth-content" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+            <div class="auth-header">
+                <h3 id="authTitle">Login</h3>
+                <button class="auth-close" id="authCloseBtn" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="auth-forms">
+                <form id="loginForm" class="active" autocomplete="off">
+                    <div class="auth-row">
+                        <label class="sr-only">User type</label>
+                        <select id="userType" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="parent">Parent</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Login</button>
+                        <button type="button" id="showRegister" class="btn-secondary">Register</button>
+                    </div>
+                </form>
+
+                <form id="registerForm" autocomplete="off">
+                    <div class="auth-row">
+                        <input id="registerFirstName" type="text" placeholder="First name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerLastName" type="text" placeholder="Last name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-row">
+                        <select id="registerGradeLevel" required>
+                            <option value="">Select grade level</option>
+                            <option value="G7">Grade 7</option>
+                            <option value="G8">Grade 8</option>
+                            <option value="G9">Grade 9</option>
+                            <option value="G10">Grade 10</option>
+                            <option value="G11">Grade 11</option>
+                            <option value="G12">Grade 12</option>
+                        </select>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Register</button>
+                        <button type="button" id="showLogin" class="btn-secondary">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-switch">
+                By logging in you accept school policies.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            // Elements
+            const loginBtn = document.getElementById('loginRegisterBtn');
+            const authModal = document.getElementById('authModal');
+            const authBackdrop = document.getElementById('authBackdrop');
+            const authCloseBtn = document.getElementById('authCloseBtn');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+
+            // Simulated users (replace with backend)
+            const users = {
+                student: [{ email: 'student@example.com', password: 'password' }],
+                teacher: [{ email: 'teacher@example.com', password: 'password' }],
+                parent: [{ email: 'parent@example.com', password: 'password' }],
+                admin: [{ email: 'admin@example.com', password: 'password' }]
+            };
+
+            function openModal(mode = 'login'){
+                authModal.style.display = 'flex';
+                authModal.setAttribute('aria-hidden','false');
+                document.getElementById('authTitle').textContent = (mode === 'login') ? 'Login' : 'Student Registration';
+                if(mode === 'login'){
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    registerForm.classList.add('active');
+                    loginForm.classList.remove('active');
+                }
+            }
+            function closeModal(){
+                authModal.style.display = 'none';
+                authModal.setAttribute('aria-hidden','true');
+            }
+
+            if(loginBtn){
+                loginBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            if(authBackdrop){
+                authBackdrop.addEventListener('click', closeModal);
+            }
+            if(authCloseBtn){
+                authCloseBtn.addEventListener('click', closeModal);
+            }
+            // switch to register
+            if(showRegister){
+                showRegister.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('register');
+                });
+            }
+            if(showLogin){
+                showLogin.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            // Login submit
+            if(loginForm){
+                loginForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const email = (document.getElementById('loginEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('loginPassword')||{}).value||'';
+                    const userType = (document.getElementById('userType')||{}).value||'';
+
+                    if(!userType){
+                        alert('Please select a role.');
+                        return;
+                    }
+                    if(!email || !password){
+                        alert('Enter email and password.');
+                        return;
+                    }
+                    const list = users[userType] || [];
+                    const found = list.find(u => u.email === email && u.password === password);
+                    if(found){
+                        alert('Login successful. Redirecting...');
+                        closeModal();
+                        // redirect destinations (adjust filenames if needed)
+                        const dest = {
+                            student:'Students.html',
+                            teacher:'Teachers Portal.html',
+                            parent:'parents.html',
+                            admin:'admin.html'
+                        }[userType] || 'main.html';
+                        setTimeout(()=> window.location.href = dest, 300);
+                    } else {
+                        alert('Invalid credentials. Try again.');
+                    }
+                });
+            }
+
+            // Register submit (adds to simulated students and stores in localStorage)
+            if(registerForm){
+                registerForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const firstName = (document.getElementById('registerFirstName')||{}).value?.trim()||'';
+                    const lastName = (document.getElementById('registerLastName')||{}).value?.trim()||'';
+                    const email = (document.getElementById('registerEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('registerPassword')||{}).value||'';
+                    const gradeLevel = (document.getElementById('registerGradeLevel')||{}).value||'';
+
+                    if(!firstName || !lastName || !email || !password || !gradeLevel){
+                        alert('Please fill all registration fields.');
+                        return;
+                    }
+                    // check existing
+                    const exists = (users.student || []).some(u => u.email === email);
+                    if(exists){
+                        alert('Email already registered.');
+                        return;
+                    }
+                    const newStudent = { firstName, lastName, email, password, gradeLevel };
+                    users.student.push(newStudent);
+                    localStorage.setItem('newEnrollmentSubmission', JSON.stringify(newStudent));
+                    alert('Registration successful. Please login.');
+                    openModal('login');
+                });
+            }
+
+            // keyboard escape to close
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'Escape' && authModal.style.display === 'flex') closeModal();
+            });
+        })();
+    </script>
+
+<script id="mobile-menu">
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        if (!navToggle || !mainNav) return;
+
+        // ensure the container is positioned so absolute dropdown is inside viewport
+        const headerContainer = document.querySelector('.header-container');
+        if (headerContainer) headerContainer.style.position = headerContainer.style.position || 'relative';
+
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = mainNav.classList.toggle('open');
+            mainNav.classList.toggle('open', isOpen);
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            // optional: ensure dropdown max-height fits below the toggle
+            if (isOpen) {
+                const rect = mainNav.getBoundingClientRect();
+                const available = window.innerHeight - rect.top - 16; // 16px margin
+                mainNav.style.maxHeight = Math.max(120, Math.min(available, window.innerHeight - 80)) + 'px';
+            } else {
+                mainNav.style.maxHeight = '';
+            }
+        });
+
+        // Close the menu after clicking a link
+        mainNav.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function () {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!mainNav.contains(e.target) && !navToggle.contains(e.target) && mainNav.classList.contains('open')) {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                mainNav.style.maxHeight = '';
+            }
+        });
+
+        // Reset on resize
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                mainNav.style.maxHeight = '';
+            }
+        });
+    });
+</script>
+
+<script id="hero-menu">
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('heroMenuToggle');
+    const dropdown = document.getElementById('heroMenuDropdown');
+    const container = document.getElementById('heroMenu');
+    if (!toggle || !dropdown || !container) return;
+
+    toggle.setAttribute('aria-expanded', 'false');
+
+    function openMenu() {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        const first = dropdown.querySelector('.menu-item');
+        if (first) first.focus();
+    }
+    function closeMenu() {
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // close on outside click
+    document.addEventListener('click', function (e) {
+        if (!container.contains(e.target)) closeMenu();
+    });
+
+    // close on Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+
+    // close after selecting an item
+    dropdown.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function () {
+            closeMenu();
+        });
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('accessibilityToggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', function() {
+        document.body.classList.toggle('high-contrast');
+        const isHighContrast = document.body.classList.contains('high-contrast');
+        localStorage.setItem('highContrast', isHighContrast);
+    });
+    const saved = localStorage.getItem('highContrast');
+    if (saved === 'true') {
+        document.body.classList.add('high-contrast');
+    }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('backToTopBtn');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+</script>
+</body>
+</html>

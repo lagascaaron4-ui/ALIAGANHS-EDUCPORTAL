@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Aliaga National High School</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#dashboard" class="active">Dashboard</a></li>
+            <li><a href="#student-management">Student Management</a></li>
+            <li><a href="#teacher-management">Teacher Management</a></li>
+            <li><a href="#enrollment-management">Enrollment Management</a></li>
+            <li><a href="#announcement-management">Announcement Management</a></li>
+            <li><a href="#resource-management">Resource Management</a></li>
+            <li><a href="#user-management">User Management</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#" id="mainPortalBtn">Main Portal</a></li> <!-- Added button -->
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <h1 class="section-title">Dashboard</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="card">
+                    <h3>Total Teachers</h3>
+                    <p id="totalTeachers">0</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Enrollments</h3>
+                    <p id="pendingEnrollments">0</p>
+                </div>
+                <div class="card">
+                    <h3>Recent Announcements</h3>
+                    <p id="recentAnnouncementsCount">0</p>
+                </div>
+            </div>
+            <!-- Quick overview of recent activities -->
+            <h2>Recent Activities</h2>
+            <div id="recentActivities">
+                <p>No recent activities.</p>
+            </div>
+        </section>
+
+        <!-- Student Management Section -->
+        <section id="student-management" style="display:none;">
+            <h1 class="section-title">Student Management</h1>
+            <button class="btn-primary" id="addStudentBtn">Add New Student</button>
+            <div class="search-bar">
+                <input type="text" id="studentSearchInput" placeholder="Search by name or ID...">
+                <button class="btn-primary" id="searchStudentsBtn">Search</button>
+            </div>
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Grade Level</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Student data will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Teacher Management Section -->
+        <section id="teacher-management" style="display:none;">
+            <h1 class="section-title">Teacher Management</h1>
+            <button class="btn-primary" id="addTeacherBtn">Add New Teacher</button>
+            <table id="teacherTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Teacher data will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Enrollment Management Section -->
+        <section id="enrollment-management" style="display:none;">
+            <h1 class="section-title">Enrollment Management</h1>
+            <h2>Pending Enrollments</h2>
+            <table id="pendingEnrollmentTable">
+                <thead>
+                    <tr>
+                        <th>Submission Date</th>
+                        <th>Student Name</th>
+                        <th>Grade Level</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Pending enrollment data will be loaded here -->
+                </tbody>
+            </table>
+
+            <h2>Enrollment History</h2>
+            <table id="enrollmentHistoryTable">
+                <thead>
+                    <tr>
+                        <th>Submission Date</th>
+                        <th>Student Name</th>
+                        <th>Grade Level</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Enrollment history data will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Announcement Management Section -->
+        <section id="announcement-management" style="display:none;">
+            <h1 class="section-title">Announcement Management</h1>
+            <button class="btn-primary" id="createAnnouncementBtn">Create New Announcement</button>
+            <table id="announcementTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Posted By</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Announcements will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Resource Management Section -->
+        <section id="resource-management" style="display:none;">
+            <h1 class="section-title">Resource Management</h1>
+            <button class="btn-primary" id="uploadResourceBtn">Upload New Resource</button>
+            <table id="resourceTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>File</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Resources will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- User Management Section -->
+        <section id="user-management" style="display:none;">
+            <h1 class="section-title">User Management (Admins)</h1>
+            <button class="btn-primary" id="addAdminUserBtn">Add New Admin User</button>
+            <table id="adminUserTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Admin users will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" style="display:none;">
+            <h1 class="section-title">Settings</h1>
+            <p>General school settings and configurations will be managed here.</p>
+            <div class="form-group">
+                <label for="schoolNameSetting">School Name:</label>
+                <input type="text" id="schoolNameSetting" value="Aliaga National High School">
+            </div>
+            <div class="form-group">
+                <label for="schoolYearSetting">Current School Year:</label>
+                <input type="text" id="schoolYearSetting" value="2024-2025">
+            </div>
+            <button class="btn-primary">Save Settings</button>
+        </section>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Student Details Modal -->
+    <div id="studentDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="studentDetailsTitle">Student Details</h2>
+            <div id="studentDetailsContent">
+                <!-- Student details will be loaded here -->
+            </div>
+            <h3>Uploaded Documents</h3>
+            <ul id="studentDocumentsList" class="document-list">
+                <!-- Documents will be listed here -->
+            </ul>
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="uploadStudentDoc">Upload New Document:</label>
+                <input type="file" id="uploadStudentDoc">
+                <button class="btn-primary" id="uploadStudentDocBtn">Upload</button>
+            </div>
+            <button class="btn-primary" id="editStudentDetailsBtn">Edit Student</button>
+        </div>
+    </div>
+
+    <!-- Add/Edit Student Modal -->
+    <div id="addEditStudentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="addEditStudentTitle">Add New Student</h2>
+            <form id="studentForm">
+                <h3>Learner's Information</h3>
+                <div class="form-group">
+                    <label for="s_lastName">Last Name:</label>
+                    <input type="text" id="s_lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_firstName">First Name:</label>
+                    <input type="text" id="s_firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_middleName">Middle Name:</label>
+                    <input type="text" id="s_middleName">
+                </div>
+                <div class="form-group">
+                    <label for="s_extension">Name Extension (JR, SR):</label>
+                    <input type="text" id="s_extension">
+                </div>
+                <div class="form-group">
+                    <label for="s_birthdate">Date of Birth:</label>
+                    <input type="date" id="s_birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_age">Age:</label>
+                    <input type="number" id="s_age" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_gender">Sex:</label>
+                    <select id="s_gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <h3>Address Information</h3>
+                <div class="form-group">
+                    <label for="s_region">Region:</label>
+                    <input type="text" id="s_region" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_province">Province:</label>
+                    <input type="text" id="s_province" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_city">City/Municipality:</label>
+                    <input type="text" id="s_city" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_barangay">Barangay:</label>
+                    <input type="text" id="s_barangay" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_street">Street Address:</label>
+                    <input type="text" id="s_street">
+                </div>
+
+                <h3>Contact Information</h3>
+                <div class="form-group">
+                    <label for="s_mobile">Mobile Number:</label>
+                    <input type="tel" id="s_mobile" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_email">Email Address:</label>
+                    <input type="email" id="s_email">
+                </div>
+
+                <h3>School Information</h3>
+                <div class="form-group">
+                    <label for="s_schoolId">School ID:</label>
+                    <input type="text" id="s_schoolId" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_schoolName">School Name:</label>
+                    <input type="text" id="s_schoolName" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_gradeLevel">Grade Level to Enroll In:</label>
+                    <select id="s_gradeLevel" required>
+                        <option value="">Select Grade Level</option>
+                        <option value="G7">Grade 7</option>
+                        <option value="G8">Grade 8</option>
+                        <option value="G9">Grade 9</option>
+                        <option value="G10">Grade 10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="s_strand">Strand/Track (for JHS):</label>
+                    <select id="s_strand">
+                        <option value="">Not Applicable</option>
+                        <option value="ICT">Information and Communication Technology</option>
+                        <option value="STE">Science, Technology, Engineering</option>
+                        <option value="SPA">Special Program in Arts</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save Student</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Teacher Modal -->
+    <div id="addEditTeacherModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="addEditTeacherTitle">Add New Teacher</h2>
+            <form id="teacherForm">
+                <div class="form-group">
+                    <label for="t_name">Name:</label>
+                    <input type="text" id="t_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="t_subject">Subject:</label>
+                    <input type="text" id="t_subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="t_email">Email:</label>
+                    <input type="email" id="t_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="t_username">Username:</label>
+                    <input type="text" id="t_username" required>
+                </div>
+                <div class="form-group">
+                    <label for="t_password">Password:</label>
+                    <input type="password" id="t_password" required>
+                </div>
+                <button type="submit" class="btn-primary">Save Teacher</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enrollment Review Modal -->
+    <div id="enrollmentReviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Enrollment Review</h2>
+            <div id="enrollmentReviewContent">
+                <!-- Enrollment details will be loaded here -->
+            </div>
+            <h3>Uploaded Documents</h3>
+            <ul id="enrollmentDocumentsList" class="document-list">
+                <!-- Documents will be listed here -->
+            </ul>
+            <div style="margin-top: 20px;">
+                <button class="btn-primary" id="approveEnrollmentBtn">Approve</button>
+                <button class="btn-secondary" id="rejectEnrollmentBtn">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Grade Modal -->
+    <div id="addEditGradeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="addEditGradeTitle">Add New Grade</h2>
+            <form id="gradeForm">
+                <div class="form-group">
+                    <label for="g_studentName">Student Name:</label>
+                    <input type="text" id="g_studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="g_subject">Subject:</label>
+                    <input type="text" id="g_subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="g_grade">Grade:</label>
+                    <input type="number" id="g_grade" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="g_comments">Comments:</label>
+                    <textarea id="g_comments"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Save Grade</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create/Edit Announcement Modal -->
+    <div id="createEditAnnouncementModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="createEditAnnouncementTitle">Create New Announcement</h2>
+            <form id="announcementForm">
+                <div class="form-group">
+                    <label for="a_title">Title:</label>
+                    <input type="text" id="a_title" required>
+                </div>
+                <div class="form-group">
+                    <label for="a_content">Content:</label>
+                    <textarea id="a_content" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Post Announcement</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Resource Modal -->
+    <div id="uploadResourceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Upload New Resource</h2>
+            <form id="resourceUploadForm">
+                <div class="form-group">
+                    <label for="r_title">Resource Title:</label>
+                    <input type="text" id="r_title" required>
+                </div>
+                <div class="form-group">
+                    <label for="r_description">Description:</label>
+                    <textarea id="r_description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="r_file">File:</label>
+                    <input type="file" id="r_file" required>
+                </div>
+                <button type="submit" class="btn-primary">Upload Resource</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Admin User Modal -->
+    <div id="addAdminUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add New Admin User</h2>
+            <form id="adminUserForm">
+                <div class="form-group">
+                    <label for="au_username">Username:</label>
+                    <input type="text" id="au_username" required>
+                </div>
+                <div class="form-group">
+                    <label for="au_email">Email:</label>
+                    <input type="email" id="au_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="au_password">Password:</label>
+                    <input type="password" id="au_password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Admin User</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Simulated Data Storage (replace with actual backend integration)
+        let students = [
+            { id: 'S001', lastName: 'Dela Cruz', firstName: 'Juan', middleName: 'P.', extension: '', birthdate: '2008-05-10', age: 16, gender: 'male', region: 'NCR', province: 'Manila', city: 'Manila', barangay: 'Barangay 1', street: '123 Main St', mobile: '09171234567', email: 'juan.dela.cruz@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G10', strand: 'ICT', status: 'Active', documents: ['BirthCert_S001.pdf', 'ReportCard_S001.pdf', 'GoodMoral_S001.pdf', 'IDPic_S001.jpg'] },
+            { id: 'S002', lastName: 'Gatdula', firstName: 'Jaden', middleName: 'S.', extension: '', birthdate: '2010-11-22', age: 15, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 2', street: '456 Elm St', mobile: '09187654321', email: 'jaden.gatdula@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G11', strand: 'STE', status: 'Active', documents: ['BirthCert_S002.pdf', 'ReportCard_S002.pdf', 'GoodMoral_S002.pdf', 'IDPic_S002.jpg'] },
+            { id: 'S003', lastName: 'Lagasca', firstName: 'Aron', middleName: 'D.', extension: '', birthdate: '2010-03-26', age: 15, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 3', street: '789 Oak Ave', mobile: '09199876543', email: 'aron.lagasca@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G9', strand: 'ICT', status: 'Inactive', documents: ['BirthCert_S003.pdf', 'Kapogian_S003.pdf', 'GoodMoral_S003.pdf', 'IDPic_S003.jpg'] }
+        ];
+
+        let teachers = [
+            { id: 'T001', name: 'Mr. John Doe', subject: 'Mathematics', email: 'john.doe@anhs.edu', username: 'teacher', password: 'password123' },
+            { id: 'T002', name: 'Ms. Jane Smith', subject: 'Science', email: 'jane.smith@anhs.edu', username: 'janesmith', password: 'securepass' }
+        ];
+
+        let pendingEnrollments = [
+            { id: 'E001', submissionDate: '2024-04-20', lastName: 'Ulip', firstName: 'Widjel', middleName: 'A.', extension: '', birthdate: '2008-03-01', age: 16, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 1', street: '123 Sample St', mobile: '09123456789', email: 'widjel.ulip@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G10', strand: 'ICT', documents: ['BirthCert_E001.pdf', 'ReportCard_E001.pdf', 'GoodMoral_E001.pdf', 'IDPic_E001.jpg'], status: 'Pending' }
+        ];
+
+        let enrollmentHistory = []; // Approved/Rejected enrollments will go here
+
+        let grades = [
+            { studentId: 'S001', studentName: 'Juan Dela Cruz', class: '10A', subject: 'Math', grade: 95, comments: 'Excellent work!' },
+            { studentId: 'S001', studentName: 'Juan Dela Cruz', class: '10A', subject: 'Science', grade: 88, comments: 'Needs improvement in lab reports.' },
+            { studentId: 'S002', studentName: 'Jaden Gatdula', class: '11B', subject: 'Science', grade: 92, comments: 'Very good understanding.' },
+            { studentId: 'S003', studentName: 'Pedro Reyes', class: '9C', subject: 'English', grade: 75, comments: 'Struggling with comprehension.' }
+        ];
+
+        let announcements = [
+            { id: 'A001', title: 'Faculty Meeting Reminder', content: 'A mandatory faculty meeting will be held on April 20, 2025, at 3:00 PM in the main conference room. Please ensure your attendance.', postedBy: 'Administration', date: 'April 15, 2025' },
+            { id: 'A002', title: 'New Curriculum Guidelines Available', content: 'The updated curriculum guidelines for the upcoming academic year are now available in the shared drive. Please review them by May 1, 2025.', postedBy: 'Academic Affairs', date: 'April 10, 2025' }
+        ];
+
+        let resources = [
+            { id: 'R001', title: 'Professional Development Workshop Schedule', description: 'Schedule for upcoming professional development workshops for the current semester.', file: 'PD_Workshop_Schedule.pdf' },
+            { id: 'R002', title: 'Teacher Handbook 2024-2025', description: 'Official handbook containing school policies, procedures, and guidelines for faculty.', file: 'Teacher_Handbook_2024-2025.pdf' }
+        ];
+
+        let adminUsers = [
+            { id: 'AD001', username: 'admin', email: 'admin@anhs.edu', password: 'admin123' }
+        ];
+
+        // Utility Functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.main-content section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+
+            document.querySelectorAll('.sidebar ul li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar ul li a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        function showLoader() {
+            document.getElementById('loader').classList.remove('d-none');
+        }
+
+        function hideLoader() {
+            document.getElementById('loader').classList.add('d-none');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function populateTable(tableId, data, rowCreator) {
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="${document.querySelector(`#${tableId} thead tr`).children.length}" style="text-align: center;">No data available.</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const row = rowCreator(item);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Dashboard Functions
+        function updateDashboard() {
+            document.getElementById('totalStudents').textContent = students.length;
+            document.getElementById('totalTeachers').textContent = teachers.length;
+            document.getElementById('pendingEnrollments').textContent = pendingEnrollments.length;
+            document.getElementById('recentAnnouncementsCount').textContent = announcements.length; // Or filter by recent date
+
+            const activitiesDiv = document.getElementById('recentActivities');
+            activitiesDiv.innerHTML = '';
+            const recent = [];
+            if (pendingEnrollments.length > 0) recent.push(`New enrollment from ${pendingEnrollments[0].firstName} ${pendingEnrollments[0].lastName}.`);
+            if (announcements.length > 0) recent.push(`New announcement: "${announcements[0].title}".`);
+            if (recent.length > 0) {
+                recent.forEach(activity => {
+                    const p = document.createElement('p');
+                    p.textContent = `- ${activity}`;
+                    activitiesDiv.appendChild(p);
+                });
+            } else {
+                activitiesDiv.innerHTML = '<p>No recent activities.</p>';
+            }
+        }
+
+        // Student Management Functions
+        function renderStudents(filter = '') {
+            const filtered = students.filter(s =>
+                s.firstName.toLowerCase().includes(filter.toLowerCase()) ||
+                s.lastName.toLowerCase().includes(filter.toLowerCase()) ||
+                s.id.toLowerCase().includes(filter.toLowerCase())
+            );
+            populateTable('studentTable', filtered, student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.lastName}</td>
+                    <td>${student.firstName}</td>
+                    <td>${student.gradeLevel}</td>
+                    <td>${student.status}</td>
+                    <td>
+                        <button class="btn-secondary view-student-btn" data-id="${student.id}">View</button>
+                        <button class="btn-secondary edit-student-btn" data-id="${student.id}">Edit</button>
+                        <button class="btn-secondary delete-student-btn" data-id="${student.id}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function viewStudentDetails(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if (!student) return;
+
+            document.getElementById('studentDetailsTitle').textContent = `Student Details: ${student.firstName} ${student.lastName}`;
+            const detailsContent = document.getElementById('studentDetailsContent');
+            detailsContent.innerHTML = `
+                <p><strong>ID:</strong> ${student.id}</p>
+                <p><strong>Name:</strong> ${student.lastName}, ${student.firstName} ${student.middleName} ${student.extension}</p>
+                <p><strong>Date of Birth:</strong> ${student.birthdate}</p>
+                <p><strong>Age:</strong> ${student.age}</p>
+                <p><strong>Gender:</strong> ${student.gender}</p>
+                <p><strong>Address:</strong> ${student.street}, ${student.barangay}, ${student.city}, ${student.province}, ${student.region}</p>
+                <p><strong>Mobile:</strong> ${student.mobile}</p>
+                <p><strong>Email:</strong> ${student.email}</p>
+                <p><strong>School ID:</strong> ${student.schoolId}</p>
+                <p><strong>School Name:</strong> ${student.schoolName}</p>
+                <p><strong>Grade Level:</strong> ${student.gradeLevel}</p>
+                <p><strong>Strand:</strong> ${student.strand}</p>
+                <p><strong>Status:</strong> ${student.status}</p>
+            `;
+
+            const docsList = document.getElementById('studentDocumentsList');
+            docsList.innerHTML = '';
+            if (student.documents && student.documents.length > 0) {
+                student.documents.forEach(doc => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="alert('Simulating download of ${doc}'); return false;">${doc}</a>`;
+                    docsList.appendChild(li);
+                });
+            } else {
+                docsList.innerHTML = '<li>No documents uploaded.</li>';
+            }
+
+            document.getElementById('editStudentDetailsBtn').dataset.id = studentId;
+            openModal('studentDetailsModal');
+        }
+
+        function fillStudentForm(student = null) {
+            const form = document.getElementById('studentForm');
+            document.getElementById('addEditStudentTitle').textContent = student ? 'Edit Student' : 'Add New Student';
+            form.reset();
+            form.dataset.editingId = '';
+
+            if (student) {
+                form.dataset.editingId = student.id;
+                document.getElementById('s_lastName').value = student.lastName;
+                document.getElementById('s_firstName').value = student.firstName;
+                document.getElementById('s_middleName').value = student.middleName;
+                document.getElementById('s_extension').value = student.extension;
+                document.getElementById('s_birthdate').value = student.birthdate;
+                document.getElementById('s_age').value = student.age;
+                document.getElementById('s_gender').value = student.gender;
+                document.getElementById('s_region').value = student.region;
+                document.getElementById('s_province').value = student.province;
+                document.getElementById('s_city').value = student.city;
+                document.getElementById('s_barangay').value = student.barangay;
+                document.getElementById('s_street').value = student.street;
+                document.getElementById('s_mobile').value = student.mobile;
+                document.getElementById('s_email').value = student.email;
+                document.getElementById('s_schoolId').value = student.schoolId;
+                document.getElementById('s_schoolName').value = student.schoolName;
+                document.getElementById('s_gradeLevel').value = student.gradeLevel;
+                document.getElementById('s_strand').value = student.strand;
+            }
+            openModal('addEditStudentModal');
+        }
+
+        function saveStudent(event) {
+            event.preventDefault();
+            showLoader();
+            setTimeout(() => {
+                const form = event.target;
+                const editingId = form.dataset.editingId;
+
+                const studentData = {
+                    lastName: document.getElementById('s_lastName').value,
+                    firstName: document.getElementById('s_firstName').value,
+                    middleName: document.getElementById('s_middleName').value,
+                    extension: document.getElementById('s_extension').value,
+                    birthdate: document.getElementById('s_birthdate').value,
+                    age: parseInt(document.getElementById('s_age').value),
+                    gender: document.getElementById('s_gender').value,
+                    region: document.getElementById('s_region').value,
+                    province: document.getElementById('s_province').value,
+                    city: document.getElementById('s_city').value,
+                    barangay: document.getElementById('s_barangay').value,
+                    street: document.getElementById('s_street').value,
+                    mobile: document.getElementById('s_mobile').value,
+                    email: document.getElementById('s_email').value,
+                    schoolId: document.getElementById('s_schoolId').value,
+                    schoolName: document.getElementById('s_schoolName').value,
+                    gradeLevel: document.getElementById('s_gradeLevel').value,
+                    strand: document.getElementById('s_strand').value,
+                };
+
+                if (editingId) {
+                    const index = students.findIndex(s => s.id === editingId);
+                    if (index !== -1) {
+                        students[index] = { ...students[index], ...studentData };
+                        alert('Student updated successfully!');
+                    }
+                } else {
+                    const newId = 'S' + String(students.length + 1).padStart(3, '0');
+                    students.push({ id: newId, ...studentData, status: 'Active', documents: [] });
+                    alert('Student added successfully!');
+                }
+                closeModal('addEditStudentModal');
+                renderStudents();
+                updateDashboard();
+                hideLoader();
+            }, 1000);
+        }
+
+        function deleteStudent(studentId) {
+            if (confirm('Are you sure you want to delete this student record?')) {
+                students = students.filter(s => s.id !== studentId);
+                alert('Student deleted successfully!');
+                renderStudents();
+                updateDashboard();
+            }
+        }
+
+        // Teacher Management Functions
+        function renderTeachers() {
+            populateTable('teacherTable', teachers, teacher => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${teacher.id}</td>
+                    <td>${teacher.name}</td>
+                    <td>${teacher.subject}</td>
+                    <td>${teacher.email}</td>
+                    <td>
+                        <button class="btn-secondary edit-teacher-btn" data-id="${teacher.id}">Edit</button>
+                        <button class="btn-secondary delete-teacher-btn" data-id="${teacher.id}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function fillTeacherForm(teacher = null) {
+            const form = document.getElementById('teacherForm');
+            document.getElementById('addEditTeacherTitle').textContent = teacher ? 'Edit Teacher' : 'Add New Teacher';
+            form.reset();
+            form.dataset.editingId = '';
+
+            if (teacher) {
+                form.dataset.editingId = teacher.id;
+                document.getElementById('t_name').value = teacher.name;
+                document.getElementById('t_subject').value = teacher.subject;
+                document.getElementById('t_email').value = teacher.email;
+                document.getElementById('t_username').value = teacher.username;
+                document.getElementById('t_password').value = teacher.password; // In real app, never pre-fill password
+            }
+            openModal('addEditTeacherModal');
+        }
+
+        function saveTeacher(event) {
+            event.preventDefault();
+            showLoader();
+            setTimeout(() => {
+                const form = event.target;
+                const editingId = form.dataset.editingId;
+
+                const teacherData = {
+                    name: document.getElementById('t_name').value,
+                    subject: document.getElementById('t_subject').value,
+                    email: document.getElementById('t_email').value,
+                    username: document.getElementById('t_username').value,
+                    password: document.getElementById('t_password').value,
+                };
+
+                if (editingId) {
+                    const index = teachers.findIndex(t => t.id === editingId);
+                    if (index !== -1) {
+                        teachers[index] = { ...teachers[index], ...teacherData };
+                        alert('Teacher updated successfully!');
+                    }
+                } else {
+                    const newId = 'T' + String(teachers.length + 1).padStart(3, '0');
+                    teachers.push({ id: newId, ...teacherData });
+                    alert('Teacher added successfully!');
+                }
+                closeModal('addEditTeacherModal');
+                renderTeachers();
+                updateDashboard();
+                hideLoader();
+            }, 1000);
+        }
+
+        function deleteTeacher(teacherId) {
+            if (confirm('Are you sure you want to delete this teacher record?')) {
+                teachers = teachers.filter(t => t.id !== teacherId);
+                alert('Teacher deleted successfully!');
+                renderTeachers();
+                updateDashboard();
+            }
+        }
+
+        // Enrollment Management Functions
+        function renderEnrollments() {
+            populateTable('pendingEnrollmentTable', pendingEnrollments, enrollment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${enrollment.submissionDate}</td>
+                    <td>${enrollment.firstName} ${enrollment.lastName}</td>
+                    <td>${enrollment.gradeLevel}</td>
+                    <td class="status-pending">${enrollment.status}</td>
+                    <td>
+                        <button class="btn-secondary review-enrollment-btn" data-id="${enrollment.id}">Review</button>
+                    </td>
+                `;
+                return row;
+            });
+
+            populateTable('enrollmentHistoryTable', enrollmentHistory, enrollment => {
+                const row = document.createElement('tr');
+                const statusClass = enrollment.status === 'Approved' ? 'status-approved' : 'status-rejected';
+                row.innerHTML = `
+                    <td>${enrollment.submissionDate}</td>
+                    <td>${enrollment.firstName} ${enrollment.lastName}</td>
+                    <td>${enrollment.gradeLevel}</td>
+                    <td class="${statusClass}">${enrollment.status}</td>
+                    <td>
+                        <button class="btn-secondary view-enrollment-history-btn" data-id="${enrollment.id}">View</button>
+                    </td>
+                `;
+                return row;
+            });
+            updateDashboard();
+        }
+
+        function reviewEnrollment(enrollmentId, isHistory = false) {
+            const enrollment = isHistory ? enrollmentHistory.find(e => e.id === enrollmentId) : pendingEnrollments.find(e => e.id === enrollmentId);
+            if (!enrollment) return;
+
+            const reviewContent = document.getElementById('enrollmentReviewContent');
+            reviewContent.innerHTML = `
+                <p><strong>Submission Date:</strong> ${enrollment.submissionDate}</p>
+                <h3>Learner's Information</h3>
+                <p><strong>Name:</strong> ${enrollment.lastName}, ${enrollment.firstName} ${enrollment.middleName} ${enrollment.extension}</p>
+                <p><strong>Date of Birth:</strong> ${enrollment.birthdate}</p>
+                <p><strong>Age:</strong> ${enrollment.age}</p>
+                <p><strong>Gender:</strong> ${enrollment.gender}</p>
+                <h3>Address Information</h3>
+                <p><strong>Address:</strong> ${enrollment.street}, ${enrollment.barangay}, ${enrollment.city}, ${enrollment.province}, ${enrollment.region}</p>
+                <h3>Contact Information</h3>
+                <p><strong>Mobile:</strong> ${enrollment.mobile}</p>
+                <p><strong>Email:</strong> ${enrollment.email}</p>
+                <h3>School Information</h3>
+                <p><strong>School ID:</strong> ${enrollment.schoolId}</p>
+                <p><strong>School Name:</strong> ${enrollment.schoolName}</p>
+                <p><strong>Grade Level:</strong> ${enrollment.gradeLevel}</p>
+                <p><strong>Strand:</strong> ${enrollment.strand}</p>
+            `;
+
+            const docsList = document.getElementById('enrollmentDocumentsList');
+            docsList.innerHTML = '';
+            if (enrollment.documents && enrollment.documents.length > 0) {
+                enrollment.documents.forEach(doc => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="alert('Simulating download of ${doc}'); return false;">${doc}</a>`;
+                    docsList.appendChild(li);
+                });
+            } else {
+                docsList.innerHTML = '<li>No documents uploaded.</li>';
+            }
+
+            const approveBtn = document.getElementById('approveEnrollmentBtn');
+            const rejectBtn = document.getElementById('rejectEnrollmentBtn');
+
+            if (isHistory) {
+                approveBtn.style.display = 'none';
+                rejectBtn.style.display = 'none';
+            } else {
+                approveBtn.style.display = 'inline-block';
+                rejectBtn.style.display = 'inline-block';
+                approveBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'Approved');
+                rejectBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'Rejected');
+            }
+            openModal('enrollmentReviewModal');
+        }
+
+        function approveRejectEnrollment(enrollmentId, status) {
+            const index = pendingEnrollments.findIndex(e => e.id === enrollmentId);
+            if (index !== -1) {
+                const enrollment = pendingEnrollments.splice(index, 1)[0];
+                enrollment.status = status;
+                enrollmentHistory.push(enrollment);
+                alert(`Enrollment ${enrollment.firstName} ${enrollment.lastName} has been ${status.toLowerCase()}.`);
+                closeModal('enrollmentReviewModal');
+                renderEnrollments();
+                // If approved, optionally add to students list
+                if (status === 'Approved') {
+                    const newStudentId = 'S' + String(students.length + 1).padStart(3, '0');
+                    students.push({
+                        id: newStudentId,
+                        lastName: enrollment.lastName,
+                        firstName: enrollment.firstName,
+                        middleName: enrollment.middleName,
+                        extension: enrollment.extension,
+                        birthdate: enrollment.birthdate,
+                        age: enrollment.age,
+                        gender: enrollment.gender,
+                        region: enrollment.region,
+                        province: enrollment.province,
+                        city: enrollment.city,
+                        barangay: enrollment.barangay,
+                        street: enrollment.street,
+                        mobile: enrollment.mobile,
+                        email: enrollment.email,
+                        schoolId: enrollment.schoolId,
+                        schoolName: enrollment.schoolName,
+                        gradeLevel: enrollment.gradeLevel,
+                        strand: enrollment.strand,
+                        status: 'Active',
+                        documents: enrollment.documents
+                    });
+                    renderStudents(); // Update student list
+                }
+            }
+        }
+
+        // Grade Management Functions
+        function renderGrades(classFilter = '', subjectFilter = '') {
+            let filteredGrades = grades;
+            if (classFilter) {
+                filteredGrades = filteredGrades.filter(g => g.class === classFilter);
+            }
+            if (subjectFilter) {
+                filteredGrades = filteredGrades.filter(g => g.subject === subjectFilter);
+            }
+
+            populateTable('gradesTable', filteredGrades, grade => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${grade.studentName}</td>
+                    <td>${grade.subject}</td>
+                    <td>${grade.grade}</td>
+                    <td>${grade.comments}</td>
+                    <td>
+                        <button class="btn-secondary edit-grade-btn" data-student-id="${grade.studentId}" data-subject="${grade.subject}">Edit</button>
+                        <button class="btn-secondary delete-grade-btn" data-student-id="${grade.studentId}" data-subject="${grade.subject}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function fillGradeForm(grade = null) {
+            const form = document.getElementById('gradeForm');
+            document.getElementById('addEditGradeTitle').textContent = grade ? 'Edit Grade' : 'Add New Grade';
+            form.reset();
+            form.dataset.editingStudentId = '';
+            form.dataset.editingSubject = '';
+
+            if (grade) {
+                form.dataset.editingStudentId = grade.studentId;
+                form.dataset.editingSubject = grade.subject;
+                document.getElementById('g_studentName').value = grade.studentName;
+                document.getElementById('g_subject').value = grade.subject;
+                document.getElementById('g_grade').value = grade.grade;
+                document.getElementById('g_comments').value = grade.comments;
+            }
+            openModal('addEditGradeModal');
+        }
+
+        function saveGrade(event) {
+            event.preventDefault();
+            showLoader();
+            setTimeout(() => {
+                const form = event.target;
+                const editingStudentId = form.dataset.editingStudentId;
+                const editingSubject = form.dataset.editingSubject;
+
+                const gradeData = {
+                    studentName: document.getElementById('g_studentName').value,
+                    subject: document.getElementById('g_subject').value,
+                    grade: parseInt(document.getElementById('g_grade').value),
+                    comments: document.getElementById('g_comments').value,
+                };
+
+                if (editingStudentId && editingSubject) {
+                    const index = grades.findIndex(g => g.studentId === editingStudentId && g.subject === editingSubject);
+                    if (index !== -1) {
+                        grades[index] = { ...grades[index], ...gradeData };
+                        alert('Grade updated successfully!');
+                    }
+                } else {
+                    // For new grades, we need to associate with an existing student ID
+                    // This simplified example assumes studentName is enough, but in real app, use studentId
+                    const existingStudent = students.find(s => s.firstName + ' ' + s.lastName === gradeData.studentName);
+                    if (existingStudent) {
+                        grades.push({ studentId: existingStudent.id, class: existingStudent.gradeLevel, ...gradeData });
+                        alert('Grade added successfully!');
+                    } else {
+                        alert('Student not found. Please ensure the student name matches an existing student.');
+                        return;
+                    }
+                }
+                closeModal('addEditGradeModal');
+                renderGrades(document.getElementById('gradeClassSelect').value, document.getElementById('gradeSubjectSelect').value);
+                hideLoader();
+            }, 1000);
+        }
+
+        function deleteGrade(studentId, subject) {
+            if (confirm('Are you sure you want to delete this grade?')) {
+                grades = grades.filter(g => !(g.studentId === studentId && g.subject === subject));
+                alert('Grade deleted successfully!');
+                renderGrades(document.getElementById('gradeClassSelect').value, document.getElementById('gradeSubjectSelect').value);
+            }
+        }
+
+        // Announcement Management Functions
+        function renderAnnouncements() {
+            populateTable('announcementTable', announcements, announcement => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${announcement.title}</td>
+                    <td>${announcement.content.substring(0, 100)}...</td>
+                    <td>${announcement.postedBy}</td>
+                    <td>${announcement.date}</td>
+                    <td>
+                        <button class="btn-secondary edit-announcement-btn" data-id="${announcement.id}">Edit</button>
+                        <button class="btn-secondary delete-announcement-btn" data-id="${announcement.id}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function fillAnnouncementForm(announcement = null) {
+            const form = document.getElementById('announcementForm');
+            document.getElementById('createEditAnnouncementTitle').textContent = announcement ? 'Edit Announcement' : 'Create New Announcement';
+            form.reset();
+            form.dataset.editingId = '';
+
+            if (announcement) {
+                form.dataset.editingId = announcement.id;
+                document.getElementById('a_title').value = announcement.title;
+                document.getElementById('a_content').value = announcement.content;
+            }
+            openModal('createEditAnnouncementModal');
+        }
+
+        function saveAnnouncement(event) {
+            event.preventDefault();
+            showLoader();
+            setTimeout(() => {
+                const form = event.target;
+                const editingId = form.dataset.editingId;
+
+                const announcementData = {
+                    title: document.getElementById('a_title').value,
+                    content: document.getElementById('a_content').value,
+                };
+
+                if (editingId) {
+                    const index = announcements.findIndex(a => a.id === editingId);
+                    if (index !== -1) {
+                        announcements[index] = { ...announcements[index], ...announcementData };
+                        alert('Announcement updated successfully!');
+                    }
+                } else {
+                    const newId = 'A' + String(announcements.length + 1).padStart(3, '0');
+                    const now = new Date();
+                    const dateString = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    announcements.push({ id: newId, ...announcementData, postedBy: 'Admin', date: dateString });
+                    alert('Announcement posted successfully!');
+                }
+                closeModal('createEditAnnouncementModal');
+                renderAnnouncements();
+                updateDashboard();
+                hideLoader();
+            }, 1000);
+        }
+
+        function deleteAnnouncement(announcementId) {
+            if (confirm('Are you sure you want to delete this announcement?')) {
+                announcements = announcements.filter(a => a.id !== announcementId);
+                alert('Announcement deleted successfully!');
+                renderAnnouncements();
+                updateDashboard();
+            }
+        }
+
+        // Resource Management Functions
+        function renderResources() {
+            populateTable('resourceTable', resources, resource => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${resource.title}</td>
+                    <td>${resource.description.substring(0, 100)}...</td>
+                    <td><a href="#" onclick="alert('Simulating download of ${resource.file}'); return false;">${resource.file}</a></td>
+                    <td>
+                        <button class="btn-secondary edit-resource-btn" data-id="${resource.id}">Edit</button>
+                        <button class="btn-secondary delete-resource-btn" data-id="${resource.id}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function fillResourceUploadForm() {
+            document.getElementById('resourceUploadForm').reset();
+            openModal('uploadResourceModal');
+        }
+
+        function saveResource(event) {
+            event.preventDefault();
+            const form = event.target;
+
+            const resourceData = {
+                title: document.getElementById('r_title').value,
+                description: document.getElementById('r_description').value,
+                file: document.getElementById('r_file').files[0] ? document.getElementById('r_file').files[0].name : '',
+            };
+
+            if (!resourceData.file) {
+                alert('Please select a file to upload.');
+                return;
+            }
+
+            const newId = 'R' + String(resources.length + 1).padStart(3, '0');
+            resources.push({ id: newId, ...resourceData });
+            alert('Resource uploaded successfully!');
+            closeModal('uploadResourceModal');
+            renderResources();
+        }
+
+        function deleteResource(resourceId) {
+            if (confirm('Are you sure you want to delete this resource?')) {
+                resources = resources.filter(r => r.id !== resourceId);
+                alert('Resource deleted successfully!');
+                renderResources();
+            }
+        }
+
+        // User Management Functions (Admin Users)
+        function renderAdminUsers() {
+            populateTable('adminUserTable', adminUsers, user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>
+                        <button class="btn-secondary edit-admin-user-btn" data-id="${user.id}">Edit</button>
+                        <button class="btn-secondary delete-admin-user-btn" data-id="${user.id}">Delete</button>
+                    </td>
+                `;
+                return row;
+            });
+        }
+
+        function fillAdminUserForm() {
+            document.getElementById('adminUserForm').reset();
+            openModal('addAdminUserModal');
+        }
+
+        function saveAdminUser(event) {
+            event.preventDefault();
+            const form = event.target;
+
+            const userData = {
+                username: document.getElementById('au_username').value,
+                email: document.getElementById('au_email').value,
+                password: document.getElementById('au_password').value, // In real app, hash this!
+            };
+
+            const newId = 'AD' + String(adminUsers.length + 1).padStart(3, '0');
+            adminUsers.push({ id: newId, ...userData });
+            alert('Admin user created successfully!');
+            closeModal('addAdminUserModal');
+            renderAdminUsers();
+        }
+
+        function deleteAdminUser(userId) {
+            if (confirm('Are you sure you want to delete this admin user?')) {
+                adminUsers = adminUsers.filter(u => u.id !== userId);
+                alert('Admin user deleted successfully!');
+                renderAdminUsers();
+            }
+        }
+
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar Navigation
+            document.querySelectorAll('.sidebar ul li a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('href').substring(1);
+                    showSection(sectionId);
+                });
+            });
+
+            // Initial Load
+            showSection('dashboard');
+            updateDashboard();
+            renderStudents();
+            renderTeachers();
+            renderEnrollments();
+            renderGrades();
+            renderAnnouncements();
+            renderResources();
+            renderAdminUsers();
+
+            // Student Management Events
+            document.getElementById('addStudentBtn').addEventListener('click', () => fillStudentForm());
+            document.getElementById('studentForm').addEventListener('submit', saveStudent);
+            document.getElementById('studentTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-student-btn')) {
+                    viewStudentDetails(e.target.dataset.id);
+                } else if (e.target.classList.contains('edit-student-btn')) {
+                    const student = students.find(s => s.id === e.target.dataset.id);
+                    fillStudentForm(student);
+                } else if (e.target.classList.contains('delete-student-btn')) {
+                    deleteStudent(e.target.dataset.id);
+                }
+            });
+            document.getElementById('editStudentDetailsBtn').addEventListener('click', function() {
+                const student = students.find(s => s.id === this.dataset.id);
+                closeModal('studentDetailsModal');
+                fillStudentForm(student);
+            });
+            document.getElementById('searchStudentsBtn').addEventListener('click', () => {
+                const filter = document.getElementById('studentSearchInput').value;
+                renderStudents(filter);
+            });
+            document.getElementById('uploadStudentDocBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('uploadStudentDoc');
+                if (fileInput.files.length > 0) {
+                    const fileName = fileInput.files[0].name;
+                    const studentId = document.getElementById('editStudentDetailsBtn').dataset.id;
+                    const student = students.find(s => s.id === studentId);
+                    if (student) {
+                        student.documents.push(fileName);
+                        alert(`Document "${fileName}" uploaded for ${student.firstName} ${student.lastName}.`);
+                        viewStudentDetails(studentId); // Refresh modal
+                    }
+                    fileInput.value = '';
+                } else {
+                    alert('Please select a file to upload.');
+                }
+            });
+
+
+            // Teacher Management Events
+            document.getElementById('addTeacherBtn').addEventListener('click', () => fillTeacherForm());
+            document.getElementById('teacherForm').addEventListener('submit', saveTeacher);
+            document.getElementById('teacherTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('edit-teacher-btn')) {
+                    const teacher = teachers.find(t => t.id === e.target.dataset.id);
+                    fillTeacherForm(teacher);
+                } else if (e.target.classList.contains('delete-teacher-btn')) {
+                    deleteTeacher(e.target.dataset.id);
+                }
+            });
+
+            // Enrollment Management Events
+            document.getElementById('pendingEnrollmentTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('review-enrollment-btn')) {
+                    reviewEnrollment(e.target.dataset.id);
+                }
+            });
+            document.getElementById('enrollmentHistoryTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-enrollment-history-btn')) {
+                    reviewEnrollment(e.target.dataset.id, true);
+                }
+            });
+
+            // Grade Management Events
+            document.getElementById('loadGradesBtn').addEventListener('click', () => {
+                const classFilter = document.getElementById('gradeClassSelect').value;
+                const subjectFilter = document.getElementById('gradeSubjectSelect').value;
+                renderGrades(classFilter, subjectFilter);
+            });
+            document.getElementById('addGradeBtn').addEventListener('click', () => fillGradeForm());
+            document.getElementById('gradeForm').addEventListener('submit', saveGrade);
+            document.getElementById('gradesTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('edit-grade-btn')) {
+                    const studentId = e.target.dataset.studentId;
+                    const subject = e.target.dataset.subject;
+                    const grade = grades.find(g => g.studentId === studentId && g.subject === subject);
+                    fillGradeForm(grade);
+                } else if (e.target.classList.contains('delete-grade-btn')) {
+                    deleteGrade(e.target.dataset.studentId, e.target.dataset.subject);
+                }
+            });
+
+            // Announcement Management Events
+            document.getElementById('createAnnouncementBtn').addEventListener('click', () => fillAnnouncementForm());
+            document.getElementById('announcementForm').addEventListener('submit', saveAnnouncement);
+            document.getElementById('announcementTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('edit-announcement-btn')) {
+                    const announcement = announcements.find(a => a.id === e.target.dataset.id);
+                    fillAnnouncementForm(announcement);
+                } else if (e.target.classList.contains('delete-announcement-btn')) {
+                    deleteAnnouncement(e.target.dataset.id);
+                }
+            });
+
+            // Resource Management Events
+            document.getElementById('uploadResourceBtn').addEventListener('click', () => fillResourceUploadForm());
+            document.getElementById('resourceUploadForm').addEventListener('submit', saveResource);
+            document.getElementById('resourceTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('edit-resource-btn')) {
+                    // For simplicity, edit is not implemented for resources as it involves file handling.
+                    // In a real app, you'd likely allow editing title/description and re-uploading file.
+                    alert('Editing resources is not fully implemented in this demo. You can only delete and re-upload.');
+                } else if (e.target.classList.contains('delete-resource-btn')) {
+                    deleteResource(e.target.dataset.id);
+                }
+            });
+
+            // User Management Events
+            document.getElementById('addAdminUserBtn').addEventListener('click', () => fillAdminUserForm());
+            document.getElementById('adminUserForm').addEventListener('submit', saveAdminUser);
+            document.getElementById('adminUserTable').addEventListener('click', function(e) {
+                if (e.target.classList.contains('edit-admin-user-btn')) {
+                    alert('Editing admin users is not fully implemented in this demo.');
+                } else if (e.target.classList.contains('delete-admin-user-btn')) {
+                    deleteAdminUser(e.target.dataset.id);
+                }
+            });
+
+            // Main Portal Button
+            document.getElementById('mainPortalBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'main.html'; // Redirect to the main portal page
+            });
+
+            // Logout Button
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to log out?')) {
+                    window.location.href = 'main.html'; // Redirect to main page
+                }
+            });
+
+            // Close buttons for modals
+            document.querySelectorAll('.modal .close-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    closeModal(this.closest('.modal').id);
+                });
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (event.target === modal) {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+        });
+
+        // Function to simulate receiving enrollment data from Enrollment.html
+        // In a real scenario, Enrollment.html would submit data to a backend API,
+        // and this admin panel would fetch it from that API.
+        // For this demo, we'll use localStorage to pass data.
+        function checkNewEnrollments() {
+            const newEnrollmentData = localStorage.getItem('newEnrollmentSubmission');
+            if (newEnrollmentData) {
+                const enrollment = JSON.parse(newEnrollmentData);
+                enrollment.id = 'E' + String(pendingEnrollments.length + enrollmentHistory.length + 1).padStart(3, '0');
+                enrollment.submissionDate = new Date().toISOString().slice(0, 10);
+                enrollment.status = 'Pending';
+                pendingEnrollments.push(enrollment);
+                localStorage.removeItem('newEnrollmentSubmission'); // Clear after processing
+                renderEnrollments();
+                updateDashboard();
+                alert('New enrollment submission received!');
+            }
+        }
+        // Call this function periodically or on page load in a real app
+        // For this demo, we'll call it once on load.
+        checkNewEnrollments();
+
+        // Override the submit function in Enrollment.html for demonstration purposes
+        // This part would typically be handled by a backend.
+        // This script needs to be run *after* Enrollment.html's script, or Enrollment.html needs to be modified.
+        // For this setup, I'll assume a manual copy-paste of data for demonstration.
+        // If you were to run this in a browser, you'd need to modify Enrollment.html's submit handler
+        // to store data in localStorage or send it to a mock API.
+        // Example modification for Enrollment.html's submit handler:
+        /*
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // ... existing validation ...
+            if (isValid) {
+                const formData = {
+                    lastName: document.getElementById('lastName').value,
+                    firstName: document.getElementById('firstName').value,
+                    middleName: document.getElementById('middleName').value,
+                    extension: document.getElementById('extension').value,
+                    birthdate: document.getElementById('birthdate').value,
+                    age: parseInt(document.getElementById('age').value),
+                    gender: document.getElementById('gender').value,
+                    region: document.getElementById('region').value,
+                    province: document.getElementById('province').value,
+                    city: document.getElementById('city').value,
+                    barangay: document.getElementById('barangay').value,
+                    street: document.getElementById('street').value,
+                    mobile: document.getElementById('mobile').value,
+                    email: document.getElementById('email').value,
+                    schoolId: document.getElementById('schoolId').value,
+                    schoolName: document.getElementById('schoolName').value,
+                    gradeLevel: document.getElementById('gradeLevel').value,
+                    strand: document.getElementById('strand').value,
+                    documents: Array.from(document.querySelectorAll('#fileItems .file-item span.font-medium')).map(span => span.textContent)
+                };
+                localStorage.setItem('newEnrollmentSubmission', JSON.stringify(formData));
+                alert('Enrollment submitted successfully! (Data saved for Admin Panel demo)');
+                // Optionally redirect or clear form
+                this.reset();
+                document.getElementById('fileItems').innerHTML = ''; // Clear uploaded files display
+            }
+        });
+        */
+    </script>
+    <div id="loader" class="d-none"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>
+</body>
+</html>

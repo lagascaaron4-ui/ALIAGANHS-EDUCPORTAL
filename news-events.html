@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News & Events - Aliaga National High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', 'Times New Roman', Times, serif; /* Formal font */
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        header {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.1);
+        }
+        .header-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            left: 50px;
+            gap: 15px;
+        }
+        .logo img {
+            height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.1);
+        }
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .logo p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08);
+            color: #13522d;
+        }
+        main h2 {
+            font-size: 2.5rem;
+            color: #1a6633;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .section-wrapper {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .news-section, .events-section {
+            flex: 1 1 480px;
+            background: #e0e8d9;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.06);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            color: #176a3a;
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .news-item, .event-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.06);
+            margin-bottom: 24px;
+            padding: 16px;
+            transition: box-shadow 0.2s;
+        }
+        .news-item:hover, .event-item:hover {
+            box-shadow: 0 6px 24px rgba(26,102,51,0.12);
+        }
+        .news-item img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .news-item h3, .event-item h3 {
+            color: #176a3a;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+        .news-item p, .event-item p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .news-item span, .event-item span {
+            font-size: 0.9rem;
+            color: #e0b34d;
+            display: block;
+            font-weight: 600;
+        }
+        footer {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            padding: 48px 0;
+        }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .footer-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #e0b34d;
+            margin-bottom: 16px;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-list li {
+            margin-bottom: 8px;
+        }
+        .footer-list a {
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 2px 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-list a:hover {
+            background: #e0b34d;
+            color: #1a6633;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .footer-social a {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.3rem;
+        }
+        .footer-social a:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-newsletter {
+            margin-top: 16px;
+        }
+        .footer-newsletter input[type="email"] {
+            background: #f0f0d9;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #e0e8d9;
+            color: #13522d;
+            padding: 8px 12px;
+            font-size: 1rem;
+            width: 70%;
+            box-sizing: border-box;
+        }
+        .footer-newsletter button {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+            font-size: 1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-newsletter button:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-bottom {
+            border-top: 1px solid #e0e8d9;
+            margin-top: 32px;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .section-wrapper {
+                flex-direction: column;
+                gap: 32px;
+            }
+            .news-section, .events-section {
+                flex: 1 1 100%;
+            }
+        }
+
+             /* Modal (login/register) styles */
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .auth-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+        }
+        .auth-content {
+            position: relative;
+            background: #fff;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 92%;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(20,60,30,0.12);
+            z-index: 2;
+        }
+        .auth-header {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom: 14px;
+        }
+        .auth-header h3 { margin:0; color:#1a6633; }
+        .auth-close { background:transparent;border:none;font-size:1.1rem;cursor:pointer;color:#7a7a7a; }
+        .auth-forms { display:block; }
+        .auth-forms form { display:none; gap:12px; }
+        .auth-forms form.active { display:block; }
+        .auth-row { margin-bottom:10px; }
+        .auth-row input, .auth-row select {
+            width:100%; padding:10px 12px; border:1px solid #d6e3d0; border-radius:8px; box-sizing:border-box; color:#13522d;
+        }
+        .auth-actions { display:flex; gap:8px; margin-top:12px; }
+        .btn-primary { background:#1a6633;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600; }
+        .btn-secondary { background:#e0b34d;color:#13522d;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600; }
+        .auth-switch { margin-top:10px; font-size:0.9rem; color:#13522d; text-align:center; }
+        .auth-switch a { color:#1a6633; text-decoration:none; font-weight:600; cursor:pointer; margin-left:6px; }
+        @media (max-width:560px){
+            .auth-content{ padding:16px; }
+        }
+
+        /* Menu-style button used in hero */
+        .menu-button {
+            position:absolute;
+            left: 16px;
+            top: 55px;
+            z-index: 1400;
+            display: inline-block;
+            max-width: 360px;
+            box-sizing: border-box;
+        }
+        .menu-toggle {
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+            transition: background 0.18s ease, transform 0.12s ease;
+        }
+        .menu-toggle:hover { background: #f0f0d9; transform: translateY(-1px); }
+
+        /* Dropdown anchored to the button, limited width & height */
+        .menu-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);    /* just below the button */
+            left: 0;
+            right: auto;
+            min-width: 160px;
+            max-width: 320px;
+            box-sizing: border-box;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            overflow: hidden;
+            display: none;            /* hidden by default */
+            z-index: 1500;
+            max-height: calc(100vh - 120px); /* fits in viewport */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            text-align: center;
+        }
+        .menu-dropdown.open { display: block; }
+
+        /* Ensure menu-items use full dropdown width with small padding */
+        .menu-item {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #13522d;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .menu-item:hover, .menu-item:focus {
+            background: #f6f7f2;
+            outline: none;
+        }
+
+        /* Make dropdown adapt to small screens and stay inside edges */
+        @media (max-width: 900px) {
+            .menu-dropdown {
+                left: 20px;
+                right: auto;
+                min-width: unset;
+                max-width: calc(100vw - 40px);
+                top: calc(100% + 8px);
+            }
+        }
+
+        /* keep header-container positioned for absolute children */
+        .header-container { position: relative; }
+
+        /* Small screens: keep toggle at top-left and adjust dropdown */
+        @media (max-width: 480px) {
+            .menu-button {
+                left: 16px;
+                top: 16px;
+                bottom: auto;
+                right: auto;
+                transform: none;
+            }
+            .menu-dropdown {
+                left: 16px;
+                right: auto;
+                max-width: calc(100vw - 32px);
+            }
+        }
+
+        /* Prevent dropdown being cut by parent overflow */
+        html, body { height: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo" />
+                <div>
+                    <h1>Aliaga National High School</h1>
+                    <p>Be an ANAHASIANS.</p>
+                </div>
+            </div>
+            <div class="menu-button">
+                <button id="navToggle" class="menu-toggle">
+                    Menu
+                    <i class="ri-menu-line"></i>
+                </button>
+                <div id="mainNav" class="menu-dropdown">
+                    <a href="main.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item">About Us</a>
+                    <a href="specialization.html" class="menu-item">Specialization</a>
+                    <a href="admission.html" class="menu-item">Admissions</a>
+                    <a href="news-events.html" class="menu-item" aria-current="page">News & Events</a>
+                    <a href="contact.html" class="menu-item">Contact Us</a>
+                    <a href="#" class="menu-item" id="loginRegisterBtn">Login/Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>News & Events</h2>
+        <div class="section-wrapper">
+            <section class="news-section" aria-label="Latest News">
+                <h3 class="section-title">Latest News</h3>
+
+                <article class="news-item">
+                    <img src="https://readdy.ai/api/search-image?query=High%20school%20students%20in%20science%20laboratory%20conducting%20experiments%20with%20modern%20equipment%2C%20bright%20classroom%20environment%2C%20educational%20setting%20with%20green%20and%20yellow%20accents&width=400&height=200&seq=news001&orientation=landscape" alt="Students conducting science experiments" />
+                    <h3>Annual Science Fair Winners Announced</h3>
+                    <p>Congratulations to our outstanding students who showcased innovative projects in this year’s science fair competition.</p>
+                    <span>March 15, 2025</span>
+                </article>
+
+                <article class="news-item">
+                    <img src="https://readdy.ai/api/search-image?query=School%20basketball%20team%20celebrating%20victory%20on%20court%20students%20in%20green%20and%20yellow%20uniforms%20indoor%20gymnasium%20setting%20team%20spirit%20and%20achievement&width=400&height=200&seq=news002&orientation=landscape" alt="Basketball team celebrating victory" />
+                    <h3>Basketball Team Wins Regional Championship</h3>
+                    <p>Our varsity basketball team secured the regional championship title after an intense final match.</p>
+                    <span>March 12, 2025</span>
+                </article>
+
+                <article class="news-item">
+                    <img src="https://readdy.ai/api/search-image?query=Students%20volunteering%20in%20a%20community%20cleanup%20drive%2C%20wearing%20school%20uniforms%2C%20outdoor%20setting%2C%20showing%20community%20engagement%20and%20social%20responsibility&width=400&height=200&seq=news003&orientation=landscape" alt="Students volunteering in community cleanup" />
+                    <h3>Community Outreach Program Success</h3>
+                    <p>Our students actively participated in a successful community cleanup drive, making a positive impact.</p>
+                    <span>March 10, 2025</span>
+                </article>
+            </section>
+
+            <section class="events-section" aria-label="Upcoming Events">
+                <h3 class="section-title">Upcoming Events</h3>
+
+                <article class="event-item">
+                    <h3><i class="ri-music-line" style="color:#176a3a; margin-right:8px;"></i>Spring Concert</h3>
+                    <p>Join us for an evening of musical performances by our talented students.</p>
+                    <span>March 20, 2025 | 7:00 PM - Main Auditorium</span>
+                </article>
+
+                <article class="event-item">
+                    <h3><i class="ri-group-line" style="color:#176a3a; margin-right:8px;"></i>Parent-Teacher Conferences</h3>
+                    <p>Schedule your appointment to discuss your child’s academic progress.</p>
+                    <span>March 25, 2025 | 9:00 AM - 5:00 PM</span>
+                </article>
+
+                <article class="event-item">
+                    <h3><i class="ri-graduation-cap-line" style="color:#176a3a; margin-right:8px;"></i>College Fair</h3>
+                    <p>Meet representatives from top universities and explore higher education opportunities.</p>
+                    <span>April 2, 2025 | 10:00 AM - 3:00 PM - Gymnasium</span>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
+                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement." />
+                    </div>
+                </div>
+                <p style="font-size:0.95rem;opacity:0.9;margin-bottom:16px;">Excellence in Education</p>
+                <div style="font-size:0.95rem;">
+                    <p>1234 Education Drive</p>
+                    <p>Aliaga, Nueva Ecija</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <p>Email: @Aliaganationalhighschool.edu</p>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Quick Links</div>
+                <ul class="footer-list">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="specialization.html">Academics</a></li>
+                    <li><a href="admission.html">Admissions</a></li>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Campus Life</a></li>
+                    <li><a href="#">Athletics</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Resources</div>
+                <ul class="footer-list">
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Parent Portal</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="news-events.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Stay Connected</div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                </div>
+                <div class="footer-newsletter">
+                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!');" aria-label="Newsletter Signup Form">
+                        <input type="email" placeholder="Your email" aria-label="Email address" required />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+ <!-- Authentication modal added so the nav Login/Register works on this page -->
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+        <div class="auth-backdrop" id="authBackdrop"></div>
+        <div class="auth-content" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+            <div class="auth-header">
+                <h3 id="authTitle">Login</h3>
+                <button class="auth-close" id="authCloseBtn" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="auth-forms">
+                <form id="loginForm" class="active" autocomplete="off">
+                    <div class="auth-row">
+                        <label class="sr-only">User type</label>
+                        <select id="userType" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="parent">Parent</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Login</button>
+                        <button type="button" id="showRegister" class="btn-secondary">Register</button>
+                    </div>
+                </form>
+
+                <form id="registerForm" autocomplete="off">
+                    <div class="auth-row">
+                        <input id="registerFirstName" type="text" placeholder="First name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerLastName" type="text" placeholder="Last name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-row">
+                        <select id="registerGradeLevel" required>
+                            <option value="">Select grade level</option>
+                            <option value="G7">Grade 7</option>
+                            <option value="G8">Grade 8</option>
+                            <option value="G9">Grade 9</option>
+                            <option value="G10">Grade 10</option>
+                            <option value="G11">Grade 11</option>
+                            <option value="G12">Grade 12</option>
+                        </select>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Register</button>
+                        <button type="button" id="showLogin" class="btn-secondary">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-switch">
+                By logging in you accept school policies.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            // Elements
+            const loginBtn = document.getElementById('loginRegisterBtn');
+            const authModal = document.getElementById('authModal');
+            const authBackdrop = document.getElementById('authBackdrop');
+            const authCloseBtn = document.getElementById('authCloseBtn');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+
+            // Simulated users (replace with backend)
+            const users = {
+                student: [{ email: 'student@example.com', password: 'password' }],
+                teacher: [{ email: 'teacher@example.com', password: 'password' }],
+                parent: [{ email: 'parent@example.com', password: 'password' }],
+                admin: [{ email: 'admin@example.com', password: 'password' }]
+            };
+
+            function openModal(mode = 'login'){
+                authModal.style.display = 'flex';
+                authModal.setAttribute('aria-hidden','false');
+                document.getElementById('authTitle').textContent = (mode === 'login') ? 'Login' : 'Student Registration';
+                if(mode === 'login'){
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    registerForm.classList.add('active');
+                    loginForm.classList.remove('active');
+                }
+            }
+            function closeModal(){
+                authModal.style.display = 'none';
+                authModal.setAttribute('aria-hidden','true');
+            }
+
+            if(loginBtn){
+                loginBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            if(authBackdrop){
+                authBackdrop.addEventListener('click', closeModal);
+            }
+            if(authCloseBtn){
+                authCloseBtn.addEventListener('click', closeModal);
+            }
+            // switch to register
+            if(showRegister){
+                showRegister.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('register');
+                });
+            }
+            if(showLogin){
+                showLogin.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            // Login submit
+            if(loginForm){
+                loginForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const email = (document.getElementById('loginEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('loginPassword')||{}).value||'';
+                    const userType = (document.getElementById('userType')||{}).value||'';
+
+                    if(!userType){
+                        alert('Please select a role.');
+                        return;
+                    }
+                    if(!email || !password){
+                        alert('Enter email and password.');
+                        return;
+                    }
+                    const list = users[userType] || [];
+                    const found = list.find(u => u.email === email && u.password === password);
+                    if(found){
+                        alert('Login successful. Redirecting...');
+                        closeModal();
+                        // redirect destinations (adjust filenames if needed)
+                        const dest = {
+                            student:'Students.html',
+                            teacher:'Teachers Portal.html',
+                            parent:'parents.html',
+                            admin:'admin.html'
+                        }[userType] || 'main.html';
+                        setTimeout(()=> window.location.href = dest, 300);
+                    } else {
+                        alert('Invalid credentials. Try again.');
+                    }
+                });
+            }
+
+            // Register submit (adds to simulated students and stores in localStorage)
+            if(registerForm){
+                registerForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const firstName = (document.getElementById('registerFirstName')||{}).value?.trim()||'';
+                    const lastName = (document.getElementById('registerLastName')||{}).value?.trim()||'';
+                    const email = (document.getElementById('registerEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('registerPassword')||{}).value||'';
+                    const gradeLevel = (document.getElementById('registerGradeLevel')||{}).value||'';
+
+                    if(!firstName || !lastName || !email || !password || !gradeLevel){
+                        alert('Please fill all registration fields.');
+                        return;
+                    }
+                    // check existing
+                    const exists = (users.student || []).some(u => u.email === email);
+                    if(exists){
+                        alert('Email already registered.');
+                        return;
+                    }
+                    const newStudent = { firstName, lastName, email, password, gradeLevel };
+                    users.student.push(newStudent);
+                    localStorage.setItem('newEnrollmentSubmission', JSON.stringify(newStudent));
+                    alert('Registration successful. Please login.');
+                    openModal('login');
+                });
+            }
+
+            // keyboard escape to close
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'Escape' && authModal.style.display === 'flex') closeModal();
+            });
+        })();
+    </script>
+
+    <script id="mobile-menu">
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav');
+            if (navToggle && mainNav) {
+                navToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('open');
+                });
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navToggle.contains(event.target) && !mainNav.contains(event.target)) {
+                        mainNav.classList.remove('open');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

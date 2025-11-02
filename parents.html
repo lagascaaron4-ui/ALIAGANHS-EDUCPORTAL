@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Portal - Aliaga National High School</title>
+    <script src="api.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #176a3a; /* Dark green */
+            color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: #ffd600; /* Yellow */
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+        .sidebar ul li a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .sidebar ul li a:hover, .sidebar ul li a.active {
+            background-color: #218c4a; /* Slightly lighter green */
+            color: #ffd600;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            color: #176a3a;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: #e8f5e9; /* Light green */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #176a3a;
+            font-size: 1.5rem;
+        }
+        .card p {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #218c4a;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #176a3a;
+            color: #fff;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .btn-primary {
+            padding: 10px 20px;
+            background-color: #176a3a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #218c4a;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .message-item {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .message-item strong {
+            color: #176a3a;
+        }
+        .message-item small {
+            display: block;
+            color: #777;
+            margin-top: 5px;
+        }
+        .announcement-item {
+            background-color: #fff3e0; /* Light orange */
+            border: 1px solid #ffcc80;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .announcement-item h4 {
+            margin-top: 0;
+            color: #e65100; /* Dark orange */
+            font-size: 1.1rem;
+        }
+        .announcement-item p {
+            margin-bottom: 5px;
+        }
+        .announcement-item small {
+            color: #777;
+            font-size: 0.85rem;
+        }
+        .document-list {
+            list-style: none;
+            padding: 0;
+        }
+        .document-list li {
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px dotted #eee;
+        }
+        .document-list li a {
+            color: #176a3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .document-list li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Parent Portal</h2>
+        <ul>
+            <li><a href="#dashboard" class="active">Dashboard</a></li>
+            <li><a href="#my-children">My Children</a></li>
+            <li><a href="#grades-attendance">Grades & Attendance</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#announcements">Announcements</a></li>
+            <li><a href="#school-resources">School Resources</a></li>
+            <li><a href="#profile-settings">Profile & Settings</a></li>
+            <li><a href="#" id="mainPortalBtn">Main Portal</a></li> <!-- Added button -->
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <h1 class="section-title">Dashboard</h1>
+            <p>Welcome, Parent Name!</p>
+            <div class="card-container">
+                <div class="card">
+                    <h3>My Children</h3>
+                    <p id="numChildren">0</p>
+                </div>
+                <div class="card">
+                    <h3>Unread Messages</h3>
+                    <p id="unreadMessages">0</p>
+                </div>
+                <div class="card">
+                    <h3>Upcoming Events</h3>
+                    <p id="upcomingEvents">0</p>
+                </div>
+            </div>
+            <h2>Quick Overview</h2>
+            <div id="dashboardOverview">
+                <p>No recent updates.</p>
+            </div>
+        </section>
+
+        <!-- My Children Section -->
+        <section id="my-children" style="display:none;">
+            <h1 class="section-title">My Children</h1>
+            <div id="childrenList">
+                <!-- Children's details will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Grades & Attendance Section -->
+        <section id="grades-attendance" style="display:none;">
+            <h1 class="section-title">Grades & Attendance</h1>
+            <div class="form-group">
+                <label for="selectChildGrades">Select Child:</label>
+                <select id="selectChildGrades">
+                    <option value="">-- Select Child --</option>
+                    <!-- Children will be loaded dynamically -->
+                </select>
+            </div>
+            <button class="btn-primary" id="loadChildDataBtn">Load Data</button>
+
+            <h2 style="margin-top: 30px;">Grades Overview</h2>
+            <table id="gradesTable">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Grade</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Grades will be loaded here -->
+                </tbody>
+            </table>
+
+            <h2 style="margin-top: 30px;">Attendance Record</h2>
+            <table id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Attendance will be loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages" style="display:none;">
+            <h1 class="section-title">Messages</h1>
+            <div class="form-group">
+                <label for="messageRecipient">Send Message To:</label>
+                <select id="messageRecipient">
+                    <option value="">-- Select Recipient --</option>
+                    <option value="teacher1">Teacher John Doe</option>
+                    <option value="admin">School Administration</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="messageSubject">Subject:</label>
+                <input type="text" id="messageSubject">
+            </div>
+            <div class="form-group">
+                <label for="messageContent">Message:</label>
+                <textarea id="messageContent"></textarea>
+            </div>
+            <button class="btn-primary" id="sendMessageBtn">Send Message</button>
+
+            <h2 style="margin-top: 30px;">Inbox</h2>
+            <div id="inboxMessages">
+                <!-- Messages will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Announcements Section -->
+        <section id="announcements" style="display:none;">
+            <h1 class="section-title">School Announcements</h1>
+            <div id="schoolAnnouncements">
+                <!-- Announcements will be loaded here -->
+            </div>
+        </section>
+
+        <!-- School Resources Section -->
+        <section id="school-resources" style="display:none;">
+            <h1 class="section-title">School Resources</h1>
+            <ul id="resourcesList" class="document-list">
+                <!-- Resources will be loaded here -->
+            </ul>
+        </section>
+
+        <!-- Profile & Settings Section -->
+        <section id="profile-settings" style="display:none;">
+            <h1 class="section-title">Profile & Settings</h1>
+            <div class="form-group">
+                <label for="parentName">Your Name:</label>
+                <input type="text" id="parentName" value="Parent Name">
+            </div>
+            <div class="form-group">
+                <label for="parentEmail">Email:</label>
+                <input type="email" id="parentEmail" value="parent@example.com">
+            </div>
+            <div class="form-group">
+                <label for="parentPhone">Phone Number:</label>
+                <input type="tel" id="parentPhone" value="09123456789">
+            </div>
+            <button class="btn-primary">Save Changes</button>
+
+            <h2 style="margin-top: 30px;">Change Password</h2>
+            <div class="form-group">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword">
+            </div>
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password:</label>
+                <input type="password" id="confirmNewPassword">
+            </div>
+            <button class="btn-primary">Change Password</button>
+        </section>
+    </div>
+
+    <script>
+        // Simulated Data (replace with actual backend data in a real application)
+        let children = [
+            { id: 'S001', name: 'Juan Dela Cruz', gradeLevel: 'G10', status: 'Active',
+              grades: [
+                  { subject: 'Math', grade: 92, comments: 'Excellent progress.' },
+                  { subject: 'Science', grade: 88, comments: 'Good effort, needs more participation.' },
+                  { subject: 'English', grade: 95, comments: 'Outstanding!' }
+              ],
+              attendance: [
+                  { date: '2024-04-01', status: 'Present', remarks: '' },
+                  { date: '2024-04-02', status: 'Present', remarks: '' },
+                  { date: '2024-04-03', status: 'Absent', remarks: 'Sick leave' }
+              ]
+            },
+            { id: 'S002', name: 'Maria Santos', gradeLevel: 'G8', status: 'Active',
+              grades: [
+                  { subject: 'Filipino', grade: 85, comments: 'Needs to improve reading comprehension.' },
+                  { subject: 'Araling Panlipunan', grade: 90, comments: 'Consistent performance.' }
+              ],
+              attendance: [
+                  { date: '2024-04-01', status: 'Present', remarks: '' },
+                  { date: '2024-04-02', status: 'Late', remarks: 'Traffic' }
+              ]
+            }
+        ];
+
+        let messages = [
+            { from: 'Teacher John Doe', subject: 'Juan Dela Cruz - Math Performance', content: 'Juan is doing great in Math. Keep up the good work!', date: '2024-04-25', read: false },
+            { from: 'School Administration', subject: 'Important: School Holiday', content: 'Please be informed that May 1st will be a school holiday.', date: '2024-04-20', read: true }
+        ];
+
+        let announcements = [
+            { title: 'Parent-Teacher Conference Schedule', content: 'The schedule for the upcoming parent-teacher conferences is now available. Please check the school calendar for details.', date: 'April 22, 2024' },
+            { title: 'School Sports Fest 2024', content: 'Get ready for our annual Sports Fest! Details about events and participation will be announced soon.', date: 'April 18, 2024' }
+        ];
+
+        let resources = [
+            { title: 'School Calendar 2024-2025', file: 'School_Calendar_2024-2025.pdf' },
+            { title: 'Student Handbook', file: 'Student_Handbook.pdf' },
+            { title: 'Parent-Teacher Association Guidelines', file: 'PTA_Guidelines.pdf' }
+        ];
+
+        // Utility Functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.main-content section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+
+            document.querySelectorAll('.sidebar ul li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar ul li a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        function populateTable(tableId, data, rowCreator) {
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="${document.querySelector(`#${tableId} thead tr`).children.length}" style="text-align: center;">No data available.</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const row = rowCreator(item);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Dashboard Functions
+        function updateDashboard() {
+            document.getElementById('numChildren').textContent = children.length;
+            const unreadCount = messages.filter(msg => !msg.read).length;
+            document.getElementById('unreadMessages').textContent = unreadCount;
+            // Simulate upcoming events (e.g., from announcements or a separate calendar data)
+            document.getElementById('upcomingEvents').textContent = announcements.length; // Simple count for demo
+
+            const overviewDiv = document.getElementById('dashboardOverview');
+            overviewDiv.innerHTML = '';
+            const recentUpdates = [];
+            if (unreadCount > 0) recentUpdates.push(`You have ${unreadCount} unread message(s).`);
+            if (children.length > 0 && children[0].grades.length > 0) recentUpdates.push(`Latest grade for ${children[0].name}: ${children[0].grades[0].subject} - ${children[0].grades[0].grade}.`);
+            if (announcements.length > 0) recentUpdates.push(`New announcement: "${announcements[0].title}".`);
+
+            if (recentUpdates.length > 0) {
+                recentUpdates.forEach(update => {
+                    const p = document.createElement('p');
+                    p.textContent = `- ${update}`;
+                    overviewDiv.appendChild(p);
+                });
+            } else {
+                overviewDiv.innerHTML = '<p>No recent updates.</p>';
+            }
+        }
+
+        // My Children Section
+        function renderChildrenList() {
+            const childrenListDiv = document.getElementById('childrenList');
+            childrenListDiv.innerHTML = '';
+            if (children.length === 0) {
+                childrenListDiv.innerHTML = '<p>No children linked to this account.</p>';
+                return;
+            }
+            children.forEach(child => {
+                const childCard = document.createElement('div');
+                childCard.classList.add('card');
+                childCard.innerHTML = `
+                    <h3>${child.name}</h3>
+                    <p>Grade Level: ${child.gradeLevel}</p>
+                    <p>Status: ${child.status}</p>
+                    <button class="btn-primary" onclick="selectChildForDetails('${child.id}')">View Details</button>
+                `;
+                childrenListDiv.appendChild(childCard);
+            });
+        }
+
+        function selectChildForDetails(childId) {
+            const child = children.find(c => c.id === childId);
+            if (child) {
+                // Populate the select dropdown for grades/attendance
+                const selectChildGrades = document.getElementById('selectChildGrades');
+                selectChildGrades.value = childId;
+                loadChildData(); // Load data for the selected child
+                showSection('grades-attendance'); // Navigate to grades/attendance section
+            }
+        }
+
+        // Grades & Attendance Section
+        function populateChildSelect() {
+            const selectChildGrades = document.getElementById('selectChildGrades');
+            selectChildGrades.innerHTML = '<option value="">-- Select Child --</option>';
+            children.forEach(child => {
+                const option = document.createElement('option');
+                option.value = child.id;
+                option.textContent = child.name;
+                selectChildGrades.appendChild(option);
+            });
+        }
+
+        function loadChildData() {
+            const selectedChildId = document.getElementById('selectChildGrades').value;
+            const selectedChild = children.find(c => c.id === selectedChildId);
+
+            if (!selectedChild) {
+                document.getElementById('gradesTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Please select a child.</td></tr>';
+                document.getElementById('attendanceTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Please select a child.</td></tr>';
+                return;
+            }
+
+            // Render Grades
+            populateTable('gradesTable', selectedChild.grades, grade => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${grade.subject}</td>
+                    <td>${grade.grade}</td>
+                    <td>${grade.comments}</td>
+                `;
+                return row;
+            });
+
+            // Render Attendance
+            populateTable('attendanceTable', selectedChild.attendance, record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${record.status}</td>
+                    <td>${record.remarks}</td>
+                `;
+                return row;
+            });
+        }
+
+        // Messages Section
+        function renderMessages() {
+            const inboxMessagesDiv = document.getElementById('inboxMessages');
+            inboxMessagesDiv.innerHTML = '';
+            if (messages.length === 0) {
+                inboxMessagesDiv.innerHTML = '<p>Your inbox is empty.</p>';
+                return;
+            }
+            messages.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending
+            messages.forEach(msg => {
+                const messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                if (!msg.read) {
+                    messageItem.style.fontWeight = 'bold'; // Highlight unread messages
+                }
+                messageItem.innerHTML = `
+                    <strong>From: ${msg.from}</strong><br>
+                    <strong>Subject: ${msg.subject}</strong>
+                    <p>${msg.content}</p>
+                    <small>${msg.date} ${!msg.read ? '(Unread)' : ''}</small>
+                `;
+                messageItem.addEventListener('click', () => {
+                    msg.read = true; // Mark as read on click
+                    renderMessages(); // Re-render to update status
+                    updateDashboard(); // Update unread count on dashboard
+                });
+                inboxMessagesDiv.appendChild(messageItem);
+            });
+        }
+
+        function sendMessage() {
+            const recipient = document.getElementById('messageRecipient').value;
+            const subject = document.getElementById('messageSubject').value.trim();
+            const content = document.getElementById('messageContent').value.trim();
+
+            if (!recipient || !subject || !content) {
+                alert('Please fill in all message fields.');
+                return;
+            }
+
+            // Simulate sending message (in a real app, this sends to backend)
+            alert(`Message sent to ${recipient} with subject "${subject}".`);
+            document.getElementById('messageRecipient').value = '';
+            document.getElementById('messageSubject').value = '';
+            document.getElementById('messageContent').value = '';
+        }
+
+        // Announcements Section
+        function renderAnnouncements() {
+            const schoolAnnouncementsDiv = document.getElementById('schoolAnnouncements');
+            schoolAnnouncementsDiv.innerHTML = '';
+            if (announcements.length === 0) {
+                schoolAnnouncementsDiv.innerHTML = '<p>No announcements available.</p>';
+                return;
+            }
+            announcements.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending
+            announcements.forEach(ann => {
+                const announcementItem = document.createElement('div');
+                announcementItem.classList.add('announcement-item');
+                announcementItem.innerHTML = `
+                    <h4>${ann.title}</h4>
+                    <p>${ann.content}</p>
+                    <small>Posted on ${ann.date}</small>
+                `;
+                schoolAnnouncementsDiv.appendChild(announcementItem);
+            });
+        }
+
+        // School Resources Section
+        function renderResources() {
+            const resourcesList = document.getElementById('resourcesList');
+            resourcesList.innerHTML = '';
+            if (resources.length === 0) {
+                resourcesList.innerHTML = '<li>No resources available.</li>';
+                return;
+            }
+            resources.forEach(res => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#" onclick="alert('Simulating download of: ${res.file}'); return false;">${res.title}</a>`;
+                resourcesList.appendChild(listItem);
+            });
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar Navigation
+            document.querySelectorAll('.sidebar ul li a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('href').substring(1);
+                    showSection(sectionId);
+                });
+            });
+
+            // Initial Load
+            showSection('dashboard');
+            updateDashboard();
+            renderChildrenList();
+            populateChildSelect();
+            renderMessages();
+            renderAnnouncements();
+            renderResources();
+
+            // Grades & Attendance Events
+            document.getElementById('loadChildDataBtn').addEventListener('click', loadChildData);
+
+            // Messages Events
+            document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+
+            // Main Portal Button
+            document.getElementById('mainPortalBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'main.html'; // Redirect to the main portal page
+            });
+
+            // Logout Button
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to log out?')) {
+                    window.location.href = 'main.html'; // Redirect to main page
+                }
+            });
+        });
+    </script>
+</body>
+</html>

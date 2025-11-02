@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admissions - Aliaga National High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', 'Times New Roman', Times, serif; /* Formal font */
+            background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%), url('anhs-removebg-preview.png') center/cover no-repeat;
+            color: #13522d;
+        }
+        header {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.1);
+        }
+        .header-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* center children horizontally */
+            position: relative; /* needed for absolute menu-button */
+        }
+
+        /* menu-button remains absolute at left so it won't affect centering */
+        .menu-button {
+            position: absolute;
+            left: 5100px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1400;
+            display: inline-block;
+        }
+
+        /* center logo image and text, stack text vertically and center it */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            text-align: center;
+            margin: 0; /* ensure no extra offset */
+        }
+        .logo img {
+            height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.1);
+        }
+        .logo > div {
+            display: flex;
+            flex-direction: column;
+            align-items: left; /* center h1 and p under the image */
+            gap: 4px;
+        }
+        .logo h1, .logo p {
+            margin: 0;
+            text-align: left;
+        }
+
+        /* responsive: keep logo centered on small screens and ensure menu-button stays visible */
+        @media (max-width: 900px) {
+            .logo img { height: 64px; }
+            .menu-button { left: 12px; }
+            .header-container { padding-left: 56px; /* leave space for menu button */ }
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 18px;
+        }
+        nav a {
+            color: #1a6633;
+            background: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 1px 4px rgba(26,102,51,0.05);
+        }
+        nav a:hover {
+            background: #e0b34d;
+            color: #13522d;
+        }
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08);
+            color: #13522d;
+        }
+        main h2 {
+            font-size: 2.5rem;
+            color: #1a6633;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        main .admission-section {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        main .admission-section h3 {
+            color: #176a3a;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        main .admission-section ul {
+            max-width: 600px;
+            margin: 0 auto 24px auto;
+            padding-left: 20px;
+        }
+        main .admission-section ul li {
+            margin-bottom: 8px;
+        }
+        footer {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
+            color: #fff;
+            padding: 48px 0;
+        }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .footer-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #e0b34d;
+            margin-bottom: 16px;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-list li {
+            margin-bottom: 8px;
+        }
+        .footer-list a {
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 2px 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-list a:hover {
+            background: #e0b34d;
+            color: #1a6633;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .footer-social a {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+        }
+        .footer-social a:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-newsletter {
+            margin-top: 16px;
+        }
+        .footer-newsletter input[type="email"] {
+            background: #f0f0d9;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #e0e8d9;
+            color: #13522d;
+        }
+        .footer-newsletter button {
+            background: #e0b34d;
+            color: #1a6633;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-newsletter button:hover {
+            background: #f0f0d9;
+            color: #13522d;
+        }
+        .footer-bottom {
+            border-top: 1px solid #e0e8d9;
+            margin-top: 32px;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+             /* Modal (login/register) styles */
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .auth-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+        }
+        .auth-content {
+            position: relative;
+            background: #fff;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 92%;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(20,60,30,0.12);
+            z-index: 2;
+        }
+        .auth-header {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom: 14px;
+        }
+        .auth-header h3 { margin:0; color:#1a6633; }
+        .auth-close { background:transparent;border:none;font-size:1.1rem;cursor:pointer;color:#7a7a7a; }
+        .auth-forms { display:block; }
+        .auth-forms form { display:none; gap:12px; }
+        .auth-forms form.active { display:block; }
+        .auth-row { margin-bottom:10px; }
+        .auth-row input, .auth-row select {
+            width:100%; padding:10px 12px; border:1px solid #d6e3d0; border-radius:8px; box-sizing:border-box; color:#13522d;
+        }
+        .auth-actions { display:flex; gap:8px; margin-top:12px; }
+        .btn-primary { background:#1a6633;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600; }
+        .btn-secondary { background:#e0b34d;color:#13522d;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600; }
+        .auth-switch { margin-top:10px; font-size:0.9rem; color:#13522d; text-align:center; }
+        .auth-switch a { color:#1a6633; text-decoration:none; font-weight:600; cursor:pointer; margin-left:6px; }
+        @media (max-width:560px){
+            .auth-content{ padding:16px; }
+        }
+
+        /* Menu button (same function as other pages) */
+        .menu-button {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1400;
+            display: inline-block;
+        }
+        .menu-toggle {
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .menu-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 16px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            min-width: 200px;
+            max-width: calc(100vw - 32px);
+            box-sizing: border-box;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            z-index: 1500;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        .menu-dropdown.open { display: flex; }
+        .menu-item {
+            padding: 10px 14px;
+            text-align: left;
+            color: #13522d;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .menu-item:hover { background: #f6f7f2; }
+
+        @media (max-width: 600px) {
+            .menu-dropdown { left: 8px; right: 8px; min-width: unset; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- menu button on the left (won't move the logo) -->
+            <div class="menu-button" id="siteMenu">
+                <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="siteMenuDropdown">☰ Menu</button>
+                <div id="siteMenuDropdown" class="menu-dropdown" role="menu" aria-labelledby="menuToggle">
+                    <a class="menu-item" href="main.html">Home</a>
+                    <a class="menu-item" href="about.html">About Us</a>
+                    <a class="menu-item" href="specialization.html">Specialization</a>
+                    <a class="menu-item" href="admission.html">Admissions</a>
+                    <a class="menu-item" href="news-events.html">News & Events</a>
+                    <a class="menu-item" href="contact.html">Contact Us</a>
+                    <button class="menu-item" id="menuLoginBtn">Login/Register</button>
+                </div>
+            </div>
+
+            <div class="logo">
+                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo" />
+                <div>
+                    <h1>Aliaga National High School</h1>
+                    <p>Be an ANAHASIANS.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>Admissions</h2>
+
+        <section class="admission-section">
+            <h3>Enrollment Requirements</h3>
+            <ul>
+                <li>Completed application form</li>
+                <li>Latest report card or transcript of records</li>
+                <li>Birth certificate (authenticated copy)</li>
+                <li>2x2 ID photos</li>
+                <li>Other documents as required by the registrar</li>
+            </ul>
+        </section>
+
+        <section class="admission-section">
+            <h3>Enrollment Process</h3>
+            <p>Visit our campus or apply online. Our admissions staff will assist you with document verification, orientation, and section assignment.</p>
+        </section>
+
+        <section class="admission-section">
+            <h3>Important Dates</h3>
+            <ul>
+                <li>Enrollment period: April 1 - May 31</li>
+                <li>Orientation: June 10</li>
+                <li>Classes start: June 15</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
+                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement." />
+                    </div>
+                </div>
+                <p style="font-size:0.95rem;opacity:0.9;margin-bottom:16px;">Excellence in Education</p>
+                <div style="font-size:0.95rem;">
+                    <p>1234 Education Drive</p>
+                    <p>Aliaga, Nueva Ecija</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <p>Email: @Aliaganationalhighschool.edu</p>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Quick Links</div>
+                <ul class="footer-list">
+                   <li><a href="main.html">About Us</a></li>    
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="specialization.html">Academics</a></li>
+                    <li><a href="admission.html">Admissions</a></li>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Campus Life</a></li>
+                    <li><a href="#">Athletics</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Resources</div>
+                <ul class="footer-list">
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Parent Portal</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="news-events.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Stay Connected</div>
+                <div class="footer-social">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                </div>
+                <div class="footer-newsletter">
+                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
+                    <div style="display:flex;">
+                        <input type="email" placeholder="Your email" />
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+     <!-- Authentication modal added so the nav Login/Register works on this page -->
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+        <div class="auth-backdrop" id="authBackdrop"></div>
+        <div class="auth-content" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+            <div class="auth-header">
+                <h3 id="authTitle">Login</h3>
+                <button class="auth-close" id="authCloseBtn" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="auth-forms">
+                <form id="loginForm" class="active" autocomplete="off">
+                    <div class="auth-row">
+                        <label class="sr-only">User type</label>
+                        <select id="userType" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="parent">Parent</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="loginPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Login</button>
+                        <button type="button" id="showRegister" class="btn-secondary">Register</button>
+                    </div>
+                </form>
+
+                <form id="registerForm" autocomplete="off">
+                    <div class="auth-row">
+                        <input id="registerFirstName" type="text" placeholder="First name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerLastName" type="text" placeholder="Last name" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerEmail" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="auth-row">
+                        <input id="registerPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-row">
+                        <select id="registerGradeLevel" required>
+                            <option value="">Select grade level</option>
+                            <option value="G7">Grade 7</option>
+                            <option value="G8">Grade 8</option>
+                            <option value="G9">Grade 9</option>
+                            <option value="G10">Grade 10</option>
+                            <option value="G11">Grade 11</option>
+                            <option value="G12">Grade 12</option>
+                        </select>
+                    </div>
+                    <div class="auth-actions">
+                        <button type="submit" class="btn-primary">Register</button>
+                        <button type="button" id="showLogin" class="btn-secondary">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-switch">
+                By logging in you accept school policies.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            // Elements
+            const loginBtn = document.getElementById('loginRegisterBtn');
+            const authModal = document.getElementById('authModal');
+            const authBackdrop = document.getElementById('authBackdrop');
+            const authCloseBtn = document.getElementById('authCloseBtn');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+
+            // Simulated users (replace with backend)
+            const users = {
+                student: [{ email: 'student@example.com', password: 'password' }],
+                teacher: [{ email: 'teacher@example.com', password: 'password' }],
+                parent: [{ email: 'parent@example.com', password: 'password' }],
+                admin: [{ email: 'admin@example.com', password: 'password' }]
+            };
+
+            function openModal(mode = 'login'){
+                authModal.style.display = 'flex';
+                authModal.setAttribute('aria-hidden','false');
+                document.getElementById('authTitle').textContent = (mode === 'login') ? 'Login' : 'Student Registration';
+                if(mode === 'login'){
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    registerForm.classList.add('active');
+                    loginForm.classList.remove('active');
+                }
+            }
+            function closeModal(){
+                authModal.style.display = 'none';
+                authModal.setAttribute('aria-hidden','true');
+            }
+
+            if(loginBtn){
+                loginBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            if(authBackdrop){
+                authBackdrop.addEventListener('click', closeModal);
+            }
+            if(authCloseBtn){
+                authCloseBtn.addEventListener('click', closeModal);
+            }
+            // switch to register
+            if(showRegister){
+                showRegister.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('register');
+                });
+            }
+            if(showLogin){
+                showLogin.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal('login');
+                });
+            }
+
+            // Login submit
+            if(loginForm){
+                loginForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const email = (document.getElementById('loginEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('loginPassword')||{}).value||'';
+                    const userType = (document.getElementById('userType')||{}).value||'';
+
+                    if(!userType){
+                        alert('Please select a role.');
+                        return;
+                    }
+                    if(!email || !password){
+                        alert('Enter email and password.');
+                        return;
+                    }
+                    const list = users[userType] || [];
+                    const found = list.find(u => u.email === email && u.password === password);
+                    if(found){
+                        alert('Login successful. Redirecting...');
+                        closeModal();
+                        // redirect destinations (adjust filenames if needed)
+                        const dest = {
+                            student:'Students.html',
+                            teacher:'Teachers Portal.html',
+                            parent:'parents.html',
+                            admin:'admin.html'
+                        }[userType] || 'main.html';
+                        setTimeout(()=> window.location.href = dest, 300);
+                    } else {
+                        alert('Invalid credentials. Try again.');
+                    }
+                });
+            }
+
+            // Register submit (adds to simulated students and stores in localStorage)
+            if(registerForm){
+                registerForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const firstName = (document.getElementById('registerFirstName')||{}).value?.trim()||'';
+                    const lastName = (document.getElementById('registerLastName')||{}).value?.trim()||'';
+                    const email = (document.getElementById('registerEmail')||{}).value?.trim()||'';
+                    const password = (document.getElementById('registerPassword')||{}).value||'';
+                    const gradeLevel = (document.getElementById('registerGradeLevel')||{}).value||'';
+
+                    if(!firstName || !lastName || !email || !password || !gradeLevel){
+                        alert('Please fill all registration fields.');
+                        return;
+                    }
+                    // check existing
+                    const exists = (users.student || []).some(u => u.email === email);
+                    if(exists){
+                        alert('Email already registered.');
+                        return;
+                    }
+                    const newStudent = { firstName, lastName, email, password, gradeLevel };
+                    users.student.push(newStudent);
+                    localStorage.setItem('newEnrollmentSubmission', JSON.stringify(newStudent));
+                    alert('Registration successful. Please login.');
+                    openModal('login');
+                });
+            }
+
+            // keyboard escape to close
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'Escape' && authModal.style.display === 'flex') closeModal();
+            });
+        })();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginRegisterBtn = document.getElementById('loginRegisterBtn');
+            loginRegisterBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('Login/Register modal functionality goes here.');
+            });
+        });
+    </script>
+
+    <script>
+        // menu button behavior (toggle dropdown, close on outside click / Escape)
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('menuToggle');
+            const dropdown = document.getElementById('siteMenuDropdown');
+            const container = document.getElementById('siteMenu');
+            if (!toggle || !dropdown || !container) return;
+
+            toggle.setAttribute('aria-expanded', 'false');
+
+            function openMenu() {
+                dropdown.classList.add('open');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+            function closeMenu() {
+                dropdown.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.contains('open') ? closeMenu() : openMenu();
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!container.contains(e.target)) closeMenu();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenu();
+            });
+
+            dropdown.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', function () {
+                    closeMenu();
+                });
+            });
+
+            // wire menu Login/Register to existing handler (click main login button if present)
+            const menuLogin = document.getElementById('menuLoginBtn');
+            if (menuLogin) {
+                menuLogin.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const mainLogin = document.getElementById('loginRegisterBtn');
+                    if (mainLogin) mainLogin.click();
+                    else {
+                        const authModal = document.getElementById('authModal');
+                        if (authModal) { authModal.style.display = 'flex'; authModal.setAttribute('aria-hidden','false'); }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

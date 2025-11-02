@@ -1,0 +1,495 @@
+/* Responsive Styles for All Screen Sizes */
+
+/* Extra Large Screens (1440px and above) */
+@media (min-width: 1441px) {
+    .container, .max-w-4xl, .max-w-6xl {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    
+    .hero-inner {
+        padding: 80px 120px;
+    }
+    
+    .section {
+        padding: 80px 120px;
+    }
+    
+    .card-container, .quick-links {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Large Screens (1024px to 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .container, .max-w-4xl, .max-w-6xl {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+    
+    .hero-inner {
+        padding: 60px 80px;
+    }
+    
+    .section {
+        padding: 60px 80px;
+    }
+    
+    .card-container, .quick-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Medium Screens (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container, .max-w-4xl, .max-w-6xl {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+    
+    .hero-inner {
+        padding: 40px 60px;
+    }
+    
+    .section {
+        padding: 40px 60px;
+    }
+    
+    .card-container, .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet and Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .btn-primary, .btn-secondary, button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .card-container, .quick-links {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .featured-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-inner {
+        padding: 20px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 40px 20px;
+    }
+
+    .max-w-4xl {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .w-96 {
+        width: 100%;
+    }
+
+    .p-8 {
+        padding: 20px;
+    }
+
+    .p-6 {
+        padding: 15px;
+    }
+
+    .mb-6 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 0.75rem;
+    }
+
+    .text-4xl {
+        font-size: 2rem;
+    }
+
+    .text-3xl {
+        font-size: 1.8rem;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+
+    .text-xl {
+        font-size: 1.25rem;
+    }
+
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .md\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .flex-col {
+        flex-direction: column;
+    }
+
+    .justify-center {
+        justify-content: flex-start;
+    }
+
+    .items-center {
+        align-items: flex-start;
+    }
+
+    .modal-backdrop .max-w-md {
+        max-width: 90%;
+        margin: 20px;
+    }
+
+    .form-transition {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    /* Tables */
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    /* Forms */
+    input[type="text"], input[type="email"], input[type="password"], select, textarea {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Navigation */
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        padding: 10px;
+    }
+
+    /* Sidebar for portals */
+    .sidebar {
+        width: 100%;
+        position: static;
+    }
+
+    .main-content {
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Specific for Students.html etc. */
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .sidebar ul li {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+
+    .sidebar ul li a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Hide hamburger on mobile if not needed */
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Menu dropdown */
+    .menu-dropdown {
+        position: static;
+        display: none;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .menu-dropdown.open {
+        display: block;
+    }
+
+    .menu-item {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Announcements Carousel */
+    .announcements-carousel {
+        padding: 20px;
+    }
+
+    .carousel-inner {
+        flex-direction: column;
+    }
+
+    .carousel-item {
+        min-width: 100%;
+    }
+
+    .carousel-nav {
+        position: static;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .carousel-nav button {
+        margin: 0 5px;
+    }
+
+    /* Contact Form */
+    .contact-container {
+        padding: 20px;
+    }
+
+    /* Mission Vision */
+    .mission-vision-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mv-card {
+        min-width: auto;
+    }
+
+    /* News Events */
+    .news-events-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .news-carousel-wrapper, .events-list-wrapper {
+        padding: 20px;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-icon {
+        margin-bottom: 10px;
+    }
+
+    /* Footer */
+    .footer-container {
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-newsletter {
+        margin-top: 20px;
+    }
+
+    .footer-newsletter input, .footer-newsletter button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Accessibility */
+    .accessibility-toggle {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .accessibility-toggle button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    /* Back to Top */
+    #backToTopBtn {
+        bottom: 70px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-desc {
+        font-size: 1rem;
+    }
+
+    .text-4xl {
+        font-size: 1.8rem;
+    }
+
+    .text-3xl {
+        font-size: 1.5rem;
+    }
+
+    .text-2xl {
+        font-size: 1.3rem;
+    }
+
+    .p-8 {
+        padding: 15px;
+    }
+
+    .modal-backdrop .max-w-md {
+        max-width: 95%;
+        margin: 10px;
+    }
+
+    .sidebar ul li {
+        min-width: 100px;
+    }
+
+    .sidebar ul li a {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    
+    /* Additional fixes for extra small screens */
+    .btn-primary, .btn-secondary, button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .section {
+        padding: 30px 15px;
+    }
+    
+    .card {
+        padding: 12px;
+    }
+    
+    .footer-container {
+        padding: 20px 15px;
+    }
+    
+    /* Fix navigation on small screens */
+    nav {
+        padding: 10px;
+    }
+    
+    /* Improve form elements on small screens */
+    input, select, textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Extra Small Screens (320px to 375px) */
+@media (max-width: 375px) {
+    body {
+        font-size: 13px;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-desc {
+        font-size: 0.9rem;
+    }
+    
+    .text-4xl {
+        font-size: 1.5rem;
+    }
+    
+    .text-3xl {
+        font-size: 1.3rem;
+    }
+    
+    .text-2xl {
+        font-size: 1.1rem;
+    }
+    
+    .section {
+        padding: 20px 10px;
+    }
+    
+    .p-8, .p-6 {
+        padding: 10px;
+    }
+    
+    .sidebar ul li {
+        min-width: 80px;
+    }
+    
+    .sidebar ul li a {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+    
+    /* Ensure buttons are easily tappable */
+    .btn-primary, .btn-secondary, button {
+        padding: 12px;
+        min-height: 44px; /* Minimum touch target size */
+    }
+}

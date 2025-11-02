@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliaga National High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="darkmode.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', 'Times New Roman', Times, serif; /* Formal font */
+            background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%), url('anhs-removebg-preview.png') center/cover no-repeat;
+            color: #13522d; /* Darker green */
+        }
+        header {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%); /* Darkened gradient */
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.1); /* Adjusted shadow */
+        }
+        .header-container { 
+            max-width: 1200px;
+            margin: 0px auto;            /* keep centered in page */
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;     /* center the logo */
+            gap: 16px;
+            position: fixed;          /* required for absolute menu-button */
+        }
+
+        .header-left {
+            display: flex;
+            align-items: left;
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+            align-items: left;
+        }
+
+        /* hamburger button (three-line / "3 lite") */
+        .nav-toggle {
+            display: flex; /* show the three-line menu button (visible on all sizes) */
+            width: 44px;
+            height: 36px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+        }
+        .nav-toggle .bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #1a6633; /* dark green bars for better contrast on light background */
+            margin: 3px 0;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+
+        /* mobile: hide inline nav, show toggle */
+        @media (max-width: 900px) {
+            /* hide nav by default on small screens */
+            nav {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(180deg, rgba(26,102,51,0.98), #ffffff);
+                padding: 16px;
+                flex-direction: column;
+                gap: 10px;
+                z-index: 1200;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+            nav a {
+                background: transparent;
+                color: #fff;
+                padding: 10px 12px;
+                border-radius: 8px;
+                font-weight: 700;
+                text-align: left;
+            }
+            nav a:hover {
+                background: rgba(255,255,255,0.08);
+                color: #fff;
+            }
+
+            /* when nav has .open it becomes visible */
+            nav.open { display: flex; }
+        }
+
+        /* wide screens: ensure nav looks left, logo stays center */
+        @media (min-width: 901px) {
+            nav a { color: #1a6633; background: #fff; }
+            /* keep toggle visible but subtle on desktop */
+            .nav-toggle { opacity: 0.9; }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            text-align: center;
+            margin: 0; /* ensure no extra offset */
+        }
+        .logo img {
+            height: 120px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.1);
+            left: 50px;
+        }
+        /* new: group the text and control spacing between h1 and p */
+        .logo > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            align-items: center; /* center h1 & p */
+            text-align: center;
+        }
+        .logo h1 {
+            margin: 0; /* remove default bottom margin */
+            font-size: 2.3rem;
+            font-weight: bold;
+            letter-spacing: 0px;
+            line-height: 1.05;
+        }
+        .logo p {
+            margin: 0; /* remove default top margin */
+            font-size: 1.1rem; /* slightly smaller so it sits closer */
+            opacity: 0.85;
+            left: 80px;
+        }
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 400px;
+            overflow: hidden;
+            text-align: left;
+            background: #e0e8d9; /* Softened background */
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('ansbg-removebg-preview.png') center/cover no-repeat; /* background image */
+            opacity: 0.15; /* Slightly reduced opacity */
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26,102,51,0.10); /* Adjusted overlay */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .hero-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 32px;
+            background: rgba(255,255,255,0.9); /* Slightly darkened */
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(26,102,51,0.08); /* Adjusted shadow */
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a6633; /* Darker green */
+            margin-bottom: 20px;
+        }
+        .hero-title span {
+            color: #e0b34d; /* Darkened yellow */
+        }
+        .hero-desc {
+            font-size: 1.15rem;
+            color: #13522d; /* Darker green */
+            margin-bottom: 28px;
+            opacity: 0.85;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-enroll {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+            padding: 8px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08); /* Adjusted shadow */
+            border: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-enroll:hover {
+            background: #f0f0d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+        .btn-tour {
+            background: #fff;
+            color: #1a6633; /* Darker green */
+            border: 2px solid #1a6633; /* Darker green */
+            padding: 8px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08); /* Adjusted shadow */
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-tour:hover {
+            background: #e0e8d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+        .section {
+            padding: 56px 0;
+            background: #fff;
+        }
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .ql-card {
+            background: #e0e8d9; /* Softened background */
+            color: #1a6633; /* Darker green */
+            padding: 32px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.06); /* Adjusted shadow */
+        }
+        .ql-card.secondary {
+            background: #f0f0d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+        .ql-card:hover {
+            background: #c7d6be; /* Darkened hover */
+            box-shadow: 0 4px 16px rgba(26,102,51,0.10); /* Adjusted shadow */
+        }
+        .ql-card.secondary:hover {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(26,102,51,0.15);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: slideIn 0.3s ease-in-out;
+        }
+        .modal h2 {
+            color: #1a6633;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .modal p {
+            color: #13522d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .modal .offers {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .modal .offers h3 {
+            color: #e0b34d;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .modal .offers ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .modal .offers li {
+            margin-bottom: 5px;
+            color: #13522d;
+        }
+        .modal button {
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: background 0.2s;
+        }
+        .modal button:hover {
+            background: #f0f0d9;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .ql-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+        .news-section { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .news-list article { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 24px; }
+        .news-list img { width: 100%; height: 200px; object-fit: cover; }
+        .news-list .p-6 { padding: 24px; }
+        .news-title { font-size: 2rem; font-weight: bold; color: #176a3a; margin-bottom: 16px; }
+        .events-list { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 24px; }
+        .event { display: flex; align-items: flex-start; gap: 16px; border-bottom: 1px solid #eee; padding-bottom: 24px; margin-bottom: 24px; }
+        .event:last-child { border-bottom: none; margin-bottom: 0; }
+        .event-date { background: #ffd600; color: #176a3a; padding: 8px 16px; border-radius: 8px; text-align: center; min-width: 60px; font-weight: bold; }
+        .event-date.primary { background: #176a3a; color: #fff; }
+        .featured-section { background: #176a3a; padding: 64px 0; }
+        .featured-title { text-align: center; color: #fff; font-size: 2.5rem; font-weight: bold; margin-bottom: 24px; }
+        .featured-desc { text-align: center; color: #fff; font-size: 1.25rem; margin-bottom: 48px; }
+        .featured-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+        .featured-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; transition: box-shadow 0.2s; }
+        .featured-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+        .featured-card img { width: 100%; height: 250px; object-fit: cover; }
+        .featured-card .p-6 { padding: 24px; border-bottom: 4px solid transparent; }
+        .featured-card:hover .p-6 { border-bottom: 4px solid #ffd600; }
+        .featured-card-title { font-size: 1.5rem; font-weight: bold; color: #176a3a; margin-bottom: 12px; }
+        .featured-card-desc { color: #444; }
+        footer {
+            background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%); /* Darkened gradient */
+            color: #fff;
+            padding: 48px 0;
+        }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0px;
+        }
+        .footer-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #e0b34d; /* Darkened yellow */
+            margin-bottom: 16px;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-list li {
+            margin-bottom: 8px;
+        }
+        .footer-list a {
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 2px 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-list a:hover {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .footer-social a {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08); /* Adjusted shadow */
+        }
+        .footer-social a:hover {
+            background: #f0f0d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+        .footer-newsletter {
+            margin-top: 16px;
+        }
+        .footer-newsletter input[type="email"] {
+            background: #f0f0d9; /* Softened background */
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #e0e8d9; /* Softened border */
+            color: #13522d; /* Darker green */
+        }
+        .footer-newsletter button {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+            border-radius: 0 8px 8px 0;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .footer-newsletter button:hover {
+            background: #f0f0d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+        .footer-bottom {
+            border-top: 1px solid #e0e8d9; /* Softened border */
+            margin-top: 32px;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 1;
+            color: #fff;
+        }
+        .footer-logo {
+            height: 250px;
+            width: auto;
+        }
+        @media (max-width: 900px) {
+            .quick-links, .featured-cards, .footer-container, .news-section, .news-events-container {
+                grid-template-columns: 1fr;
+            }
+            .news-section, .news-events-container { gap: 24px; }
+            .dashboard-buttons { flex-direction: column; }
+            .carousel-nav button { padding: 8px 12px; font-size: 1rem; }
+            .mission-vision-container { gap: 18px; }
+        }
+
+        /* New Styles for added features */
+        .dashboard-section {
+            background: #f0f0f0;
+            padding: 64px 0;
+            text-align: center;
+        }
+        .dashboard-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .dashboard-content h2 {
+            font-size: 2.2rem;
+            color: #176a3a;
+            margin-bottom: 24px;
+        }
+        .dashboard-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 32px;
+        }
+        .dashboard-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .dashboard-btn {
+            background: #176a3a;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .dashboard-btn:hover {
+            background: #218c4a;
+        }
+        .dashboard-btn.secondary {
+            background: #ffd600;
+            color: #176a3a;
+        }
+        .dashboard-btn.secondary:hover {
+            background: #ffe066;
+        }
+
+        /* Announcements Carousel */
+        .announcements-carousel {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08); /* Adjusted shadow */
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .announcements-carousel h2 {
+            font-size: 2rem;
+            color: #1a6633; /* Darker green */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 15px;
+            text-align: center;
+        }
+        .carousel-item h3 {
+            color: #176a3a;
+            margin-bottom: 10px;
+        }
+        .carousel-item p {
+            color: #444;
+            font-size: 1rem;
+        }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+        }
+        .carousel-nav button {
+            background: rgba(23,106,58,0.7);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        .carousel-nav button:hover {
+            background: #176a3a;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: #e0e8d9; /* Softened background */
+            padding: 56px 0;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08); /* Adjusted shadow */
+            padding: 40px;
+            text-align: center;
+        }
+        .contact-container h2 {
+            font-size: 2rem;
+            color: #1a6633; /* Darker green */
+            margin-bottom: 20px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            background: #f0f0d9; /* Softened background */
+            border: 1px solid #e0e8d9; /* Softened border */
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #13522d; /* Darker green */
+            box-sizing: border-box;
+        }
+        .contact-form button {
+            background: #e0b34d; /* Darkened yellow */
+            color: #1a6633; /* Darker green */
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .contact-form button:hover {
+            background: #f0f0d9; /* Softened background */
+            color: #13522d; /* Darker green */
+        }
+
+        /* Accessibility Toggle */
+        .accessibility-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .accessibility-toggle button {
+            background: #1a6633; /* Darker green */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(26,102,51,0.12); /* Adjusted shadow */
+            transition: background 0.3s;
+        }
+        .accessibility-toggle button:hover {
+            background: #13522d; /* Darker green */
+        }
+        body.high-contrast {
+            background: #000 !important;
+            color: #fff !important;
+        }
+        body.high-contrast * {
+            background-color: transparent !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+        body.high-contrast .ql-card,
+        body.high-contrast .featured-card,
+        body.high-contrast .news-list article,
+        body.high-contrast .events-list,
+        body.high-contrast .dashboard-content,
+        body.high-contrast .announcements-carousel,
+        body.high-contrast .contact-container {
+            background-color: #333 !important;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3) !important;
+        }
+        body.high-contrast .ql-card.secondary,
+        body.high-contrast .dashboard-btn.secondary {
+            background-color: #555 !important;
+            color: #fff !important;
+        }
+        body.high-contrast .btn-enroll,
+        body.high-contrast .contact-form button,
+        body.high-contrast .footer-social a {
+            background-color: #ffd600 !important;
+            color: #000 !important;
+        }
+        body.high-contrast .hero-overlay {
+            background: rgba(0,0,0,0.7) !important;
+        }
+        body.high-contrast header,
+        body.high-contrast footer {
+            background: #111 !important;
+        }
+        body.high-contrast .footer-title {
+            color: #ffd600 !important;
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 90px; /* Place the button at the bottom of the page */
+            right: 20px; /* Place the button 30px from the right */
+            z-index: 999; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: #ffd600; /* Set a background color */
+            color: #176a3a; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #ffe066; /* Add a darker background on hover */
+        }
+
+
+        /* New styles for Mission & Vision section */
+        .mission-vision-section {
+            background: #f0f0d9; /* Softened background */
+            padding: 56px 0;
+            text-align: center;
+        }
+        .mission-vision-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+        }
+        .mv-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08); /* Adjusted shadow */
+            padding: 32px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 480px;
+            text-align: left;
+            transition: box-shadow 0.2s;
+        }
+        .mv-card:hover {
+            box-shadow: 0 6px 24px rgba(26,102,51,0.12); /* Adjusted shadow */
+        }
+        .mv-card h3 {
+            font-size: 1.5rem;
+            color: #1a6633; /* Darker green */
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .mv-card p {
+            font-size: 1.05rem;
+            color: #13522d; /* Darker green */
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* News & Events Section */
+        .news-events-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            padding: 0 20px; /* Added padding for smaller screens */
+        }
+
+        .news-carousel-wrapper {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08); /* Adjusted shadow */
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-carousel-wrapper h3.section-subtitle {
+            font-size: 1.8rem;
+            color: #176a3a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .news-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .news-carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .news-carousel-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.06); /* Adjusted shadow */
+        }
+        .news-carousel-item h4 {
+            color: #1a6633; /* Darker green */
+        }
+        .news-carousel-item span {
+            color: #e0b34d; /* Darkened yellow */
+        }
+
+        .events-list-wrapper {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08); /* Adjusted shadow */
+            padding: 28px;
+        }
+
+        .events-list-wrapper h3.section-subtitle {
+            font-size: 1.8rem;
+            color: #176a3a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .event-card {
+            border-radius: 10px;
+            background: #e0e8d9; /* Softened background */
+            box-shadow: 0 2px 8px rgba(26,102,51,0.06); /* Adjusted shadow */
+            margin-bottom: 18px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .event-icon {
+            font-size: 2.2rem;
+            color: #1a6633; /* Darker green */
+        }
+        .event-details h4 {
+            color: #1a6633; /* Darker green */
+        }
+        .event-details span {
+            color: #e0b34d; /* Darkened yellow */
+        }
+
+        /* Menu-style button used in hero */
+        .menu-button {
+            position:absolute;
+            left: 16px;
+            top: 55px;
+            z-index: 1400;
+            display: inline-block;
+            max-width: 360px;
+            box-sizing: border-box;
+        }
+        .menu-toggle {
+            background: #e0b34d;
+            color: #1a6633;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: left;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(26,102,51,0.08);
+            transition: background 0.18s ease, transform 0.12s ease;
+        }
+        .menu-toggle:hover { background: #f0f0d9; transform: translateY(-1px); }
+
+        /* Dropdown anchored to the button, limited width & height */
+        .menu-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);    /* just below the button */
+            left: 0;
+            right: auto;
+            min-width: 160px;
+            max-width: 320px;
+            box-sizing: border-box;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            overflow: hidden;
+            display: none;            /* hidden by default */
+            z-index: 1500;
+            max-height: calc(100vh - 120px); /* fits in viewport */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            text-align: center;
+        }
+        .menu-dropdown.open { display: block; }
+
+        /* Ensure menu-items use full dropdown width with small padding */
+        .menu-item {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #13522d;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .menu-item:hover, .menu-item:focus {
+            background: #f6f7f2;
+            outline: none;
+        }
+
+        /* Make dropdown adapt to small screens and stay inside edges */
+        @media (max-width: 900px) {
+            .menu-dropdown {
+                left: 20px;
+                right: auto;
+                min-width: unset;
+                max-width: calc(100vw - 40px);
+                top: calc(100% + 8px);
+            }
+        }
+
+        /* keep header-container positioned for absolute children */
+        .header-container { position: relative; }
+
+        /* Small screens: keep toggle at top-left and adjust dropdown */
+        @media (max-width: 480px) {
+            .menu-button {
+                left: 16px;
+                top: 16px;
+                bottom: auto;
+                right: auto;
+                transform: none;
+            }
+            .menu-dropdown {
+                left: 16px;
+                right: auto;
+                max-width: calc(100vw - 32px);
+            }
+        }
+
+        /* Prevent dropdown being cut by parent overflow */
+        html, body { height: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <div class="menu-button">
+                    <button id="navToggle" class="menu-toggle">
+                        Menu
+                        <i class="ri-menu-line"></i>
+                    </button>
+
+                    <div id="mainNav" class="menu-dropdown">
+                        <a href="about us.html" class="menu-item">About Us</a>
+                        <a href="specialization.html" class="menu-item" id="specializationBtn">Specialization</a>
+                        <a href="admission.html" class="menu-item" id="admissionsBtn">Admissions</a>
+                        <a href="news-events.html" class="menu-item" id="newsEventsBtn">News & Events</a>
+                        <a href="contact.html" class="menu-item">Contact Us</a>
+                        <a href="login.html" class="menu-item">Login/Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo">
+                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo">
+                <div>
+                    <h1>Aliaga National High School</h1>
+                    <p>Be an ANAHASIANS.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-inner">
+                    <h2 class="hero-title">Welcome to 
+                        <br>
+                        <span>Aliaga National High School</span></h2>
+                    <p class="hero-desc">Fostering academic excellence, character development, and community engagement since 1946.</p>
+                    <div class="hero-buttons">
+                        <a href="Enrollment.html" class="btn-enroll">Enroll Now</a>
+                        <a href="visual tour.html" class="btn-tour">Take a Virtual Tour</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="quick-links">
+                <div class="ql-card" onclick="window.location.href='login.html'">
+                    <div class="ql-icon"><i class="ri-graduation-cap-line"></i></div>
+                    <h3 style="font-size:1.25rem;font-weight:bold;">Student Portal</h3>
+                    <p style="font-size:0.95rem;opacity:0.9;">The Student Portal provides students with access to their grades, assignments, and various educational resources to enhance their learning experience.</p>
+                </div>
+                <div class="ql-card secondary" onclick="window.location.href='login.html'">
+                    <div class="ql-icon"><i class="ri-group-line"></i></div>
+                    <h3 style="font-size:1.25rem;font-weight:bold;">Parent Portal</h3>
+                    <p style="font-size:0.95rem;opacity:0.9;">The Parent Portal allows parents to stay connected with their child's academic progress, view reports, and communicate with school staff.</p>
+                </div>
+                <div class="ql-card" onclick="openModal('calendar')">
+                    <div class="ql-icon"><i class="ri-calendar-line"></i></div>
+                    <h3 style="font-size:1.25rem;font-weight:bold;">Calendar</h3>
+                    <p style="font-size:0.95rem;opacity:0.9;">View important dates and events</p>
+                </div>
+                <div class="ql-card secondary" onclick="openModal('news')">
+                    <div class="ql-icon"><i class="ri-news-line"></i></div>
+                    <h3 style="font-size:1.25rem;font-weight:bold;">News</h3>
+                    <p style="font-size:0.95rem;">Latest updates and announcements</p>
+                </div>
+            </div>
+        </section>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
+                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement." class="footer-logo">
+                    </div>
+                </div>
+                <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Excellence in Education</p>
+                <div style="font-size:0.95rem;color:#fff;">
+                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">1234 Education Drive</p>
+                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Aliaga, Nueva Ecija</p>
+                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Phone: (555) 123-4567</p>
+                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Email: @Aliaganationalhighschool.edu</p>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Quick Links</div>
+                <ul class="footer-list">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#specialization-section">Academics</a></li>
+                    <li><a href="#admissions-section">Admissions</a></li>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Campus Life</a></li>
+                    <li><a href="#">Athletics</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Resources</div>
+                <ul class="footer-list">
+
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Parent Portal</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="#news-events-section">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Stay Connected</div>
+                <div class="footer-social">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                </div>
+                <div class="footer-newsletter">
+                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
+                    <div style="display:flex;">
+                        <input type="email" placeholder="Your email">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('calendar')">&times;</span>
+            <h2>School Calendar</h2>
+            <p>Important dates and events for the academic year.</p>
+            <div class="offers">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li>Science Fair - March 15, 2025</li>
+                    <li>Basketball Championship - March 12, 2025</li>
+                    <li>Parent-Teacher Conferences - March 25, 2025</li>
+                    <li>Spring Concert - March 20, 2025</li>
+                </ul>
+            </div>
+            <button onclick="closeModal('calendar')">Close</button>
+        </div>
+    </div>
+
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('news')">&times;</span>
+            <h2>Latest News</h2>
+            <p>Stay updated with the latest announcements and news from Aliaga National High School.</p>
+            <div class="offers">
+                <h3>Recent Announcements</h3>
+                <ul>
+                    <li>Annual Science Fair Winners Announced - March 15, 2025</li>
+                    <li>Basketball Team Wins Regional Championship - March 12, 2025</li>
+                    <li>Community Outreach Program Success - March 10, 2025</li>
+                    <li>New Library Resources Available - March 8, 2025</li>
+                </ul>
+            </div>
+            <button onclick="closeModal('news')">Close</button>
+        </div>
+    </div>
+
+    <div class="accessibility-toggle">
+        <button id="highContrastBtn" title="Toggle High Contrast Mode"><i class="ri-contrast-2-line"></i></button>
+    </div>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top"><i class="ri-arrow-up-line"></i></button>
+
+
+    <script id="hero-carousel">
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroImages = [
+                'ansbg-removebg-preview.png', // Use your local image first
+            ];
+
+            let currentImageIndex = 0;
+            const heroBg = document.querySelector('.hero-bg'); // Corrected selector
+
+            function changeHeroImage() {
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                heroBg.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+            }
+
+            // Set initial background image
+            heroBg.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+
+            setInterval(changeHeroImage, 5000);
+        });
+    </script>
+
+    <script id="smooth-scroll">
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+<script id="mobile-menu">
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        if (!navToggle || !mainNav) return;
+
+        // ensure the container is positioned so absolute dropdown is inside viewport
+        const headerContainer = document.querySelector('.header-container');
+        if (headerContainer) headerContainer.style.position = headerContainer.style.position || 'relative';
+
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = mainNav.classList.toggle('open');
+            mainNav.classList.toggle('open', isOpen);
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            // optional: ensure dropdown max-height fits below the toggle
+            if (isOpen) {
+                const rect = mainNav.getBoundingClientRect();
+                const available = window.innerHeight - rect.top - 16; // 16px margin
+                mainNav.style.maxHeight = Math.max(120, Math.min(available, window.innerHeight - 80)) + 'px';
+            } else {
+                mainNav.style.maxHeight = '';
+            }
+        });
+
+        // Close the menu after clicking a link
+        mainNav.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function () {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!mainNav.contains(e.target) && !navToggle.contains(e.target) && mainNav.classList.contains('open')) {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                mainNav.style.maxHeight = '';
+            }
+        });
+
+        // Reset on resize
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) {
+                mainNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                mainNav.style.maxHeight = '';
+            }
+        });
+    });
+</script>
+    <script id="announcement-carousel-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('announcementCarousel');
+            const prevBtn = document.getElementById('prevAnnouncement');
+            const nextBtn = document.getElementById('nextAnnouncement');
+            const items = carousel.children;
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            });
+
+            // Optional: Auto-advance carousel
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            }, 7000); // Change slide every 7 seconds
+        });
+    </script>
+
+    <script id="accessibility-toggle-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const highContrastBtn = document.getElementById('highContrastBtn');
+            highContrastBtn.addEventListener('click', () => {
+                document.body.classList.toggle('high-contrast');
+            });
+        });
+    </script>
+
+    <script id="back-to-top-script">
+        // Get the button
+        let mybutton = document.getElementById("backToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+
+
+    <script id="admin-news-events-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsCarouselInner = document.getElementById('newsCarouselInner');
+            const prevNewsBtn = document.getElementById('prevNewsBtn');
+            const nextNewsBtn = document.getElementById('nextNewsBtn');
+            const eventsList = document.getElementById('eventsList');
+
+            // Sample data for news and events
+            const newsData = [
+                {
+                    img: 'https://readdy.ai/api/search-image?query=High%20school%20students%20in%20science%20laboratory%20conducting%20experiments%20with%20modern%20equipment%2C%20bright%20classroom%20environment%2C%20educational%20setting%20with%20green%20and%20yellow%20accents&width=400&height=200&seq=news001&orientation=landscape',
+                    title: 'Annual Science Fair Winners Announced',
+                    description: 'Congratulations to our outstanding students who showcased innovative projects in this year\'s science fair competition.',
+                    date: 'March 15, 2025'
+                },
+                {
+                    img: 'https://readdy.ai/api/search-image?query=School%20basketball%20team%20celebrating%20victory%20on%20court%20students%20in%20green%20and%20yellow%20uniforms%20indoor%20gymnasium%20setting%20team%20spirit%20and%20achievement&width=400&height=200&seq=news002&orientation=landscape',
+                    title: 'Basketball Team Wins Regional Championship',
+                    description: 'Our varsity basketball team secured the regional championship title after an intense final match.',
+                    date: 'March 12, 2025'
+                },
+                {
+                    img: 'https://readdy.ai/api/search-image?query=Students%20volunteering%20in%20a%20community%20cleanup%20drive%2C%20wearing%20school%20uniforms%2C%20outdoor%20setting%2C%20showing%20community%20engagement%20and%20social%20responsibility&width=400&height=200&seq=news003&orientation=landscape',
+                    title: 'Community Outreach Program Success',
+                    description: 'Our students actively participated in a successful community cleanup drive, making a positive impact.',
+                    date: 'March 10, 2025'
+                }
+            ];
+
+            const eventsData = [
+                {
+                    icon: 'ri-music-line',
+                    title: 'Spring Concert',
+                    description: 'Join us for an evening of musical performances by our talented students.',
+                    time: '7:00 PM - Main Auditorium',
+                    date: 'March 20, 2025'
+                },
+                {
+                    icon: 'ri-group-line',
+                    title: 'Parent-Teacher Conferences',
+                    description: 'Schedule your appointment to discuss your child\'s academic progress.',
+                    time: '9:00 AM - 5:00 PM',
+                    date: 'March 25, 2025'
+                },
+                {
+                    icon: 'ri-graduation-cap-line',
+                    title: 'College Fair',
+                    description: 'Meet representatives from top universities and explore higher education opportunities.',
+                    time: '10:00 AM - 3:00 PM - Gymnasium',
+                    date: 'April 02, 2025'
+                }
+            ];
+
+            // Populate News Carousel
+            let currentNewsIndex = 0;
+            function renderNews() {
+                newsCarouselInner.innerHTML = '';
+                newsData.forEach(news => {
+                    const newsItem = document.createElement('div');
+                    newsItem.classList.add('news-carousel-item');
+                    newsItem.innerHTML = `
+                        <img src="${news.img}" alt="${news.title}">
+                        <h4>${news.title}</h4>
+                        <p>${news.description}</p>
+                        <span>${news.date}</span>
+                    `;
+                    newsCarouselInner.appendChild(newsItem);
+                });
+                updateNewsCarousel();
+            }
+
+            function updateNewsCarousel() {
+                newsCarouselInner.style.transform = `translateX(-${currentNewsIndex * 100}%)`;
+            }
+
+            prevNewsBtn.addEventListener('click', () => {
+                currentNewsIndex = (currentNewsIndex - 1 + newsData.length) % newsData.length;
+                updateNewsCarousel();
+            });
+
+            nextNewsBtn.addEventListener('click', () => {
+                currentNewsIndex = (currentNewsIndex + 1) % newsData.length;
+                updateNewsCarousel();
+            });
+
+            // Auto-advance news carousel
+            setInterval(() => {
+                currentNewsIndex = (currentNewsIndex + 1) % newsData.length;
+                updateNewsCarousel();
+            }, 7000); // Change slide every 7 seconds
+
+            // Populate Events List
+            function renderEvents() {
+                eventsList.innerHTML = '';
+                eventsData.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.classList.add('event-card');
+                    eventCard.innerHTML = `
+                        <div class="event-icon"><i class="${event.icon}"></i></div>
+                        <div class="event-details">
+                            <h4>${event.title}</h4>
+                            <p>${event.description}</p>
+                            <span>${event.time} - ${event.date}</span>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+
+            renderNews();
+            renderEvents();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+/* Dark Mode Styles - Less Harsh, Eye Comforting with Green-Yellow Theme */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #e5e7eb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode body {
+  background-color: #1a1a1a;
+  color: #e5e7eb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode header {
+  background: linear-gradient(90deg, #1a5f32 80%, #d4af37 100%);
+  color: #e5e7eb;
+}
+
+.dark-mode footer {
+  background: linear-gradient(90deg, #1a5f32 80%, #d4af37 100%);
+  color: #fff;
+}
+
+.dark-mode .bg-white {
+  background-color: #2d2d2d !important;
+}
+
+.dark-mode .bg-gray-50 {
+  background-color: #3a3a3a !important;
+}
+
+.dark-mode .bg-gray-100 {
+  background-color: #404040 !important;
+}
+
+.dark-mode .bg-indigo-600 {
+  background-color: #1e3a8a !important;
+}
+
+.dark-mode .bg-indigo-700 {
+  background-color: #1e40af !important;
+}
+
+.dark-mode .bg-indigo-100 {
+  background-color: #1e293b !important;
+}
+
+.dark-mode .bg-purple-100 {
+  background-color: #2d1b69 !important;
+}
+
+.dark-mode .bg-pink-100 {
+  background-color: #831843 !important;
+}
+
+.dark-mode .bg-green-600 {
+  background-color: #166534 !important;
+}
+
+.dark-mode .text-gray-600 {
+  color: #d1d5db !important;
+}
+
+.dark-mode .text-gray-800 {
+  color: #f3f4f6 !important;
+}
+
+.dark-mode .text-indigo-600 {
+  color: #60a5fa !important;
+}
+
+.dark-mode .text-indigo-700 {
+  color: #3b82f6 !important;
+}
+
+.dark-mode .border {
+  border-color: #4b5563 !important;
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="password"],
+.dark-mode select {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #6b7280;
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+}
+
+.dark-mode .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode .bg-indigo-600.text-white {
+  background-color: #1e3a8a !important;
+}
+
+.dark-mode .text-white {
+  color: #f9fafb !important;
+}
+
+.dark-mode .gradient-bg {
+  background: linear-gradient(135deg, #1a5f32 0%, #d4af37 50%, #2d2d2d 100%);
+}
+
+.dark-mode .hero-overlay {
+  background: rgba(26, 95, 50, 0.4);
+}
+
+.dark-mode .hero-inner {
+  background: rgba(45, 45, 45, 0.9);
+}
+
+.dark-mode .ql-card {
+  background-color: #3a3a3a;
+  color: #e5e7eb;
+}
+
+.dark-mode .ql-card.secondary {
+  background-color: #404040;
+  color: #e5e7eb;
+}
+
+.dark-mode .news-list article {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .events-list {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .featured-card {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .announcements-carousel {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .contact-container {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .dashboard-content {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .mv-card {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .news-carousel-wrapper {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .events-list-wrapper {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .event-card {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .menu-dropdown {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .portal-nav {
+  background-color: #1a5f32;
+}
+
+.dark-mode .container {
+  background-color: #2d2d2d;
+}
+
+.dark-mode .search-section,
+.dark-mode .grade-entry-section,
+.dark-mode .announcement-section,
+.dark-mode .resource-section {
+  background-color: #3a3a3a;
+  border-color: #4b5563;
+}
+
+.dark-mode .student-card {
+  background-color: #3a3a3a;
+  border-color: #6b7280;
+}
+
+.dark-mode .document-viewer {
+  background-color: #3a3a3a;
+  border-color: #4b5563;
+}
+
+.dark-mode .grade-table th {
+  background-color: #1a5f32;
+  color: #f9fafb;
+}
+
+.dark-mode .grade-table tr:nth-child(even) {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .announcement-item {
+  background-color: #3a3a3a;
+  border-color: #6b7280;
+}
+
+.dark-mode .results-area {
+  background-color: #4b5563;
+  border-color: #6b7280;
+}
+
+.dark-mode .btn-primary {
+  background-color: #1a5f32;
+}
+
+.dark-mode .btn-primary:hover {
+  background-color: #166534;
+}
+
+.dark-mode .btn-secondary {
+  background-color: #d4af37;
+  color: #1a1a1a;
+}
+
+.dark-mode .btn-secondary:hover {
+  background-color: #e6b800;
+}
+
+/* Additional dark mode styles for specialization.html */
+.dark-mode .specialization-card {
+  background-color: #3a3a3a;
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+.dark-mode .specialization-card h3 {
+  color: #d4af37;
+}
+
+.dark-mode .auth-modal {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode .auth-content {
+  background-color: #2d2d2d;
+  color: #e5e7eb;
+}
+
+.dark-mode .auth-row input,
+.dark-mode .auth-row select {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #6b7280;
+}
+
+.dark-mode .auth-row input:focus,
+.dark-mode .auth-row select:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+}
+
+.dark-mode .auth-switch {
+  color: #d1d5db;
+}
+
+.dark-mode .auth-switch a {
+  color: #60a5fa;
+}
+
+/* Transitions for all elements */
+.dark-mode *,
+.dark-mode *::before,
+.dark-mode *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
