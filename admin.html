@@ -14,7 +14,8 @@
     <script src="darkmode.js"></script>
 </head>
 <body>
-    <div class="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar" id="sidebar">
         <h2>Admin Panel</h2>
         <ul>
             <li><a href="#dashboard" class="active">Dashboard</a></li>
@@ -483,46 +484,69 @@
         </div>
     </div>
 
-
+    <script src="api.js"></script>
     <script>
-        // Simulated Data Storage (replace with actual backend integration)
-        let students = [
-            { id: 'S001', lastName: 'Dela Cruz', firstName: 'Juan', middleName: 'P.', extension: '', birthdate: '2008-05-10', age: 16, gender: 'male', region: 'NCR', province: 'Manila', city: 'Manila', barangay: 'Barangay 1', street: '123 Main St', mobile: '09171234567', email: 'juan.dela.cruz@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G10', strand: 'ICT', status: 'Active', documents: ['BirthCert_S001.pdf', 'ReportCard_S001.pdf', 'GoodMoral_S001.pdf', 'IDPic_S001.jpg'] },
-            { id: 'S002', lastName: 'Gatdula', firstName: 'Jaden', middleName: 'S.', extension: '', birthdate: '2010-11-22', age: 15, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 2', street: '456 Elm St', mobile: '09187654321', email: 'jaden.gatdula@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G11', strand: 'STE', status: 'Active', documents: ['BirthCert_S002.pdf', 'ReportCard_S002.pdf', 'GoodMoral_S002.pdf', 'IDPic_S002.jpg'] },
-            { id: 'S003', lastName: 'Lagasca', firstName: 'Aron', middleName: 'D.', extension: '', birthdate: '2010-03-26', age: 15, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 3', street: '789 Oak Ave', mobile: '09199876543', email: 'aron.lagasca@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G9', strand: 'ICT', status: 'Inactive', documents: ['BirthCert_S003.pdf', 'Kapogian_S003.pdf', 'GoodMoral_S003.pdf', 'IDPic_S003.jpg'] }
-        ];
+        // Data will be fetched from API
+        let students = [];
+        let teachers = [];
+        let pendingEnrollments = [];
+        let enrollmentHistory = [];
+        let grades = [];
+        let announcements = [];
+        let resources = [];
+        let adminUsers = [];
 
-        let teachers = [
-            { id: 'T001', name: 'Mr. John Doe', subject: 'Mathematics', email: 'john.doe@anhs.edu', username: 'teacher', password: 'password123' },
-            { id: 'T002', name: 'Ms. Jane Smith', subject: 'Science', email: 'jane.smith@anhs.edu', username: 'janesmith', password: 'securepass' }
-        ];
+        // Load data from API
+        async function loadStudents() {
+            try {
+                const response = await API.students.getAll();
+                if (response.success) {
+                    students = response.data || [];
+                } else {
+                    console.error('Failed to load students:', response.message);
+                    students = [];
+                }
+            } catch (error) {
+                console.error('Error loading students:', error);
+                students = [];
+            }
+        }
 
-        let pendingEnrollments = [
-            { id: 'E001', submissionDate: '2024-04-20', lastName: 'Ulip', firstName: 'Widjel', middleName: 'A.', extension: '', birthdate: '2008-03-01', age: 16, gender: 'male', region: 'Region III', province: 'Nueva Ecija', city: 'Aliaga', barangay: 'Barangay 1', street: '123 Sample St', mobile: '09123456789', email: 'widjel.ulip@example.com', schoolId: 'ANHS001', schoolName: 'Aliaga National High School', gradeLevel: 'G10', strand: 'ICT', documents: ['BirthCert_E001.pdf', 'ReportCard_E001.pdf', 'GoodMoral_E001.pdf', 'IDPic_E001.jpg'], status: 'Pending' }
-        ];
+        async function loadTeachers() {
+            try {
+                const response = await API.teachers.getAll();
+                if (response.success) {
+                    teachers = response.data || [];
+                } else {
+                    console.error('Failed to load teachers:', response.message);
+                    teachers = [];
+                }
+            } catch (error) {
+                console.error('Error loading teachers:', error);
+                teachers = [];
+            }
+        }
 
-        let enrollmentHistory = []; // Approved/Rejected enrollments will go here
+        async function loadEnrollments() {
+            try {
+                const response = await API.enrollments.getAll();
+                if (response.success) {
+                    const allEnrollments = response.data || [];
+                    pendingEnrollments = allEnrollments.filter(e => e.status === 'Pending');
+                    enrollmentHistory = allEnrollments.filter(e => e.status !== 'Pending');
+                } else {
+                    console.error('Failed to load enrollments:', response.message);
+                    pendingEnrollments = [];
+                    enrollmentHistory = [];
+                }
+            } catch (error) {
+                console.error('Error loading enrollments:', error);
+                pendingEnrollments = [];
+                enrollmentHistory = [];
+            }
+        }
 
-        let grades = [
-            { studentId: 'S001', studentName: 'Juan Dela Cruz', class: '10A', subject: 'Math', grade: 95, comments: 'Excellent work!' },
-            { studentId: 'S001', studentName: 'Juan Dela Cruz', class: '10A', subject: 'Science', grade: 88, comments: 'Needs improvement in lab reports.' },
-            { studentId: 'S002', studentName: 'Jaden Gatdula', class: '11B', subject: 'Science', grade: 92, comments: 'Very good understanding.' },
-            { studentId: 'S003', studentName: 'Pedro Reyes', class: '9C', subject: 'English', grade: 75, comments: 'Struggling with comprehension.' }
-        ];
-
-        let announcements = [
-            { id: 'A001', title: 'Faculty Meeting Reminder', content: 'A mandatory faculty meeting will be held on April 20, 2025, at 3:00 PM in the main conference room. Please ensure your attendance.', postedBy: 'Administration', date: 'April 15, 2025' },
-            { id: 'A002', title: 'New Curriculum Guidelines Available', content: 'The updated curriculum guidelines for the upcoming academic year are now available in the shared drive. Please review them by May 1, 2025.', postedBy: 'Academic Affairs', date: 'April 10, 2025' }
-        ];
-
-        let resources = [
-            { id: 'R001', title: 'Professional Development Workshop Schedule', description: 'Schedule for upcoming professional development workshops for the current semester.', file: 'PD_Workshop_Schedule.pdf' },
-            { id: 'R002', title: 'Teacher Handbook 2024-2025', description: 'Official handbook containing school policies, procedures, and guidelines for faculty.', file: 'Teacher_Handbook_2024-2025.pdf' }
-        ];
-
-        let adminUsers = [
-            { id: 'AD001', username: 'admin', email: 'admin@anhs.edu', password: 'admin123' }
-        ];
+        // Note: Grades, announcements, resources, adminUsers are not in API yet, keep simulated or add later
 
         // Utility Functions
         function showSection(sectionId) {
@@ -682,10 +706,10 @@
             openModal('addEditStudentModal');
         }
 
-        function saveStudent(event) {
+        async function saveStudent(event) {
             event.preventDefault();
             showLoader();
-            setTimeout(() => {
+            try {
                 const form = event.target;
                 const editingId = form.dataset.editingId;
 
@@ -710,22 +734,28 @@
                     strand: document.getElementById('s_strand').value,
                 };
 
+                let response;
                 if (editingId) {
-                    const index = students.findIndex(s => s.id === editingId);
-                    if (index !== -1) {
-                        students[index] = { ...students[index], ...studentData };
-                        alert('Student updated successfully!');
-                    }
+                    response = await API.students.update(editingId, studentData);
                 } else {
-                    const newId = 'S' + String(students.length + 1).padStart(3, '0');
-                    students.push({ id: newId, ...studentData, status: 'Active', documents: [] });
-                    alert('Student added successfully!');
+                    response = await API.students.create(studentData);
                 }
-                closeModal('addEditStudentModal');
-                renderStudents();
-                updateDashboard();
+
+                if (response.success) {
+                    alert(editingId ? 'Student updated successfully!' : 'Student added successfully!');
+                    closeModal('addEditStudentModal');
+                    await loadStudents();
+                    renderStudents();
+                    updateDashboard();
+                } else {
+                    alert('Failed to save student: ' + response.message);
+                }
+            } catch (error) {
+                console.error('Error saving student:', error);
+                alert('An error occurred while saving the student.');
+            } finally {
                 hideLoader();
-            }, 1000);
+            }
         }
 
         function deleteStudent(studentId) {
@@ -892,49 +922,31 @@
             } else {
                 approveBtn.style.display = 'inline-block';
                 rejectBtn.style.display = 'inline-block';
-                approveBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'Approved');
-                rejectBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'Rejected');
+                approveBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'approve');
+                rejectBtn.onclick = () => approveRejectEnrollment(enrollmentId, 'reject');
             }
             openModal('enrollmentReviewModal');
         }
 
-        function approveRejectEnrollment(enrollmentId, status) {
-            const index = pendingEnrollments.findIndex(e => e.id === enrollmentId);
-            if (index !== -1) {
-                const enrollment = pendingEnrollments.splice(index, 1)[0];
-                enrollment.status = status;
-                enrollmentHistory.push(enrollment);
-                alert(`Enrollment ${enrollment.firstName} ${enrollment.lastName} has been ${status.toLowerCase()}.`);
-                closeModal('enrollmentReviewModal');
-                renderEnrollments();
-                // If approved, optionally add to students list
-                if (status === 'Approved') {
-                    const newStudentId = 'S' + String(students.length + 1).padStart(3, '0');
-                    students.push({
-                        id: newStudentId,
-                        lastName: enrollment.lastName,
-                        firstName: enrollment.firstName,
-                        middleName: enrollment.middleName,
-                        extension: enrollment.extension,
-                        birthdate: enrollment.birthdate,
-                        age: enrollment.age,
-                        gender: enrollment.gender,
-                        region: enrollment.region,
-                        province: enrollment.province,
-                        city: enrollment.city,
-                        barangay: enrollment.barangay,
-                        street: enrollment.street,
-                        mobile: enrollment.mobile,
-                        email: enrollment.email,
-                        schoolId: enrollment.schoolId,
-                        schoolName: enrollment.schoolName,
-                        gradeLevel: enrollment.gradeLevel,
-                        strand: enrollment.strand,
-                        status: 'Active',
-                        documents: enrollment.documents
-                    });
-                    renderStudents(); // Update student list
+        async function approveRejectEnrollment(enrollmentId, action) {
+            try {
+                const response = action === 'approve' ? await API.enrollments.approve(enrollmentId) : await API.enrollments.reject(enrollmentId);
+                if (response.success) {
+                    alert(`Enrollment has been ${action === 'approve' ? 'approved' : 'rejected'}.`);
+                    closeModal('enrollmentReviewModal');
+                    await loadEnrollments();
+                    renderEnrollments();
+                    if (action === 'approve') {
+                        await loadStudents(); // Reload students if approved
+                        renderStudents();
+                    }
+                    updateDashboard();
+                } else {
+                    alert('Failed to update enrollment: ' + response.message);
                 }
+            } catch (error) {
+                console.error('Error updating enrollment:', error);
+                alert('An error occurred while updating the enrollment.');
             }
         }
 
@@ -1155,15 +1167,29 @@
         }
 
         // User Management Functions (Admin Users)
+        async function loadAdminUsers() {
+            try {
+                const response = await API.admin.getAdmins();
+                if (response.success) {
+                    adminUsers = response.data || [];
+                } else {
+                    console.error('Failed to load admin users:', response.message);
+                    adminUsers = [];
+                }
+            } catch (error) {
+                console.error('Error loading admin users:', error);
+                adminUsers = [];
+            }
+        }
+
         function renderAdminUsers() {
             populateTable('adminUserTable', adminUsers, user => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${user.username}</td>
+                    <td>${user.name}</td>
                     <td>${user.email}</td>
                     <td>
-                        <button class="btn-secondary edit-admin-user-btn" data-id="${user.id}">Edit</button>
-                        <button class="btn-secondary delete-admin-user-btn" data-id="${user.id}">Delete</button>
+                        <button class="btn-secondary delete-admin-user-btn" data-id="${user._id}">Delete</button>
                     </td>
                 `;
                 return row;
@@ -1175,28 +1201,50 @@
             openModal('addAdminUserModal');
         }
 
-        function saveAdminUser(event) {
+        async function saveAdminUser(event) {
             event.preventDefault();
-            const form = event.target;
+            showLoader();
+            try {
+                const form = event.target;
 
-            const userData = {
-                username: document.getElementById('au_username').value,
-                email: document.getElementById('au_email').value,
-                password: document.getElementById('au_password').value, // In real app, hash this!
-            };
+                const userData = {
+                    name: document.getElementById('au_username').value,
+                    email: document.getElementById('au_email').value,
+                    password: document.getElementById('au_password').value,
+                };
 
-            const newId = 'AD' + String(adminUsers.length + 1).padStart(3, '0');
-            adminUsers.push({ id: newId, ...userData });
-            alert('Admin user created successfully!');
-            closeModal('addAdminUserModal');
-            renderAdminUsers();
+                const response = await API.auth.createAdmin(userData);
+                if (response.success) {
+                    alert('Admin user created successfully!');
+                    closeModal('addAdminUserModal');
+                    await loadAdminUsers();
+                    renderAdminUsers();
+                } else {
+                    alert('Failed to create admin user: ' + response.message);
+                }
+            } catch (error) {
+                console.error('Error creating admin user:', error);
+                alert('An error occurred while creating the admin user.');
+            } finally {
+                hideLoader();
+            }
         }
 
-        function deleteAdminUser(userId) {
+        async function deleteAdminUser(userId) {
             if (confirm('Are you sure you want to delete this admin user?')) {
-                adminUsers = adminUsers.filter(u => u.id !== userId);
-                alert('Admin user deleted successfully!');
-                renderAdminUsers();
+                try {
+                    const response = await API.auth.deleteAdmin(userId);
+                    if (response.success) {
+                        alert('Admin user deleted successfully!');
+                        await loadAdminUsers();
+                        renderAdminUsers();
+                    } else {
+                        alert('Failed to delete admin user: ' + response.message);
+                    }
+                } catch (error) {
+                    console.error('Error deleting admin user:', error);
+                    alert('An error occurred while deleting the admin user.');
+                }
             }
         }
 
@@ -1371,6 +1419,22 @@
                     }
                 });
             });
+
+            // Sidebar Toggle Functionality
+            document.getElementById('sidebarToggle').addEventListener('click', function() {
+                const sidebar = document.getElementById('sidebar');
+                const mainContent = document.querySelector('.main-content');
+                const toggle = document.getElementById('sidebarToggle');
+
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+
+                if (sidebar.classList.contains('collapsed')) {
+                    toggle.style.display = 'block';
+                } else {
+                    toggle.style.display = 'none';
+                }
+            });
         });
 
         // Function to simulate receiving enrollment data from Enrollment.html
@@ -1438,5 +1502,6 @@
         */
     </script>
     <div id="loader" class="d-none"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>
+    <div id="site-footer"></div>
 </body>
 </html>

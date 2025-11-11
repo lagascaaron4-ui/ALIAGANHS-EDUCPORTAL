@@ -5,177 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Aliaga National High School</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="darkmode.css">
     <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="darkmode.js"></script>
     <style>
+        /* Light, modern UI adjustments for About page */
         body {
             margin: 0;
-            font-family: 'Georgia', 'Arial bold italic', Times, Serif;
-            background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%), url('anhs-removebg-preview.png') center/cover no-repeat;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(180deg, #f7f9f4 0%, #ffffff 100%);
             color: #13522d;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
         header {
             background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
             color: #fff;
-            box-shadow: 0 2px 12px rgba(26,102,51,0.1);
+            box-shadow: 0 2px 12px rgba(26,102,51,0.08);
         }
+
         .header-container {
-            max-width: 1500px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px 30px;
+            padding: 18px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            gap: 16px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
             gap: 12px;
-            flex-direction: row;
-            text-align: center;
-            justify-content: center;
         }
-        .logo img {
-            height: 72px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(26,102,51,0.1);
-            margin: 0;
-        }
-        .logo > div {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            align-items: center;
-            text-align: center;
-        }
-        .logo h1, .logo p {
-            margin: 0;
-            text-align: center;
-            align-items: center;
-        }
-        nav {
-            position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 18px;
-        }
+
+        .logo { display:flex; align-items:center; gap:12px; }
+        .logo img { height:64px; border-radius:12px; }
+        .logo > div { display:flex; flex-direction:column; }
+        .logo h1 { margin:0; font-size:1.5rem; }
+        .logo p { margin:0; font-size:0.9rem; opacity:0.95; }
+
+        /* Keep navigation inline inside header (avoids overlap) */
+        nav { display:flex; gap:14px; align-items:center; }
+        nav a, nav button { color:#fff; text-decoration:none; font-weight:600; }
+
         @media (max-width: 900px) {
-            .header-container {
-                flex-direction: column;
-                padding: 12px 16px;
-                justify-content: center;
-                gap: 12px;
-            }
-            nav {
-                position: static;
-                transform: none;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: left;
-                gap: 10px;
-            }
-            .logo img { height: 64px; }
-            .header-container .logo { order: 1; }
-            .header-container nav { order: 2; }
+            .header-container { flex-direction:column; gap:8px; padding:12px; }
+            .logo img { height:56px; }
+            nav { width:100%; justify-content:center; flex-wrap:wrap; gap:10px; }
         }
-        .hero {
-            position: relative;
-            height: 100vh;
-            background: url('anhs-removebg-preview.png') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #fff;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26,102,51,0.7);
-            z-index: 1;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 20px;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #e0b34d;
-            color: #1a6633;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background: #f0f0d9;
-        }
-        .quick-links {
-            padding: 60px 20px;
-            background: #fff;
-            text-align: center;
-        }
-        .quick-links h2 {
-            font-size: 2.5rem;
-            color: #1a6633;
-            margin-bottom: 40px;
-        }
-        .links-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .link-card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        .link-card h3 {
-            color: #1a6633;
-            margin-bottom: 15px;
-        }
-        .link-card p {
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-        .link-card .btn {
-            background: #1a6633;
-            color: #fff;
-        }
-        .link-card .btn:hover {
-            background: #13522d;
-        }
+
+        /* Hero - smaller and cleaner */
+        .hero { position:relative; height:60vh; display:flex; align-items:center; justify-content:center; text-align:center; }
+        .hero::before { content:''; position:absolute; inset:0; background: linear-gradient(90deg, rgba(26,102,51,0.85) 0%, rgba(19,82,45,0.7) 100%); z-index:1; }
+        .hero-content { position:relative; z-index:2; max-width:900px; padding:20px; color:#fff; }
+        .hero h1 { font-size:2.6rem; margin:0 0 12px; font-weight:700; }
+        .hero p { font-size:1.05rem; margin:0 0 20px; opacity:0.95; }
+
+        .btn { display:inline-block; padding:12px 22px; background:#e0b34d; color:#1a6633; border-radius:8px; font-weight:700; }
+        .btn:hover { background:#f3e7bf; }
+
+        .quick-links { padding:48px 16px; background:transparent; text-align:center; }
+        .quick-links h2 { font-size:2rem; color:#1a6633; margin-bottom:28px; }
+        .links-container { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:20px; max-width:1100px; margin:0 auto; }
+        .link-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 6px 18px rgba(16,40,20,0.04); transition:transform .25s, box-shadow .25s; }
+        .link-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(16,40,20,0.06); }
+        .link-card h3 { color:#1a6633; margin-bottom:10px; }
+        .link-card p { color:#6c757d; }
         footer {
             background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%);
             color: #fff;
@@ -395,7 +290,7 @@
         }
         .menu-dropdown {
             position: absolute;
-            right: 50;
+            right: 0;
             top: calc(100% + 10px);
             background: #fff;
             border-radius: 10px;
@@ -579,36 +474,8 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <!-- left: keep menu toggle/button (will be positioned via CSS) -->
-            <div class="menu-button" id="heroMenu">
-                <button class="menu-toggle" id="heroMenuToggle" aria-haspopup="true" aria-expanded="false">Menu</button>
-                <div class="menu-dropdown" id="heroMenuDropdown">
-                    <a class="menu-item" href="main.html">Home</a>
-                    <a class="menu-item" href="about.html">About Us</a>
-                    <a class="menu-item" href="specialization.html">Specialization</a>
-                    <a class="menu-item" href="admission.html">Admissions</a>
-                    <a class="menu-item" href="news-events.html">News & Events</a>
-                    <a class="menu-item" href="contact.html">Contact Us</a>
-                    <a class="menu-item" id="loginRegisterBtn" href="#">Login/Register</a>
-                </div>
-            </div>
-            
-            <!-- centered logo block -->
-            <div class="logo">
-                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo">
-                <div>
-                    <h1>Aliaga National High School</h1>
-                    <p>Be an ANAHASIANS.</p>
-                </div>
-            </div>
-
-            <!-- right: (optional) place nav here if needed; keep empty to preserve centered logo -->
-            <nav id="mainNav" aria-label="Main navigation" style="visibility:hidden;"></nav>
-        </div>
-    </header>
+    <body>
+    <div id="site-header"></div>
 
     <main>
         <section class="about-content">
@@ -650,65 +517,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
-                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement.">
-                    </div>
-                </div>
-                <p style="font-size:0.95rem;opacity:0.9;margin-bottom:16px;">Excellence in Education</p>
-                <div style="font-size:0.95rem;">
-                    <p>1234 Education Drive</p>
-                    <p>Aliaga, Nueva Ecija</p>
-                    <p>Phone: (555) 123-4567</p>
-                    <p>Email: @Aliaganationalhighschool.edu</p>
-                </div>
-            </div>
-            <div>
-                <div class="footer-title">Quick Links</div>
-                <ul class="footer-list">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="main.html#specialization-section">Academics</a></li>
-                    <li><a href="main.html#admissions-section">Admissions</a></li>
-                    <li><a href="#">Faculty</a></li>
-                    <li><a href="#">Campus Life</a></li>
-                    <li><a href="#">Athletics</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-title">Resources</div>
-                <ul class="footer-list">
-                    <li><a href="#">Student Portal</a></li>
-                    <li><a href="#">Parent Portal</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li><a href="#">Calendar</a></li>
-                    <li><a href="main.html#news-events-section">News</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-title">Stay Connected</div>
-                <div class="footer-social">
-                    <a href="#"><i class="ri-facebook-fill"></i></a>
-                    <a href="#"><i class="ri-twitter-fill"></i></a>
-                    <a href="#"><i class="ri-instagram-fill"></i></a>
-                    <a href="#"><i class="ri-youtube-fill"></i></a>
-                </div>
-                <div class="footer-newsletter">
-                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
-                    <div style="display:flex;">
-                        <input type="email" placeholder="Your email">
-                        <button>Subscribe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 
     <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Toggle accessibility features">♿</button>
     <button class="backToTopBtn" id="backToTopBtn" aria-label="Back to top">↑</button>
@@ -740,6 +549,21 @@
                     <div class="auth-row">
                         <input id="loginPassword" type="password" placeholder="Password" required>
                     </div>
+                    <div class="auth-row" style="display:flex;gap:8px;align-items:center;">
+                        <button type="button" id="sendCodeBtn" class="btn-primary" style="flex:1;background:#0b5;">Send login code to email</button>
+                    </div>
+                    <div id="codeVerifyArea" style="display:none;">
+                        <div class="auth-row">
+                            <input id="loginCode" type="text" placeholder="One-time code (123456)" pattern="\\d{6}">
+                        </div>
+                        <div class="auth-row">
+                            <input id="loginPasswordVerify" type="password" placeholder="Password (for this account)">
+                        </div>
+                        <div class="auth-actions">
+                            <button type="button" id="verifyCodeBtn" class="btn-primary">Verify code & login</button>
+                        </div>
+                        <div id="codePreview" style="font-size:0.9rem;color:#666;display:none;margin-top:8px;"></div>
+                    </div>
                     <div class="auth-actions">
                         <button type="submit" class="btn-primary">Login</button>
                         <button type="button" id="showRegister" class="btn-secondary">Register</button>
@@ -758,6 +582,21 @@
                     </div>
                     <div class="auth-row">
                         <input id="registerPassword" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="auth-row" style="display:flex;gap:8px;align-items:center;">
+                        <button type="button" id="sendRegCodeBtn" class="btn-primary" style="flex:1;background:#0b5;">Send registration code to email</button>
+                    </div>
+                    <div id="regCodeArea" style="display:none;">
+                        <div class="auth-row">
+                            <input id="regCode" type="text" placeholder="One-time code (123456)" pattern="\\d{6}">
+                        </div>
+                        <div class="auth-row">
+                            <input id="regPasswordVerify" type="password" placeholder="Confirm password">
+                        </div>
+                        <div class="auth-actions">
+                            <button type="button" id="verifyRegBtn" class="btn-primary">Verify code & complete registration</button>
+                        </div>
+                        <div id="regCodePreview" style="font-size:0.9rem;color:#666;display:none;margin-top:8px;"></div>
                     </div>
                     <div class="auth-row">
                         <select id="registerGradeLevel" required>
@@ -794,15 +633,7 @@
             const registerForm = document.getElementById('registerForm');
             const showRegister = document.getElementById('showRegister');
             const showLogin = document.getElementById('showLogin');
-
-            // Simulated users (replace with backend)
-            const users = {
-                student: [{ email: 'student@example.com', password: 'password' }],
-                teacher: [{ email: 'teacher@example.com', password: 'password' }],
-                parent: [{ email: 'parent@example.com', password: 'password' }],
-                admin: [{ email: 'admin@example.com', password: 'password' }]
-            };
-
+        
             function openModal(mode = 'login'){
                 authModal.style.display = 'flex';
                 authModal.setAttribute('aria-hidden','false');
@@ -814,6 +645,88 @@
                     registerForm.classList.add('active');
                     loginForm.classList.remove('active');
                 }
+            }
+
+            // Send-code and verify handlers (calls backend endpoints)
+            const sendCodeBtn = document.getElementById('sendCodeBtn');
+            const codeVerifyArea = document.getElementById('codeVerifyArea');
+            const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+            const codePreview = document.getElementById('codePreview');
+
+            if(sendCodeBtn){
+                sendCodeBtn.addEventListener('click', async function(){
+                    const email = (document.getElementById('loginEmail')||{}).value?.trim()||'';
+                    if(!email){ alert('Enter an email to send code to.'); return; }
+                    sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Sending...';
+                    try{
+                        const resp = await fetch('/api/auth/google/request-code', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+                        const data = await resp.json();
+                        if(!resp.ok) throw new Error(data.message||'Failed to send code');
+                        codeVerifyArea.style.display = 'block';
+                        if(data.preview){ codePreview.innerHTML = 'Preview email: <a href="'+data.preview+'" target="_blank">open</a>'; codePreview.style.display='block'; }
+                    }catch(err){ alert(err.message||'Failed to send code'); }
+                    finally{ sendCodeBtn.disabled = false; sendCodeBtn.textContent = 'Send login code to email'; }
+                });
+            }
+
+            if(verifyCodeBtn){
+                verifyCodeBtn.addEventListener('click', async function(){
+                    const email = (document.getElementById('loginEmail')||{}).value?.trim()||'';
+                    const code = (document.getElementById('loginCode')||{}).value||'';
+                    const password = (document.getElementById('loginPasswordVerify')||{}).value||'';
+                    if(!email || !code || !password){ alert('Provide email, code and password to verify.'); return; }
+                    verifyCodeBtn.disabled = true; verifyCodeBtn.textContent = 'Verifying...';
+                    try{
+                        const resp = await fetch('/api/auth/google/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, code, password, purpose: 'login' }) });
+                        const data = await resp.json();
+                        if(!resp.ok) throw new Error(data.message||'Verification failed');
+                        // store token if provided and redirect
+                        if(data.token) localStorage.setItem('token', data.token);
+                        const userRole = data.user?.role || (document.getElementById('userType')||{}).value||'student';
+                        const dest = { student:'Students.html', teacher:'Teachers Portal.html', parent:'parents.html', admin:'admin.html' }[userRole]||'main.html';
+                        alert('Login successful'); closeModal(); setTimeout(()=> window.location.href = dest, 300);
+                    }catch(err){ alert(err.message||'Verification failed'); }
+                    finally{ verifyCodeBtn.disabled = false; verifyCodeBtn.textContent = 'Verify code & login'; }
+                });
+            }
+
+            const sendRegCodeBtn = document.getElementById('sendRegCodeBtn');
+            const regCodeArea = document.getElementById('regCodeArea');
+            const verifyRegBtn = document.getElementById('verifyRegBtn');
+            const regCodePreview = document.getElementById('regCodePreview');
+
+            if(sendRegCodeBtn){
+                sendRegCodeBtn.addEventListener('click', async function(){
+                    const email = (document.getElementById('registerEmail')||{}).value?.trim()||'';
+                    if(!email){ alert('Enter an email to send code to.'); return; }
+                    sendRegCodeBtn.disabled = true; sendRegCodeBtn.textContent = 'Sending...';
+                    try{
+                        const resp = await fetch('/api/auth/google/request-code', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+                        const data = await resp.json();
+                        if(!resp.ok) throw new Error(data.message||'Failed to send code');
+                        regCodeArea.style.display = 'block';
+                        if(data.preview){ regCodePreview.innerHTML = 'Preview email: <a href="'+data.preview+'" target="_blank">open</a>'; regCodePreview.style.display='block'; }
+                    }catch(err){ alert(err.message||'Failed to send code'); }
+                    finally{ sendRegCodeBtn.disabled = false; sendRegCodeBtn.textContent = 'Send registration code to email'; }
+                });
+            }
+
+            if(verifyRegBtn){
+                verifyRegBtn.addEventListener('click', async function(){
+                    const email = (document.getElementById('registerEmail')||{}).value?.trim()||'';
+                    const code = (document.getElementById('regCode')||{}).value||'';
+                    const password = (document.getElementById('regPasswordVerify')||{}).value||'';
+                    if(!email || !code || !password){ alert('Provide email, code and password to verify.'); return; }
+                    verifyRegBtn.disabled = true; verifyRegBtn.textContent = 'Verifying...';
+                    try{
+                        const resp = await fetch('/api/auth/google/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, code, password, purpose: 'register' }) });
+                        const data = await resp.json();
+                        if(!resp.ok) throw new Error(data.message||'Verification failed');
+                        if(data.token) localStorage.setItem('token', data.token);
+                        alert('Registration successful'); closeModal(); setTimeout(()=> window.location.href = 'main.html', 300);
+                    }catch(err){ alert(err.message||'Verification failed'); }
+                    finally{ verifyRegBtn.disabled = false; verifyRegBtn.textContent = 'Verify code & complete registration'; }
+                });
             }
             function closeModal(){
                 authModal.style.display = 'none';
@@ -1045,7 +958,9 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-});
+    });
 </script>
+    <div id="site-footer"></div>
+    <script src="js/includes.js" defer></script>
 </body>
 </html>

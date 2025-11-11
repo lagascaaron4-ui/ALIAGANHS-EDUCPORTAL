@@ -27,6 +27,9 @@
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
         }
         .sidebar h2 {
             text-align: center;
@@ -59,7 +62,7 @@
             padding: 30px;
             background-color: #fff;
             border-radius: 10px;
-            margin: 20px;
+            margin: 20px 20px 20px 270px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         .section-title {
@@ -369,47 +372,11 @@
     </div>
 
     <script>
-        // Simulated Data (replace with actual backend data in a real application)
-        let children = [
-            { id: 'S001', name: 'Juan Dela Cruz', gradeLevel: 'G10', status: 'Active',
-              grades: [
-                  { subject: 'Math', grade: 92, comments: 'Excellent progress.' },
-                  { subject: 'Science', grade: 88, comments: 'Good effort, needs more participation.' },
-                  { subject: 'English', grade: 95, comments: 'Outstanding!' }
-              ],
-              attendance: [
-                  { date: '2024-04-01', status: 'Present', remarks: '' },
-                  { date: '2024-04-02', status: 'Present', remarks: '' },
-                  { date: '2024-04-03', status: 'Absent', remarks: 'Sick leave' }
-              ]
-            },
-            { id: 'S002', name: 'Maria Santos', gradeLevel: 'G8', status: 'Active',
-              grades: [
-                  { subject: 'Filipino', grade: 85, comments: 'Needs to improve reading comprehension.' },
-                  { subject: 'Araling Panlipunan', grade: 90, comments: 'Consistent performance.' }
-              ],
-              attendance: [
-                  { date: '2024-04-01', status: 'Present', remarks: '' },
-                  { date: '2024-04-02', status: 'Late', remarks: 'Traffic' }
-              ]
-            }
-        ];
-
-        let messages = [
-            { from: 'Teacher John Doe', subject: 'Juan Dela Cruz - Math Performance', content: 'Juan is doing great in Math. Keep up the good work!', date: '2024-04-25', read: false },
-            { from: 'School Administration', subject: 'Important: School Holiday', content: 'Please be informed that May 1st will be a school holiday.', date: '2024-04-20', read: true }
-        ];
-
-        let announcements = [
-            { title: 'Parent-Teacher Conference Schedule', content: 'The schedule for the upcoming parent-teacher conferences is now available. Please check the school calendar for details.', date: 'April 22, 2024' },
-            { title: 'School Sports Fest 2024', content: 'Get ready for our annual Sports Fest! Details about events and participation will be announced soon.', date: 'April 18, 2024' }
-        ];
-
-        let resources = [
-            { title: 'School Calendar 2024-2025', file: 'School_Calendar_2024-2025.pdf' },
-            { title: 'Student Handbook', file: 'Student_Handbook.pdf' },
-            { title: 'Parent-Teacher Association Guidelines', file: 'PTA_Guidelines.pdf' }
-        ];
+        // Global variables for data
+        let children = [];
+        let messages = [];
+        let announcements = [];
+        let resources = [];
 
         // Utility Functions
         function showSection(sectionId) {
@@ -623,6 +590,107 @@
             });
         }
 
+        // Load data from API
+        async function loadData() {
+            try {
+                // Load children
+                const childrenResponse = await API.parent.getChildren();
+                if (childrenResponse.success) {
+                    children = childrenResponse.data || [];
+                } else {
+                    console.error('Failed to load children:', childrenResponse.message);
+                }
+
+                // Load messages
+                const messagesResponse = await API.messages.getAll();
+                if (messagesResponse.success) {
+                    messages = messagesResponse.data || [];
+                } else {
+                    console.error('Failed to load messages:', messagesResponse.message);
+                }
+
+                // Load announcements
+                const announcementsResponse = await API.announcements.getAll();
+                if (announcementsResponse.success) {
+                    announcements = announcementsResponse.data || [];
+                } else {
+                    console.error('Failed to load announcements:', announcementsResponse.message);
+                }
+
+                // Load resources
+                const resourcesResponse = await API.resources.getAll();
+                if (resourcesResponse.success) {
+                    resources = resourcesResponse.data || [];
+                } else {
+                    console.error('Failed to load resources:', resourcesResponse.message);
+                }
+
+                // Update UI after loading data
+                updateDashboard();
+                renderChildrenList();
+                populateChildSelect();
+                renderMessages();
+                renderAnnouncements();
+                renderResources();
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // Load child grades and attendance
+        async function loadChildData() {
+            const selectedChildId = document.getElementById('selectChildGrades').value;
+            const selectedChild = children.find(c => c.id === selectedChildId);
+
+            if (!selectedChild) {
+                document.getElementById('gradesTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Please select a child.</td></tr>';
+                document.getElementById('attendanceTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Please select a child.</td></tr>';
+                return;
+            }
+
+            try {
+                // Load grades
+                const gradesResponse = await API.parent.getChildGrades(selectedChildId);
+                if (gradesResponse.success) {
+                    const grades = gradesResponse.data || [];
+                    populateTable('gradesTable', grades, grade => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${grade.course ? grade.course.name : 'N/A'}</td>
+                            <td>${grade.grade}</td>
+                            <td>${grade.comments || ''}</td>
+                        `;
+                        return row;
+                    });
+                } else {
+                    console.error('Failed to load grades:', gradesResponse.message);
+                    document.getElementById('gradesTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Failed to load grades.</td></tr>';
+                }
+
+                // Load attendance
+                const attendanceResponse = await API.parent.getChildAttendance(selectedChildId);
+                if (attendanceResponse.success) {
+                    const attendance = attendanceResponse.data || [];
+                    populateTable('attendanceTable', attendance, record => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${new Date(record.date).toLocaleDateString()}</td>
+                            <td>${record.status}</td>
+                            <td>${record.remarks || ''}</td>
+                        `;
+                        return row;
+                    });
+                } else {
+                    console.error('Failed to load attendance:', attendanceResponse.message);
+                    document.getElementById('attendanceTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Failed to load attendance.</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading child data:', error);
+                document.getElementById('gradesTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Error loading grades.</td></tr>';
+                document.getElementById('attendanceTable').querySelector('tbody').innerHTML = '<tr><td colspan="3" style="text-align: center;">Error loading attendance.</td></tr>';
+            }
+        }
+
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
             // Sidebar Navigation
@@ -636,18 +704,32 @@
 
             // Initial Load
             showSection('dashboard');
-            updateDashboard();
-            renderChildrenList();
-            populateChildSelect();
-            renderMessages();
-            renderAnnouncements();
-            renderResources();
+            loadData(); // Load data from API
 
             // Grades & Attendance Events
             document.getElementById('loadChildDataBtn').addEventListener('click', loadChildData);
 
             // Messages Events
-            document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+            document.getElementById('sendMessageBtn').addEventListener('click', async function() {
+                const recipient = document.getElementById('messageRecipient').value;
+                const subject = document.getElementById('messageSubject').value.trim();
+                const content = document.getElementById('messageContent').value.trim();
+
+                if (!recipient || !subject || !content) {
+                    alert('Please fill in all message fields.');
+                    return;
+                }
+
+                const response = await API.messages.send({ recipient, subject, content });
+                if (response.success) {
+                    alert('Message sent successfully!');
+                    document.getElementById('messageRecipient').value = '';
+                    document.getElementById('messageSubject').value = '';
+                    document.getElementById('messageContent').value = '';
+                } else {
+                    alert('Failed to send message: ' + response.message);
+                }
+            });
 
             // Main Portal Button
             document.getElementById('mainPortalBtn').addEventListener('click', function(e) {
@@ -659,6 +741,7 @@
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 if (confirm('Are you sure you want to log out?')) {
+                    API.auth.logout();
                     window.location.href = 'main.html'; // Redirect to main page
                 }
             });

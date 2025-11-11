@@ -102,6 +102,7 @@
     </style>
 </head>
 <body>
+    <div id="site-header"></div>
     <div class="login-container">
         <h1>Aliaga National High School</h1>
         <div id="loginForm">
@@ -114,6 +115,19 @@
                 <div class="form-group">
                     <label for="loginPassword">Password:</label>
                     <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group" style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="sendCodeBtn" class="btn-primary" style="flex:1;background:#0b5;">Send login code to email</button>
+                </div>
+                <div id="codeVerifyArea" style="display:none;">
+                    <div class="form-group">
+                        <label for="loginCode">One-time Code:</label>
+                        <input type="text" id="loginCode" pattern="\\d{6}" placeholder="123456">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="verifyCodeBtn" class="btn-primary">Verify code & login</button>
+                    </div>
+                    <div id="codePreview" style="font-size:0.9rem;color:#666;display:none;margin-top:8px;"></div>
                 </div>
                 <div class="form-group">
                     <label for="loginRole">Role:</label>
@@ -167,6 +181,87 @@
                 } catch (error) {
                     errorMessage.textContent = 'Login failed. Please check your credentials.';
                     errorMessage.style.display = 'block';
+                }
+            });
+
+            // Send code flow
+            const sendCodeBtn = document.getElementById('sendCodeBtn');
+            const codeVerifyArea = document.getElementById('codeVerifyArea');
+            const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+            const codePreview = document.getElementById('codePreview');
+
+            sendCodeBtn.addEventListener('click', async function() {
+                const email = document.getElementById('loginEmail').value;
+                if (!email) {
+                    errorMessage.textContent = 'Please enter an email to send code to.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                errorMessage.style.display = 'none';
+                sendCodeBtn.disabled = true;
+                sendCodeBtn.textContent = 'Sending...';
+                try {
+                    const resp = await fetch('/api/auth/google/request-code', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    const data = await resp.json();
+                    if (!resp.ok) throw new Error(data.message || 'Failed to send code');
+                    codeVerifyArea.style.display = 'block';
+                    if (data.preview) {
+                        codePreview.innerHTML = 'Preview email: <a href="' + data.preview + '" target="_blank">open</a>';
+                        codePreview.style.display = 'block';
+                    }
+                } catch (err) {
+                    errorMessage.textContent = err.message || 'Failed to send code';
+                    errorMessage.style.display = 'block';
+                } finally {
+                    sendCodeBtn.disabled = false;
+                    sendCodeBtn.textContent = 'Send login code to email';
+                }
+            });
+
+            verifyCodeBtn.addEventListener('click', async function() {
+                const email = document.getElementById('loginEmail').value;
+                const code = document.getElementById('loginCode').value;
+                const role = document.getElementById('loginRole').value;
+                if (!email || !code) {
+                    errorMessage.textContent = 'Please provide email and code to verify.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                errorMessage.style.display = 'none';
+                verifyCodeBtn.disabled = true;
+                verifyCodeBtn.textContent = 'Verifying...';
+                try {
+                    const resp = await fetch('/api/auth/google/verify', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, code, purpose: 'login' })
+                    });
+                    const data = await resp.json();
+                    if (!resp.ok) throw new Error(data.message || 'Verification failed');
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('role', data.user.role || role);
+                    // Redirect based on role
+                    if (data.user.role === 'admin' || role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else if (data.user.role === 'student' || role === 'student') {
+                        window.location.href = 'Students.html';
+                    } else if (data.user.role === 'teacher' || role === 'teacher') {
+                        window.location.href = 'Teachers Portal.html';
+                    } else if (data.user.role === 'parent' || role === 'parent') {
+                        window.location.href = 'parents.html';
+                    } else {
+                        window.location.href = 'main.html';
+                    }
+                } catch (err) {
+                    errorMessage.textContent = err.message || 'Verification failed';
+                    errorMessage.style.display = 'block';
+                } finally {
+                    verifyCodeBtn.disabled = false;
+                    verifyCodeBtn.textContent = 'Verify code & login';
                 }
             });
         });

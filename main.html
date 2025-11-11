@@ -12,6 +12,7 @@
     <style>
         body {
             margin: 0;
+            padding-top: 100px; /* Reserve space for fixed header */
             font-family: 'Georgia', 'Times New Roman', Times, serif; /* Formal font */
             background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%), url('anhs-removebg-preview.png') center/cover no-repeat;
             color: #13522d; /* Darker green */
@@ -20,16 +21,21 @@
             background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%); /* Darkened gradient */
             color: #fff;
             box-shadow: 0 2px 12px rgba(26,102,51,0.1); /* Adjusted shadow */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
         }
-        .header-container { 
-            max-width: 1200px;
+        .header-container {
+            max-width: 1000px;
             margin: 0px auto;            /* keep centered in page */
-            padding: 20px 30px;
+
             display: flex;
             align-items: center;
             justify-content: center;     /* center the logo */
             gap: 16px;
-            position: fixed;          /* required for absolute menu-button */
         }
 
         .header-left {
@@ -43,7 +49,6 @@
             align-items: left;
         }
 
-        /* hamburger button (three-line / "3 lite") */
         .nav-toggle {
             display: flex; /* show the three-line menu button (visible on all sizes) */
             width: 44px;
@@ -65,7 +70,7 @@
         }
 
         /* mobile: hide inline nav, show toggle */
-        @media (max-width: 900px) {
+        @media (max-width: 1200px) {
             /* hide nav by default on small screens */
             nav {
                 display: none;
@@ -114,7 +119,7 @@
             margin: 0; /* ensure no extra offset */
         }
         .logo img {
-            height: 120px;
+            height: 80px;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(26,102,51,0.1);
             left: 50px;
@@ -142,8 +147,7 @@
         }
         .hero {
             position: relative;
-            height: 80vh;
-            min-height: 400px;
+            height: 350px;
             overflow: hidden;
             text-align: left;
             background: #e0e8d9; /* Softened background */
@@ -931,39 +935,11 @@
         html, body { height: 100%; }
     </style>
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="header-left">
-                <div class="menu-button">
-                    <button id="navToggle" class="menu-toggle">
-                        Menu
-                        <i class="ri-menu-line"></i>
-                    </button>
-
-                    <div id="mainNav" class="menu-dropdown">
-                        <a href="about us.html" class="menu-item">About Us</a>
-                        <a href="specialization.html" class="menu-item" id="specializationBtn">Specialization</a>
-                        <a href="admission.html" class="menu-item" id="admissionsBtn">Admissions</a>
-                        <a href="news-events.html" class="menu-item" id="newsEventsBtn">News & Events</a>
-                        <a href="contact.html" class="menu-item">Contact Us</a>
-                        <a href="login.html" class="menu-item">Login/Register</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="logo">
-                <img src="anhs-removebg-preview.png" alt="Aliaga National High School Logo">
-                <div>
-                    <h1>Aliaga National High School</h1>
-                    <p>Be an ANAHASIANS.</p>
-                </div>
-            </div>
-        </div>
-    </header>
+    <body>
+    <div id="site-header"></div>
 
     <main>
-        <section class="hero">
+        <section class="hero animate-in">
             <div class="hero-bg"></div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -980,7 +956,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section animate-in">
             <div class="quick-links">
                 <div class="ql-card" onclick="window.location.href='login.html'">
                     <div class="ql-icon"><i class="ri-graduation-cap-line"></i></div>
@@ -1005,64 +981,9 @@
             </div>
         </section>
 
-    <footer>
-        <div class="footer-container">
-            <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-                    <div style="font-family:'Pacifico',cursive;font-size:1.25rem;color:#ffd600;">
-                        <img src="anhs-removebg-preview.png" alt="Aliaga National High School circular seal featuring a torch above an open book with laurel branches, rays of light, and the year 1946. Text reads Aliaga National High School and Aliaga, Nueva Ecija. The design uses blue, yellow, and green colors, conveying a sense of pride and academic achievement." class="footer-logo">
-                    </div>
-                </div>
-                <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Excellence in Education</p>
-                <div style="font-size:0.95rem;color:#fff;">
-                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">1234 Education Drive</p>
-                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Aliaga, Nueva Ecija</p>
-                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Phone: (555) 123-4567</p>
-                    <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">Email: @Aliaganationalhighschool.edu</p>
-                </div>
-            </div>
-            <div>
-                <div class="footer-title">Quick Links</div>
-                <ul class="footer-list">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="#specialization-section">Academics</a></li>
-                    <li><a href="#admissions-section">Admissions</a></li>
-                    <li><a href="#">Faculty</a></li>
-                    <li><a href="#">Campus Life</a></li>
-                    <li><a href="#">Athletics</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-title">Resources</div>
-                <ul class="footer-list">
-
-                    <li><a href="#">Student Portal</a></li>
-                    <li><a href="#">Parent Portal</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li><a href="#">Calendar</a></li>
-                    <li><a href="#news-events-section">News</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-title">Stay Connected</div>
-                <div class="footer-social">
-                    <a href="#"><i class="ri-facebook-fill"></i></a>
-                    <a href="#"><i class="ri-twitter-fill"></i></a>
-                </div>
-                <div class="footer-newsletter">
-                    <div style="font-weight:500;margin-bottom:8px;">Newsletter Signup</div>
-                    <div style="display:flex;">
-                        <input type="email" placeholder="Your email">
-                        <button>Subscribe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p style="font-size:0.95rem;opacity:1;margin-bottom:16px;color:#fff;">&copy; 2025 Aliaga National High School. All rights reserved. | Privacy Policy | Terms of Service</p>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
+    <script src="js/includes.js" defer></script>
+    <script src="js/animations.js" defer></script>
 
     <!-- Modals -->
     <div id="calendarModal" class="modal">

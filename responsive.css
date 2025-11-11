@@ -225,11 +225,27 @@
     .sidebar {
         width: 100%;
         position: static;
+        height: auto;
+        transform: none !important;
+    }
+
+    .sidebar.collapsed {
+        display: none;
+    }
+
+    .sidebar-toggle {
+        display: block !important;
+        position: static;
+        margin-bottom: 1rem;
     }
 
     .main-content {
         margin: 0;
         padding: 20px;
+    }
+
+    .main-content.expanded {
+        margin-left: 0;
     }
 
     /* Specific for Students.html etc. */

@@ -544,84 +544,139 @@
     </div>
 
     <script>
-        // Simulated Data (replace with actual backend data in a real application)
+        // Data loaded from API
         let currentStudent = {
-            id: 'S001',
-            firstName: 'Juan',
-            lastName: 'Dela Cruz',
-            email: 'juan.dela.cruz@example.com',
-            gradeLevel: 'G10',
-            subjects: [ // Changed from courses to subjects
-                { id: 'SUB001', name: 'Mathematics 10', teacher: 'Mr. John Doe' },
-                { id: 'SUB002', name: 'Science 10', teacher: 'Ms. Jane Smith' },
-                { id: 'SUB003', name: 'English 10', teacher: 'Ms. Emily White' }
-            ],
-            grades: {
-                'SUB001': [ // Mathematics 10
-                    { assignment: 'Algebra Quiz', grade: 92, weight: 20, comments: 'Good understanding of concepts.' },
-                    { assignment: 'Geometry Exam', grade: 88, weight: 30, comments: 'Needs improvement in proofs.' },
-                    { assignment: 'Final Project', grade: 95, weight: 50, comments: 'Excellent work!' }
-                ],
-                'SUB002': [ // Science 10
-                    { assignment: 'Biology Lab Report', grade: 85, weight: 25, comments: 'Detailed observations.' },
-                    { assignment: 'Chemistry Midterm', grade: 90, weight: 40, comments: 'Strong grasp of chemical reactions.' }
-                ]
-            },
-            attendance: [
+            id: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            gradeLevel: '',
+            subjects: [],
+            grades: {},
+            attendance: [ // Simulated, no API available
                 { date: '2024-04-01', status: 'Present', remarks: '' },
                 { date: '2024-04-02', status: 'Present', remarks: '' },
                 { date: '2024-04-03', status: 'Absent', remarks: 'Sick leave' },
                 { date: '2024-04-04', status: 'Present', remarks: '' },
                 { date: '2024-04-05', status: 'Late', remarks: 'Traffic' }
             ],
-
-            messages: [
-                { id: 'M001', from: 'Mr. John Doe', subject: 'Math Class Update', content: 'Reminder: The upcoming quiz will cover chapters 5 and 6.', date: '2024-04-25', read: false },
-                { id: 'M002', from: 'School Administration', subject: 'School Event: Sports Fest', content: 'Please be informed that May 1st will be a school holiday.', date: '2024-04-20', read: true }
-            ],
-            announcements: [ // These would typically be school-wide, not student-specific
-                { id: 'AN001', title: 'Parent-Teacher Conference Schedule', content: 'The schedule for the upcoming parent-teacher conferences is now available. Please check the school calendar for details.', date: 'April 22, 2024', read: false },
-                { id: 'AN002', title: 'School Sports Fest 2024', content: 'Get ready for our annual Sports Fest! Details about events and participation will be announced soon.', date: 'April 18, 2024', read: true }
-            ],
-            events: [ // New events data
+            messages: [],
+            announcements: [],
+            events: [ // Simulated, no API available
                 { id: 'EV001', title: 'School Fair', date: '2024-05-20', time: '9:00 AM - 4:00 PM', location: 'School Grounds', description: 'Annual school fair with games, food, and performances.' },
                 { id: 'EV002', title: 'Graduation Ceremony', date: '2024-06-05', time: '2:00 PM', location: 'School Auditorium', description: 'Ceremony for graduating students.' }
             ]
         };
 
-        // Simulated Teachers Data
-        let teachers = [
-            {
-                name: 'Mr. John Doe',
-                email: 'john.doe@school.edu',
-                phone: '+1-234-567-8901',
-                subjects: ['Mathematics 10'],
-                bio: 'A dedicated mathematics educator with over 15 years of experience in fostering analytical thinking and problem-solving skills among students. Holds a Master\'s degree in Mathematics and is committed to creating an engaging learning environment that promotes academic excellence.',
-                qualifications: 'M.Sc. in Mathematics, B.Ed. in Secondary Education, Certified Math Instructor',
-                yearsOfExperience: 15,
-                photo: 'https://via.placeholder.com/100x100/176a3a/ffffff?text=JD'
-            },
-            {
-                name: 'Ms. Jane Smith',
-                email: 'jane.smith@school.edu',
-                phone: '+1-234-567-8902',
-                subjects: ['Science 10'],
-                bio: 'An accomplished science educator with a strong background in biological and chemical sciences. Specializes in hands-on laboratory instruction and inquiry-based learning to develop students\' scientific literacy and research capabilities.',
-                qualifications: 'M.Sc. in Biology, B.Sc. in Chemistry, Teaching Certification in Science Education',
-                yearsOfExperience: 12,
-                photo: 'https://via.placeholder.com/100x100/176a3a/ffffff?text=JS'
-            },
-            {
-                name: 'Ms. Emily White',
-                email: 'emily.white@school.edu',
-                phone: '+1-234-567-8903',
-                subjects: ['English 10'],
-                bio: 'A passionate English literature instructor dedicated to cultivating critical thinking, effective communication, and literary appreciation. Employs innovative teaching methods to enhance students\' reading comprehension and writing proficiency.',
-                qualifications: 'M.A. in English Literature, B.A. in Education, Certified English Language Arts Teacher',
-                yearsOfExperience: 10,
-                photo: 'https://via.placeholder.com/100x100/176a3a/ffffff?text=EW'
+        let teachers = [];
+
+        // Load data from API
+        async function loadData() {
+            try {
+                // Get current user
+                const user = await API.auth.getCurrentUser();
+                if (!user || user.role !== 'student') {
+                    alert('Unauthorized access. Redirecting to login.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Fetch student details
+                const studentData = await API.students.getById(user.id);
+                if (studentData.success) {
+                    currentStudent.id = studentData.student.id;
+                    currentStudent.firstName = studentData.student.firstName;
+                    currentStudent.lastName = studentData.student.lastName;
+                    currentStudent.email = studentData.student.email;
+                    currentStudent.gradeLevel = studentData.student.gradeLevel;
+                } else {
+                    alert('Failed to load student data.');
+                    return;
+                }
+
+                // Fetch enrollments
+                const enrollmentsData = await API.enrollments.getByStudent(currentStudent.id);
+                if (enrollmentsData.success) {
+                    const subjects = [];
+                    for (const enrollment of enrollmentsData.enrollments) {
+                        const courseData = await API.courses.getById(enrollment.courseId);
+                        if (courseData.success) {
+                            const teacherData = await API.teachers.getById(courseData.course.teacherId);
+                            const teacherName = teacherData.success ? `${teacherData.teacher.firstName} ${teacherData.teacher.lastName}` : 'Unknown';
+                            subjects.push({
+                                id: enrollment.courseId,
+                                name: courseData.course.name,
+                                teacher: teacherName
+                            });
+                        }
+                    }
+                    currentStudent.subjects = subjects;
+                }
+
+                // Fetch grades
+                const gradesData = await API.grades.getAll();
+                if (gradesData.success) {
+                    const studentGrades = gradesData.grades.filter(g => g.studentId === currentStudent.id);
+                    const gradesBySubject = {};
+                    studentGrades.forEach(grade => {
+                        if (!gradesBySubject[grade.courseId]) {
+                            gradesBySubject[grade.courseId] = [];
+                        }
+                        gradesBySubject[grade.courseId].push({
+                            assignment: grade.assignment || 'N/A',
+                            grade: grade.grade,
+                            weight: grade.weight || 0,
+                            comments: grade.comments || ''
+                        });
+                    });
+                    currentStudent.grades = gradesBySubject;
+                }
+
+                // Fetch teachers
+                const teachersData = await API.teachers.getAll();
+                if (teachersData.success) {
+                    teachers = teachersData.teachers.map(t => ({
+                        name: `${t.firstName} ${t.lastName}`,
+                        email: t.email,
+                        phone: t.phone || '',
+                        subjects: t.subjects || [],
+                        bio: t.bio || '',
+                        qualifications: t.qualifications || '',
+                        yearsOfExperience: t.yearsOfExperience || 0,
+                        photo: t.photo || 'https://via.placeholder.com/100x100/176a3a/ffffff?text=Teacher'
+                    }));
+                }
+
+                // Fetch announcements
+                const announcementsData = await API.announcements.getAll();
+                if (announcementsData.success) {
+                    currentStudent.announcements = announcementsData.announcements.map(a => ({
+                        id: a.id,
+                        title: a.title,
+                        content: a.content,
+                        date: a.date,
+                        read: a.read || false
+                    }));
+                }
+
+                // Fetch messages
+                const messagesData = await API.messages.getAll();
+                if (messagesData.success) {
+                    currentStudent.messages = messagesData.messages.map(m => ({
+                        id: m.id,
+                        from: m.from,
+                        subject: m.subject,
+                        content: m.content,
+                        date: m.date,
+                        read: m.read || false
+                    }));
+                }
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                alert('Failed to load data. Please try again.');
             }
-        ];
+        }
 
         // Utility Functions
         function showSection(sectionId) {
@@ -953,7 +1008,10 @@
         }
 
         // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load data from API
+            await loadData();
+
             // Sidebar Navigation
             document.querySelectorAll('.sidebar ul li a').forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -966,13 +1024,12 @@
             // Initial Load
             showSection('dashboard');
             updateDashboard();
-            renderSubjects(); // Changed from renderCourses
-            renderTeachers(); // Render teachers list
-            populateSubjectSelectForGrades(); // Changed from populateCourseSelectForGrades
-            // renderAssignments(); // Removed assignments rendering
-            renderAnnouncementsAndEvents(); // New function for combined section
+            renderSubjects();
+            renderTeachers();
+            populateSubjectSelectForGrades();
+            renderAnnouncementsAndEvents();
             renderMessages();
-            loadProfileSettings(); // Load profile settings on initial page load
+            loadProfileSettings();
 
             // Grades & Academic Progress Events
             document.getElementById('loadGradesBtn').addEventListener('click', loadGradesAndAttendance);
@@ -988,14 +1045,14 @@
             // Main Portal Button
             document.getElementById('mainPortalBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.href = 'main.html'; // Redirect to the main portal page
+                window.location.href = 'main.html';
             });
 
             // Logout Button
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 if (confirm('Are you sure you want to log out?')) {
-                    window.location.href = 'main.html'; // Redirect to main page
+                    window.location.href = 'main.html';
                 }
             });
         });

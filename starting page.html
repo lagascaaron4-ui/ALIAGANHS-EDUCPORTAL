@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANHS Educational Portal</title>
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="darkmode.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Color variables matching main.html */
+        :root{
+            --primary: #1a6633;
+            --primary-dark: #13522d;
+            --secondary: #e0b34d;
+            --secondary-dark: #c99e38;
+            --accent: #8b5cf6;
+            --light-bg: #f9fafb;
+            --dark-text: #13522d;
+            --light-text: #ffffff;
+            --gray-medium: #6b7280;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #13522d;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Smooth transitions */
+        a, button {
+            transition: all 0.3s ease;
+        }
+
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'%3E%3C/path%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            border: 1px solid rgba(26, 102, 51, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -5px rgba(26, 102, 51, 0.1);
+            border-color: var(--primary);
+        }
+
+        .backdrop-blur-sm {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Menu button */
+        .menu-button { 
+            position:relative; 
+            display:inline-block; 
+            margin-right: 16px; 
+        }
+        .menu-toggle { 
+            background:#e0b34d; 
+            color:#1a6633; 
+            border:none; 
+            padding:8px 12px; 
+            border-radius:8px; 
+            font-weight:700; 
+            cursor:pointer; 
+            display:inline-flex; 
+            align-items:center; 
+            gap:8px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-1px);
+        }
+        .menu-dropdown { 
+            position:absolute; 
+            top:calc(100% + 8px); 
+            left:0; 
+            background:#fff; 
+            border-radius:10px; 
+            box-shadow:0 8px 20px rgba(0,0,0,0.12); 
+            min-width:220px; 
+            max-width:calc(100vw - 32px); 
+            box-sizing:border-box; 
+            overflow:hidden; 
+            display:none; 
+            flex-direction:column; 
+            z-index:1500; 
+            max-height:calc(100vh - 120px); 
+            overflow-y:auto;
+        }
+        .menu-dropdown.open { 
+            display:flex; 
+        }
+        .menu-item { 
+            padding:12px 16px; 
+            text-align:left; 
+            color:#13522d; 
+            text-decoration:none; 
+            background:transparent; 
+            border:none; 
+            width:100%; 
+            cursor:pointer; 
+            font-weight:600;
+            transition: all 0.2s ease;
+        }
+        .menu-item:hover { 
+            background:#f6f7f2; 
+            color: var(--primary);
+        }
+        @media (max-width:600px){ 
+            .menu-dropdown { 
+                left:-8px; 
+                right:-8px; 
+                min-width:280px; 
+            } 
+        }
+
+        /* Enhanced feature icons */
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transform: rotate(-5deg);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover .feature-icon {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--light-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            background-color: rgba(26, 102, 51, 0.1);
+            color: var(--primary);
+            padding: 1rem;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Modal Animations */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .form-transition {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .form-active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* --- Tailwind-like utility overrides (kept minimal) --- */
+        .w-96 { width: 24rem; }
+        .h-80 { height: 20rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-full { border-radius: 9999px; }
+        .rounded-t-xl { border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
+        .overflow-hidden { overflow: hidden; }
+        .text-center { text-align: center; }
+        .grid { display: grid; }
+        .gap-8 { gap: 2rem; }
+        .gap-4 { gap: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mr-4 { margin-right: 1rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+         .hidden { display: none !important; }
+         .object-cover { object-fit: cover; }
+         /* Make auth modal scrollable on smaller screens */
+         #authModal { overflow-y: auto; }
+         .modal-content { max-height: 85vh; overflow-y: auto; }
+        .bg-primary { 
+            background-color: #1a6633 !important; 
+        }
+        .hover\:bg-primary-dark:hover { 
+            background-color: #144d28 !important; 
+        }
+        .text-primary { 
+            color: #1a6633 !important; 
+        }
+        .hover\:text-primary-dark:hover { 
+            color: #144d28 !important; 
+        }
+        .ring-primary { 
+            --tw-ring-color: #1a6633 !important; 
+        }
+        .focus\:ring-primary:focus { 
+            --tw-ring-color: #1a6633 !important; 
+        }
+
+        /* Text utilities */
+        .text-5xl { font-size: 3rem; line-height: 1.1; }
+        .text-4xl { font-size: 2.25rem; line-height: 1.2; }
+        .text-3xl { font-size: 1.875rem; line-height: 1.3; }
+        .text-2xl { font-size: 1.5rem; line-height: 1.4; }
+        .text-xl { font-size: 1.25rem; line-height: 1.5; }
+        .text-lg { font-size: 1.125rem; line-height: 1.6; }
+        .text-sm { font-size: 0.875rem; line-height: 1.5; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-medium { font-weight: 500; }
+        .opacity-90 { opacity: 0.9; }
+        .text-gray-600 { color: var(--gray-medium); }
+        .leading-relaxed { line-height: 1.625; }
+        
+        /* Responsive text */
+        @media (max-width: 768px) {
+            .text-5xl { font-size: 2.5rem; }
+            .text-4xl { font-size: 2rem; }
+            .text-3xl { font-size: 1.75rem; }
+            .text-2xl { font-size: 1.375rem; }
+        }
+        .text-gray-800 { color: var(--dark-text); }
+
+        /* Backgrounds */
+        .bg-white { background: #ffffff; }
+        .bg-indigo-600 { background: var(--primary); }
+        .bg-indigo-700 { background: var(--primary-dark); }
+        .bg-indigo-100 { background: rgba(26, 102, 51, 0.1); }
+        .bg-purple-100 { background: rgba(26, 102, 51, 0.15); }
+        .bg-pink-100 { background: rgba(224, 179, 77, 0.15); }
+        .bg-gray-50 { background: #f9fafb; }
+        .bg-gray-100 { background: #f3f4f6; }
+        .bg-green-600 { background: var(--secondary); }
+
+        /* Custom gradient for body */
+        .gradient-bg {
+            background: linear-gradient(135deg, #f0f0d9 0%, #e0b34d 50%, #ffffff 100%),
+                        url('anhs-removebg-preview.png') center/cover no-repeat;
+        }
+
+        /* Shadows and border */
+        .shadow-2xl { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1); }
+        .border { border: 1px solid #d1d5db; }
+
+        /* Buttons */
+        .transition { transition: all 0.25s ease; }
+        .transform { transform: none; }
+        .hover\:scale-105:hover { transform: scale(1.05); }
+        .hover\:bg-indigo-700:hover { background: var(--primary-dark); }
+        .hover\:bg-gray-500:hover { background: #6b7280; }
+        .hover\:bg-green-700:hover { background: var(--secondary-dark); }
+
+        /* Button base */
+        button { cursor: pointer; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        
+        /* Form controls */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden min-h-[600px] flex items-center" style="background: linear-gradient(135deg, rgba(26,102,51,0.95) 0%, rgba(19,82,45,0.9) 100%);">
+        <div class="absolute inset-0 z-0">
+            <div class="hero-pattern opacity-10 w-full h-full"></div>
+        </div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <img src="anhs-removebg-preview.png" alt="ANHS Logo" class="w-32 h-32 mx-auto mb-8 rounded-xl shadow-2xl">
+            <h2 class="text-5xl font-bold text-white mb-6">Welcome to ANHS Educational Portal</h2>
+            <p class="text-xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">Your gateway to quality education and academic excellence. Access resources, track progress, and connect with teachers.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <button id="openLoginBtn" class="bg-secondary text-white px-8 py-4 rounded-lg hover:bg-secondary-dark transition transform hover:scale-105 hover:shadow-lg font-semibold text-lg">Get Started</button>
+                <button id="learnMoreBtn" class="bg-white text-primary px-8 py-4 rounded-lg hover:bg-gray-100 transition transform hover:scale-105 hover:shadow-lg font-semibold text-lg">Learn More</button>
+                <button id="guestBtn" class="bg-transparent text-white border-2 border-white px-8 py-4 rounded-lg hover:bg-white/10 transition transform hover:scale-105 font-semibold text-lg">Continue as Guest</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="py-24 px-4 bg-gray-50">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary-dark mb-4">Why Choose ANHS Portal?</h2>
+                <p class="text-xl text-gray-60 max-w-3xl mx-auto">Experience a modern educational platform designed to enhance your learning journey.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl">
+                    <div class="feature-icon w-16 h-16 mx-auto mb-6 text-3xl">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-dark">Digital Library</h3>
+                    <p class="text-gray-60 leading-relaxed">Access thousands of educational resources, textbooks, and research materials anytime, anywhere.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-primary-dark">Progress Tracking</h3>
+                    <p class="text-gray-medium">Monitor your academic performance and track your improvement over time.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-primary-dark">Community Forums</h3>
+                    <p class="text-gray-medium">Connect with teachers and peers to discuss academic topics and collaborate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <div class="bg-light-bg py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-primary-dark mb-8">Access Your Portal</h2>
+            <div class="flex flex-col justify-center items-center bg-white rounded-xl p-8 w-96 h-80 mx-auto shadow-2xl">
+                <div class="flex justify-center items-center">
+                    <img src="anhs-removebg-preview.png" alt="ANHS Logo" class="w-32 h-32 rounded-full mb-4 object-cover">
+                </div>
+                <p class="text-gray-medium mb-6">Sign in to access your personalized dashboard and resources</p>
+                <div class="space-y-4 w-full">
+                    <button id="loginPortalBtn" class="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition">Login Portal</button>
+                    <button id="guestContinueBtn" class="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition">Continue as Guest</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(90deg, #1a6633 80%, #e0b34d 100%); color: #fff;" class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-secondary">ANHS Educational Portal</h3>
+                    <p class="text-white">Empowering students through technology and innovation.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-secondary">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white hover:text-secondary transition">Home</a></li>
+                        <li><a href="#" class="text-white hover:text-secondary transition">About Us</a></li>
+                        <li><a href="#" class="text-white hover:text-secondary transition">Programs</a></li>
+                        <li><a href="#" class="text-white hover:text-secondary transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-secondary">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-secondary transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-secondary transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-secondary transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-secondary transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-white">
+                <p>&copy; 2023 ANHS Educational Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-md relative z-10 form-transition modal-content">
+            <!-- Modal Header -->
+            <div class="bg-primary text-white rounded-t-lg p-4 flex justify-between items-center">
+                <h3 id="authTitle" class="text-xl font-semibold"><i class="fas fa-sign-in-alt mr-2"></i>Login</h3>
+                <button id="closeAuthModal" class="text-white hover:text-secondary focus:outline-none" aria-label="Close login dialog">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="p-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="userType">
+                        <i class="fas fa-user-tag mr-2"></i>I am a
+                    </label>
+                    <select id="userType" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="email">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" id="email" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your email">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="password">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <input type="password" id="password" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your password">
+                    <p class="text-sm text-right mt-2"><a href="#" class="text-primary hover:text-primary-dark">Forgot password?</a></p>
+                </div>
+                <div class="mb-4">
+                    <button type="button" id="sendCodeBtn" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg">Send login code to email</button>
+                </div>
+                <div id="codeVerifyArea" style="display:none;">
+                    <div class="mb-4">
+                        <input type="text" id="loginCode" class="w-full border rounded-lg px-3 py-2" placeholder="One-time code (123456)" pattern="\\d{6}">
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" id="loginPasswordVerify" class="w-full border rounded-lg px-3 py-2" placeholder="Password (for this account)">
+                    </div>
+                    <button type="button" id="verifyCodeBtn" class="w-full bg-primary text-white py-2 px-4 rounded-lg">Verify code & login</button>
+                    <div id="codePreview" style="font-size:0.9rem;color:#666;display:none;margin-top:8px;"></div>
+                </div>
+                <button id="loginSubmit" class="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </button>
+                <p class="text-center mt-4 text-sm text-gray-600">Don't have an account? <a href="#" id="showRegister" class="text-primary hover:text-primary-dark">Register</a></p>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="registerForm" class="p-6 hidden">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regUserType">
+                        <i class="fas fa-user-tag mr-2"></i>Register as
+                    </label>
+                    <select id="regUserType" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regFirstName">
+                        <i class="fas fa-user mr-2"></i>First Name
+                    </label>
+                    <input type="text" id="regFirstName" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your first name" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regLastName">
+                        <i class="fas fa-user mr-2"></i>Last Name
+                    </label>
+                    <input type="text" id="regLastName" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your last name" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regEmail">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" id="regEmail" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-4" id="gradeLevelGroup" style="display: none;">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regGradeLevel">
+                        <i class="fas fa-graduation-cap mr-2"></i>Grade Level
+                    </label>
+                    <select id="regGradeLevel" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">Select Grade Level</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                    </select>
+                </div>
+                <div class="mb-4" id="parentEmailGroup" style="display: none;">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regParentEmail">
+                        <i class="fas fa-envelope mr-2"></i>Parent's Email
+                    </label>
+                    <input type="email" id="regParentEmail" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter parent's email for portal access">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="regPassword">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <input type="password" id="regPassword" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Create a password" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="confirmPassword">
+                        <i class="fas fa-lock mr-2"></i>Confirm Password
+                    </label>
+                    <input type="password" id="confirmPassword" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Confirm your password" required>
+                </div>
+                <div class="mb-4">
+                    <button type="button" id="sendRegCodeBtn" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg">Send registration code to email</button>
+                </div>
+                <div id="regCodeArea" style="display:none;">
+                    <div class="mb-4">
+                        <input type="text" id="regCode" class="w-full border rounded-lg px-3 py-2" placeholder="One-time code (123456)" pattern="\\d{6}">
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" id="regPasswordVerify" class="w-full border rounded-lg px-3 py-2" placeholder="Confirm password for verification">
+                    </div>
+                    <button type="button" id="verifyRegBtn" class="w-full bg-primary text-white py-2 px-4 rounded-lg">Verify code & complete registration</button>
+                    <div id="regCodePreview" style="font-size:0.9rem;color:#666;display:none;margin-top:8px;"></div>
+                </div>
+
+                <button id="registerSubmit" class="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition flex items-center justify-center">
+                    <i class="fas fa-user-plus mr-2"></i>Register
+                </button>
+                <p class="text-center mt-4 text-sm text-gray-600">Already have an account? <a href="#" id="showLogin" class="text-primary hover:text-primary-dark">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const authModal = document.getElementById('authModal');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const authTitle = document.getElementById('authTitle');
+        const modalContent = document.querySelector('.form-transition');
+        
+        // Buttons
+        const loginBtn = document.getElementById('loginBtn');
+        const loginPortalBtn = document.getElementById('loginPortalBtn');
+        const openLoginBtn = document.getElementById('openLoginBtn');
+        const guestBtn = document.getElementById('guestBtn');
+        const guestContinueBtn = document.getElementById('guestContinueBtn');
+        const closeAuthModal = document.getElementById('closeAuthModal');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        
+        // Show Modal Function
+        function showModal() {
+            authModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.add('form-active');
+            }, 10);
+        }
+        
+        // Hide Modal Function
+        function hideModal() {
+            modalContent.classList.remove('form-active');
+            setTimeout(() => {
+                authModal.classList.add('hidden');
+            }, 300);
+        }
+        
+        // Toggle between Login and Register forms
+        function showLoginForm() {
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            authTitle.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Login';
+        }
+        
+        function showRegisterForm() {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            authTitle.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Register';
+            // Initialize fields based on current selection so grade level shows for students
+            updateRegisterFields();
+        }
+        
+        // Event Listeners
+        if (loginBtn) loginBtn.addEventListener('click', showModal);
+        if (loginPortalBtn) loginPortalBtn.addEventListener('click', showModal);
+        if (openLoginBtn) openLoginBtn.addEventListener('click', showModal);
+        if (closeAuthModal) closeAuthModal.addEventListener('click', hideModal);
+        if (showRegister) showRegister.addEventListener('click', showRegisterForm);
+        if (showLogin) showLogin.addEventListener('click', showLoginForm);
+        
+        // Guest button redirects to main page
+        guestBtn.addEventListener('click', function() {
+            window.location.href = 'main.html';
+        });
+        
+        if (guestContinueBtn) {
+            guestContinueBtn.addEventListener('click', function() {
+                window.location.href = 'main.html';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === authModal) {
+                hideModal();
+            }
+        });
+        
+        // Show/hide register fields based on role selection
+        function updateRegisterFields() {
+            const role = document.getElementById('regUserType').value;
+            const gradeLevelGroup = document.getElementById('gradeLevelGroup');
+            const parentEmailGroup = document.getElementById('parentEmailGroup');
+            const gradeLevelInput = document.getElementById('regGradeLevel');
+            const parentEmailInput = document.getElementById('regParentEmail');
+
+            if (role === 'student') {
+                gradeLevelGroup.style.display = 'block';
+                parentEmailGroup.style.display = 'block';
+                gradeLevelInput.required = true;
+                parentEmailInput.required = true;
+            } else {
+                gradeLevelGroup.style.display = 'none';
+                parentEmailGroup.style.display = 'none';
+                gradeLevelInput.required = false;
+                parentEmailInput.required = false;
+            }
+        }
+
+        document.getElementById('regUserType').addEventListener('change', updateRegisterFields);
+        // Ensure fields are correct on initial load if user opens Register directly
+        updateRegisterFields();
+
+        // Form submissions
+        document.getElementById('loginSubmit').addEventListener('click', async function() {
+            const userType = document.getElementById('userType').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                // Use specialized parent login endpoint when parent is selected
+                const url = userType === 'parent' ? '/api/auth/parent-login' : '/api/auth/login';
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Prefer the role returned from the server over the selected value
+                    const role = (data.user && data.user.role) ? data.user.role : userType;
+                    
+                    // Redirect based on actual role
+                    if (role === 'parent') {
+                        window.location.href = 'parent-dashboard.html';
+                    } else {
+                        window.location.href = 'main.html';
+                    }
+                } else {
+                    alert(data.message || 'Login failed');
+                }
+            } catch (error) {
+                alert('Login failed. Please try again.');
+                console.error('Login error:', error);
+            }
+        });
+        
+        // Send-code and verify handlers for starting page
+        const sendCodeBtn = document.getElementById('sendCodeBtn');
+        const codeVerifyArea = document.getElementById('codeVerifyArea');
+        const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+        const codePreview = document.getElementById('codePreview');
+
+        if(sendCodeBtn) sendCodeBtn.addEventListener('click', async function(){
+            const email = document.getElementById('email').value;
+            if(!email){ alert('Enter email'); return; }
+            sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Sending...';
+            try{
+                const resp = await fetch('/api/auth/google/request-code', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+                const data = await resp.json();
+                if(!resp.ok) throw new Error(data.message||'Failed to send code');
+                codeVerifyArea.style.display = 'block';
+                if(data.preview){ codePreview.innerHTML = 'Preview email: <a href="'+data.preview+'" target="_blank">open</a>'; codePreview.style.display='block'; }
+            }catch(err){ alert(err.message||'Failed to send code'); }
+            finally{ sendCodeBtn.disabled = false; sendCodeBtn.textContent = 'Send login code to email'; }
+        });
+
+        if(verifyCodeBtn) verifyCodeBtn.addEventListener('click', async function(){
+            const email = document.getElementById('email').value;
+            const code = document.getElementById('loginCode').value;
+            const password = document.getElementById('loginPasswordVerify').value;
+            if(!email || !code || !password){ alert('Provide email, code and password'); return; }
+            verifyCodeBtn.disabled = true; verifyCodeBtn.textContent = 'Verifying...';
+            try{
+                const resp = await fetch('/api/auth/google/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, code, password, purpose:'login' }) });
+                const data = await resp.json();
+                if(!resp.ok) throw new Error(data.message||'Verification failed');
+                if(data.token) localStorage.setItem('token', data.token);
+                alert('Login successful'); hideModal(); setTimeout(()=> window.location.href = 'main.html', 300);
+            }catch(err){ alert(err.message||'Verification failed'); }
+            finally{ verifyCodeBtn.disabled = false; verifyCodeBtn.textContent = 'Verify code & login'; }
+        });
+
+        const sendRegCodeBtn = document.getElementById('sendRegCodeBtn');
+        const regCodeArea = document.getElementById('regCodeArea');
+        const verifyRegBtn = document.getElementById('verifyRegBtn');
+        const regCodePreview = document.getElementById('regCodePreview');
+
+        if(sendRegCodeBtn) sendRegCodeBtn.addEventListener('click', async function(){
+            const email = document.getElementById('regEmail').value;
+            if(!email){ alert('Enter email'); return; }
+            sendRegCodeBtn.disabled = true; sendRegCodeBtn.textContent = 'Sending...';
+            try{
+                const resp = await fetch('/api/auth/google/request-code', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+                const data = await resp.json();
+                if(!resp.ok) throw new Error(data.message||'Failed to send code');
+                regCodeArea.style.display = 'block';
+                if(data.preview){ regCodePreview.innerHTML = 'Preview email: <a href="'+data.preview+'" target="_blank">open</a>'; regCodePreview.style.display='block'; }
+            }catch(err){ alert(err.message||'Failed to send code'); }
+            finally{ sendRegCodeBtn.disabled = false; sendRegCodeBtn.textContent = 'Send registration code to email'; }
+        });
+
+        if(verifyRegBtn) verifyRegBtn.addEventListener('click', async function(){
+            const email = document.getElementById('regEmail').value;
+            const code = document.getElementById('regCode').value;
+            const password = document.getElementById('regPasswordVerify').value;
+            if(!email || !code || !password){ alert('Provide email, code and password'); return; }
+            verifyRegBtn.disabled = true; verifyRegBtn.textContent = 'Verifying...';
+            try{
+                const resp = await fetch('/api/auth/google/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, code, password, purpose:'register' }) });
+                const data = await resp.json();
+                if(!resp.ok) throw new Error(data.message||'Verification failed');
+                if(data.token) localStorage.setItem('token', data.token);
+                alert('Registration successful'); hideModal(); setTimeout(()=> window.location.href = 'main.html', 300);
+            }catch(err){ alert(err.message||'Verification failed'); }
+            finally{ verifyRegBtn.disabled = false; verifyRegBtn.textContent = 'Verify code & complete registration'; }
+        });
+
+        
+        document.getElementById('registerSubmit').addEventListener('click', async function() {
+            const userType = document.getElementById('regUserType').value;
+            const firstName = document.getElementById('regFirstName').value;
+            const lastName = document.getElementById('regLastName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const gradeLevel = document.getElementById('regGradeLevel').value;
+            const parentEmail = document.getElementById('regParentEmail').value;
+            
+            // Basic validation
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // Student-specific validation
+            if (userType === 'student') {
+                if (!gradeLevel) {
+                    alert('Please select a grade level');
+                    return;
+                }
+                if (!parentEmail) {
+                    alert('Please provide parent email for portal access');
+                    return;
+                }
+            }
+            
+            try {
+                const registrationData = {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    role: userType
+                };
+                
+                // Add student-specific fields
+                if (userType === 'student') {
+                    registrationData.gradeLevel = gradeLevel;
+                    registrationData.parentEmail = parentEmail;
+                }
+                
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(registrationData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Registration successful! Please login with your credentials.');
+                    showLoginForm();
+                } else {
+                    alert(data.message || 'Registration failed');
+                }
+            } catch (error) {
+                alert('Registration failed. Please try again.');
+                console.error('Registration error:', error);
+            }
+        });
+    </script>
+    <script src="js/includes.js" defer>
+
+    </script>
+</body>
+</html>
+
+
+
